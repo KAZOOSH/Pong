@@ -1,29 +1,163 @@
-# Compiled Object files
-*.slo
-*.lo
+#########################
+# openFrameworks patterns
+#########################
+
+# build files
+openFrameworks.a
+openFrameworksDebug.a
+openFrameworksUniversal.a
+libs/openFrameworksCompiled/lib/*/*
+!libs/openFrameworksCompiled/lib/*/.gitkeep
+
+# apothecary
+scripts/apothecary/build
+
+# rule to avoid non-official addons going into git
+# see addons/.gitignore
+#addons/*
+
+# rule to avoid non-official apps going into git
+# see apps/.gitignore
+#apps/*
+
+# also, see examples/.gitignore
+
+#.gitignore
+
+#########################
+# general
+#########################
+examples/*
+docs/*
+export/*
+libs/*
+other/*
+projectGenerator_osx/*
+projectGenerator/*
+projectGenerator-vs/*
+scripts/*
+
+
+[Bb]uild/
+[Oo]bj/
 *.o
-*.obj
+*.mode*
+*.app/
+*.pyc
+.svn/
+*.log
+*.cpp.eep
+*.cpp.elf
+*.cpp.hex
 
-# Precompiled Headers
-*.gch
-*.pch
+#########################
+# IDE
+#########################
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# XCode
+*.pbxuser
+*.perspective
+*.perspectivev3
+*.mode1v3
+*.mode2v3
+# XCode 4
+xcuserdata
+*.xcworkspace
 
-# Fortran module files
-*.mod
-*.smod
+# Code::Blocks
+*.depend
+*.layout
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+# Visual Studio
+*.sdf
+*.opensdf
+*.suo
+*.pdb
+*.ilk
+*.aps
+*.sln
+*.vcxproj
+*.filters
+*.user
+*.VC.db
+*.VC.opendb
+*.VC.VC.opendb
+ipch/
 
-# Executables
-*.exe
-*.out
+# Eclipse
+.metadata
+local.properties
+.externalToolBuilders
+
+#########################
+# operating system
+#########################
+
+# Linux
+*~
+# KDE
+.directory
+.AppleDouble
+
+# OSX
+.DS_Store
+*.swp
+*~.nib
+# Thumbnails
+._*
 *.app
+*.xcconfig
+*.xcodeproj
+
+# Windows
+# Windows image file caches
+Thumbs.db
+# Folder config file
+Desktop.ini
+apps/photobox/reddo_power_box/bin/Assimp32.dll
+apps/photobox/reddo_power_box/bin/FreeImage.dll
+apps/photobox/reddo_power_box/bin/FreeType-6.dll
+apps/photobox/reddo_power_box/bin/zlib.dll
+apps/photobox/reddo_power_box/bin/fmodex.dll
+apps/photobox/reddo_power_box/bin/fmodexL.dll
+apps/photobox/reddo_power_box/bin/glut32.dll
+apps/photobox/reddo_power_box/bin/libeay32.dll
+apps/photobox/reddo_power_box/bin/reddo_power_box_debug.exe
+apps/photobox/reddo_power_box/bin/reddo_power_box_debug.exp
+apps/photobox/reddo_power_box/bin/reddo_power_box_debug.lib
+apps/photobox/reddo_power_box/bin/ssleay32.dll
+
+
+# Android
+.csettings
+/libs/openFrameworksCompiled/project/android/paths.make
+
+# Android Studio
+*.iml
+
+#########################
+# miscellaneous
+#########################
+
+.mailmap
+
+#########################
+# addons
+#########################
+addons/ofxAssimpModelLoader/*
+addons/ofxEmscripten/*
+addons/ofxGui/*
+addons/ofxKinect/*
+addons/ofxNetwork/*
+addons/ofxOpenCv/*
+addons/ofxOsc/*
+addons/ofxSvg/*
+addons/ofxThreadedImageLoader/*
+addons/ofxVectorGraphics/*
+addons/ofxXmlSettings/*
+
+#########################
+# apps
+#########################
+apps/myApps/*
+

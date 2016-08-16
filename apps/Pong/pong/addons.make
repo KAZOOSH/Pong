@@ -1,0 +1,3 @@
+ofxCameraAnaglyph
+ofxQuadWarp
+ofxOpenCv
