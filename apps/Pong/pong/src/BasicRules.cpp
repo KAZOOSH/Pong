@@ -11,7 +11,7 @@
 
 
 //------------------------------------------------------------------
-BasicRules::BasicRules(GameElements* gameElements):AbstractRules(gameElements) {
+BasicRules::BasicRules(GameElements* gameElements, string name):AbstractRules(gameElements,name) {
 	
 }
 

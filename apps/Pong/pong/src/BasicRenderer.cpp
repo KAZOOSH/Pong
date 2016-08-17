@@ -11,7 +11,7 @@
 
 
 //------------------------------------------------------------------
-BasicRenderer::BasicRenderer(GameElements* gameElements):AbstractRenderer(gameElements) {
+BasicRenderer::BasicRenderer(GameElements* gameElements, string name):AbstractRenderer(gameElements, name) {
     font.load("font.ttf",70);
 }
 

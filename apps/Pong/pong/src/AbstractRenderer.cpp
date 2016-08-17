@@ -11,7 +11,6 @@
 
 
 //------------------------------------------------------------------
-AbstractRenderer::AbstractRenderer(GameElements* gameElements_) {
-    gameElements = gameElements_;
+AbstractRenderer::AbstractRenderer(GameElements* gameElements_, string name):AbstractGameControl(gameElements_,name) {
 	
 }

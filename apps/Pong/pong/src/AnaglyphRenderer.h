@@ -18,7 +18,7 @@ class AnaglyphRenderer : public BasicRenderer{
 	
   public:
 	
-    AnaglyphRenderer(GameElements* gameElements);
+    AnaglyphRenderer(GameElements* gameElements, string name = "AnaglyphRenderer");
     virtual void draw();
 	
 protected:

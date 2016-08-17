@@ -16,13 +16,21 @@ void ofApp::setup(){
     //->add other rules to vector here
     
     //init renderer
-    activeRenderer = 1;
+    activeRenderer = 0;
     renderer.push_back(new BasicRenderer(&elements));
     renderer.push_back(new AnaglyphRenderer(&elements));
     //-> add other renderers to vector here
     
     //init warper
     initWarper();
+    
+    textRenderer = new TextRenderer(&elements);
+    for (int i=0; i<rules.size(); ++i) {
+        ofAddListener(rules[i]->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);
+    }
+    for (int i=0; i<renderer.size(); ++i) {
+        ofAddListener(renderer[i]->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);
+    }
 }
 
 //--------------------------------------------------------------
@@ -35,6 +43,7 @@ void ofApp::draw(){
     //render game view in fbo
     gameFbo.begin();
     renderer[activeRenderer]->draw();
+    textRenderer->draw();
     gameFbo.end();
     
     //warp fbo on screen

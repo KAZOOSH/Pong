@@ -10,22 +10,17 @@
 #ifndef _AbstractRenderer
 #define _AbstractRenderer
 
-#include "ofMain.h"
-#include "GameElements.h"
+#include "AbstractGameControl.h"
 
-class AbstractRenderer {
+class AbstractRenderer : public AbstractGameControl{
 	
   public:
 	
-	AbstractRenderer(GameElements* gameElements);
-    virtual void begin(){};
+	AbstractRenderer(GameElements* gameElements, string name);
 	virtual void draw() = 0;
     
     ofEvent<bool> endRenderer;
     
-protected:
-    GameElements* gameElements;
-    long startTime;
 };
 
 #endif

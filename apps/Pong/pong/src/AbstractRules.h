@@ -10,25 +10,19 @@
 #ifndef _Rule
 #define _Rule
 
-#include "ofMain.h"
-#include "GameElements.h"
+#include "AbstractGameControl.h"
 
 /**
  * defines a the rule which controls the game physics and point counting
  */
-class AbstractRules {
+class AbstractRules : public AbstractGameControl{
 	
   public:
 	
-	AbstractRules(GameElements* gameElements);
-    virtual void begin();
+	AbstractRules(GameElements* gameElements,string name);
 	virtual void update() = 0;
     
     ofEvent<bool> endRules;
-    
-protected:
-    GameElements* gameElements;
-    long startTime;
 };
 
 #endif

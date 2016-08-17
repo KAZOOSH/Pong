@@ -9,7 +9,7 @@
 
 #include "MultiBallRule.h"
 
-MultiBallRule::MultiBallRule(GameElements* gameElements):BasicRules(gameElements){
+MultiBallRule::MultiBallRule(GameElements* gameElements, string name):BasicRules(gameElements, name){
     
 }
 
@@ -18,7 +18,8 @@ MultiBallRule::MultiBallRule(GameElements* gameElements):BasicRules(gameElements
 void MultiBallRule::begin() {
     AbstractRules::begin();
 	
-    
+    TextElement t = TextElement(name);
+    ofNotifyEvent(newTextEvent, t);
     
     maxRuntime = ofRandom(6000,20000);
     

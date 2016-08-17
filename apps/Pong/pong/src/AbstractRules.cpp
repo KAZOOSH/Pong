@@ -11,11 +11,8 @@
 
 
 //------------------------------------------------------------------
-AbstractRules::AbstractRules(GameElements* gameElements_) {
-    gameElements = gameElements_;
+AbstractRules::AbstractRules(GameElements* gameElements_,string name):AbstractGameControl(gameElements_,name) {
 	
 }
 
-void AbstractRules::begin(){
-    startTime = ofGetElapsedTimeMillis();
-}
+

@@ -17,7 +17,7 @@ class MultiBallRule : public BasicRules{
 	
   public:
 	
-	MultiBallRule(GameElements* gameElements);
+	MultiBallRule(GameElements* gameElements, string name = "Multiball");
     virtual void begin();
     virtual void update();
 	

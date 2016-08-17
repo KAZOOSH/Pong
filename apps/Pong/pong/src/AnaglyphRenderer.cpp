@@ -11,7 +11,7 @@
 
 
 //------------------------------------------------------------------
-AnaglyphRenderer::AnaglyphRenderer(GameElements* gameElements):BasicRenderer(gameElements) {
+AnaglyphRenderer::AnaglyphRenderer(GameElements* gameElements, string name):BasicRenderer(gameElements, name) {
 
     
      cam.setPosition( 0, 0, 10 );

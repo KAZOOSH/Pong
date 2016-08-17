@@ -14,6 +14,8 @@
 #include "AnaglyphRenderer.h"
 //-> include other renderers here
 
+#include "TextRenderer.h"
+
 #include "MouseControl.h"
 
 class ofApp : public ofBaseApp{
@@ -55,6 +57,8 @@ private:
     
     vector<AbstractRenderer*> renderer; //!< renderer collection
     int activeRenderer;
+    
+    TextRenderer* textRenderer;
     
     MouseControl mouse;
 };
