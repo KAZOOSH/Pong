@@ -41,7 +41,6 @@ void TextRenderer::draw() {
     for (auto text:texts) {
         float position = ofMap(now, text.startTime, text.startTime + text.lengthAnimation, 0, 1);
         float scale = ani_ease_bounce.calcCurveAt(position);
-        cout << position << "  " <<scale << endl;
         ofPushMatrix();
         ofTranslate(300, 300);
         ofPushMatrix();

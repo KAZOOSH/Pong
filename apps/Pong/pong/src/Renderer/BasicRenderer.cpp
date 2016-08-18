@@ -31,6 +31,6 @@ void BasicRenderer::draw() {
 }
 
 void BasicRenderer::drawScore(){
-    font.drawString(ofToString(gameElements->pointsP1), gameElements->getWidth()*0.25, gameElements->getHeigth()*0.25);
-    font.drawString(ofToString(gameElements->pointsP2), gameElements->getWidth()*0.75, gameElements->getHeigth()*0.25);
+    font.drawString(ofToString(gameElements->getPoints(1)), gameElements->getWidth()*0.25, gameElements->getHeigth()*0.25);
+    font.drawString(ofToString(gameElements->getPoints(2)), gameElements->getWidth()*0.75, gameElements->getHeigth()*0.25);
 }

@@ -30,9 +30,12 @@ class ofApp : public ofBaseApp{
     void setActiveRules(int index);
     void setActiveRenderer(int index);
     
+    void restartGame();
+    
     //listeners
     void onEndRules(bool& isEnd);
     void onEndRenderer(bool& isEnd);
+    void onPointsChanged(PlayerScore& e);
     
 		void keyPressed(int key);
 		void keyReleased(int key);

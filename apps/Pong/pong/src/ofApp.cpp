@@ -31,10 +31,15 @@ void ofApp::setup(){
     for (int i=0; i<renderer.size(); ++i) {
         ofAddListener(renderer[i]->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);
     }
+    
+    //register listeners
+    ofAddListener(elements.scoreEvent, this, &ofApp::onPointsChanged);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    ofSoundUpdate();
+    
     rules[activeRules]->update();
 }
 
@@ -48,7 +53,7 @@ void ofApp::draw(){
     
     //warp fbo on screen
     drawWarpedImage();
-
+    
 }
 
 /**
@@ -115,6 +120,12 @@ void ofApp::setActiveRenderer(int index){
     renderer[activeRenderer]->begin();
 }
 
+void ofApp::restartGame(){
+    elements.resetElements();
+    activeRules = 0;
+    activeRenderer = 0;
+}
+
 /**
  * when special Rule is finished return back to basic rules
  */
@@ -130,6 +141,14 @@ void ofApp::onEndRules(bool& isEnd){
 void ofApp::onEndRenderer(bool& isEnd){
     if (isEnd) {
         activeRenderer = 0;
+    }
+}
+
+void ofApp::onPointsChanged(PlayerScore& e){
+    cout << e.points << "  " << elements.getWinScore() <<endl;
+    int c = elements.getWinScore();
+    if (e.points >= c){
+        restartGame();
     }
 }
 
@@ -154,50 +173,50 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseEntered(int x, int y){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseExited(int x, int y){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+    
 }

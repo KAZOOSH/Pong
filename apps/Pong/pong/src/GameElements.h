@@ -13,9 +13,24 @@
 #include "Ball.h"
 #include "Paddle.h"
 
+struct PlayerScore{
+    int id;
+    int points;
+};
+
+enum GameEvent{
+    CONTACT_PADDLE1,
+    CONTACT_PADDLE2,
+    CONTACT_WALL,
+    BALL_OUT_P1,
+    BALL_OUT_P2,
+    P1_WIN,
+    P2_WIN,
+    START};
+
 class GameElements {
-	
-  public:
+    
+public:
     GameElements();
     
     int getWidth();
@@ -25,14 +40,24 @@ class GameElements {
     bool removeBall(long id);
     void removeAllExtraBalls();
     
+    void increasePoints(int player, int amount = 1);
+    int getPoints(int player);
+    
+    int getWinScore();
+    
+    void resetElements();
+    
+    ofEvent<PlayerScore> scoreEvent;
+    
     Paddle paddleLeft, paddleRight; //!< paddles
     vector<Ball*> balls; //!< balls
-    int pointsP1, pointsP2; //!< player score
+    
     
 private:
     int widthGame, heightGame;//!< actual game size
-	
-	
+    int pointsP1, pointsP2; //!< player score
+    int winScore; //!< score needed for win
+    
 };
 
 #endif
