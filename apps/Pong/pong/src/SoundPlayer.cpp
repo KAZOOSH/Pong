@@ -44,7 +44,6 @@ void SoundPlayer::draw() {
 
 void SoundPlayer::onGameEvent(GameEvent& event){
     player[event]->play();
-    cout << event <<endl;
 }
 
 void SoundPlayer::onPlaymodeChanged(PlayModeEvent& event){

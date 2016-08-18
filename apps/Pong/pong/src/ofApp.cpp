@@ -4,7 +4,9 @@
 void ofApp::setup(){
     ofSeedRandom();
     ofSetFrameRate( 60 );
-    
+    isGameRunning = false;
+    isInitMessageShown = false;
+    tGameFinished = 0;
     
     //init controls
     elements.paddleLeft.addControl(mouse);
@@ -47,7 +49,23 @@ void ofApp::setup(){
 void ofApp::update(){
     ofSoundUpdate();
     
-    rules[activeRules]->update();
+    
+    //init message
+    if(!isInitMessageShown){
+        if (ofGetElapsedTimeMillis() - tGameFinished > 4000) {
+            showInitMessage();
+        }
+    }
+    
+    if(!isGameRunning){
+        if (ofGetElapsedTimeMillis() - tGameFinished > 7000) {
+            startGame();
+        }
+    }
+    else {
+        rules[activeRules]->update();
+    }
+    
 }
 
 //--------------------------------------------------------------
@@ -127,16 +145,24 @@ void ofApp::setActiveRenderer(int index){
     renderer[activeRenderer]->begin();
 }
 
+/**
+ * resets all elements
+ */
 void ofApp::restartGame(){
     elements.resetElements();
     activeRules = 0;
     activeRenderer = 0;
+    isGameRunning = false;
+    isInitMessageShown = false;
 }
 
 /**
  * notify events to start fireworks ;)
  */
 void ofApp::endGame(int winner){
+    
+    tGameFinished = ofGetElapsedTimeMillis();
+    
     string text = "Player ";
     text += ofToString(winner);
     text += " wins!";
@@ -154,6 +180,37 @@ void ofApp::endGame(int winner){
     
     ofNotifyEvent(elements.newGameEvent, g);
 }
+
+void ofApp::showInitMessage(){
+    TextElement t("Get in Position!",
+                  MEDIUM,
+                  true,
+                  2000);
+    ofNotifyEvent(gameOverEvent, t);
+    isInitMessageShown = true;
+}
+
+/**
+ * checks if paddles are ready to start game
+ */
+void ofApp::startGame(){
+    
+    if(elements.paddleLeft.getPosition() < 10 &&
+       elements.paddleRight.getPosition() < 10){
+        
+        TextElement t("GO!",
+                      BIG,
+                      true,
+                      1500);
+        ofNotifyEvent(gameOverEvent, t);
+        
+        GameEvent g = START;
+        ofNotifyEvent(elements.newGameEvent, g);
+        isGameRunning = true;
+    }
+}
+
+
 
 /**
  * when special Rule is finished return back to basic rules

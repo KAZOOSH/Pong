@@ -10,7 +10,7 @@
 #include "Paddle.h"
 
 Paddle::Paddle(){
-    y = 0;// gameElements->getHeigth()/2;
+    y = 50;// gameElements->getHeigth()/2;
     height = 100;
     
 }
@@ -34,12 +34,16 @@ void Paddle::addControl(AbstractControl& control){
         ofAddListener(control.newPositionPaddle1Event, this, &Paddle::onPositionChanged);
     }
     else{
-       ofAddListener(control.newPositionPaddle2Event, this, &Paddle::onPositionChanged);
+        ofAddListener(control.newPositionPaddle2Event, this, &Paddle::onPositionChanged);
     }
 }
 
 void Paddle::onPositionChanged(float& pos){
     y = ofMap(pos ,0 ,1 ,0 ,hGame);
+}
+
+int Paddle::getPosition(){
+    return y;
 }
 
 /**

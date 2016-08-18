@@ -44,7 +44,7 @@ void TextRenderer::draw() {
             ofDrawRectangle(0, 0, gameElements->getWidth(), gameElements->getHeigth());
         }
         //max fade-in time 2 seconds
-        int fadeInTime = text.lengthAnimation
+        int fadeInTime = text.lengthAnimation;
         if( text.lengthAnimation >= 2000) fadeInTime = 2000;
         
         float position = ofMap(now, text.startTime, text.startTime + fadeInTime, 0, 1);

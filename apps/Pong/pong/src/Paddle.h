@@ -25,6 +25,8 @@ class Paddle {
     
     void onPositionChanged(float& pos);
     
+    int getPosition();
+    
     bool isHit(Ball& b);
     float getHitzone(Ball& b);
     

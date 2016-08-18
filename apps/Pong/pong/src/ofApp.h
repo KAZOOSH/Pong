@@ -33,6 +33,8 @@ public:
     
     void restartGame();
     void endGame(int winner);
+    void showInitMessage();
+    void startGame();
     
     ofEvent<TextElement> gameOverEvent;
     
@@ -54,13 +56,17 @@ public:
     void gotMessage(ofMessage msg);
     
 private:
+    long tGameFinished;
+    bool isInitMessageShown;
+    bool isGameRunning;//!< game status
+    
     ofxQuadWarp warper; //!< mapping tool
     ofFbo gameFbo; //!< game graphics are rendered in fbo
     
     SoundPlayer soundPlayer;//!< manages sounds and plays it
     GameElements elements; //!< balls and paddles, shared over all classes
     
-    vector<AbstractRules*> rules; //!< ruleset
+    vector<AbstractRules*> rules; //!< rule set
     int activeRules;
     
     vector<AbstractRenderer*> renderer; //!< renderer collection
