@@ -13,11 +13,24 @@
 #include "Ball.h"
 #include "Paddle.h"
 
-struct PlayerScore{
+
+//structs an enums for event handling
+
+/**
+ * event to notify the current score
+ */
+struct PlayerScoreEvent{
+    PlayerScoreEvent(int _id, int _points){
+        id = _id;
+        points = _points;
+    };
     int id;
     int points;
 };
 
+/**
+ * event to notify a game action
+ */
 enum GameEvent{
     CONTACT_PADDLE1,
     CONTACT_PADDLE2,
@@ -28,6 +41,21 @@ enum GameEvent{
     P2_WIN,
     START};
 
+/**
+ * event to notify a playmode change
+ */
+struct PlayModeEvent{
+    PlayModeEvent(string _name, bool _hasSoundset = false, string _nameSoundset = ""){
+        name = _name;
+        hasSoundset = _hasSoundset;
+        if(_nameSoundset == "") nameSoundset = name;
+        else nameSoundset = _nameSoundset;
+    };
+    string name;
+    bool hasSoundset;
+    string nameSoundset;
+};
+
 class GameElements {
     
 public:
@@ -36,7 +64,7 @@ public:
     int getWidth();
     int getHeigth();
     
-    void addBall(ofVec2f position, ofVec2f velocity = ofVec2f(-3, 0));
+    void addBall(ofVec2f position, ofVec2f velocity = ofVec2f(-7, 0));
     bool removeBall(long id);
     void removeAllExtraBalls();
     
@@ -47,7 +75,11 @@ public:
     
     void resetElements();
     
-    ofEvent<PlayerScore> scoreEvent;
+    void notifyGameEvent(GameEvent e);
+    
+    ofEvent<GameEvent> newGameEvent; //!< triggered when game event happens
+    ofEvent<PlayerScoreEvent> newScoreEvent; //!< triggered when score updated
+    ofEvent<PlayModeEvent> newPlayModeEvent; //!< triggered when playmode changed
     
     Paddle paddleLeft, paddleRight; //!< paddles
     vector<Ball*> balls; //!< balls

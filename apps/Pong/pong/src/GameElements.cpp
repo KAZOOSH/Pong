@@ -71,7 +71,7 @@ void GameElements::removeAllExtraBalls(){
  * int player -> 1 for player 1 and 2 for player 2
  */
 void GameElements::increasePoints(int player, int amount){
-    PlayerScore score;
+    PlayerScoreEvent score(0,0);
     if (player == 1) {
         pointsP1 += amount;
         score.id = 1;
@@ -83,7 +83,7 @@ void GameElements::increasePoints(int player, int amount){
         score.points = pointsP2;
     }
     
-    ofNotifyEvent(scoreEvent,score);
+    ofNotifyEvent(newScoreEvent,score);
 }
 
 /**
@@ -112,5 +112,12 @@ void GameElements::resetElements(){
     addBall(ofVec2f(widthGame/2, heightGame/2));
     pointsP1 = 0;
     pointsP2 = 0;
+}
+
+/**
+ *helper function for notify game events
+ */
+void GameElements::notifyGameEvent(GameEvent e){
+    ofNotifyEvent(newGameEvent,e);
 }
 

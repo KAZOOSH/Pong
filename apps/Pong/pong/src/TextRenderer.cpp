@@ -20,7 +20,7 @@ TextRenderer::TextRenderer(GameElements* gameElements, string name):AbstractRend
     fontList[0]->load("font.ttf",50);
     fontList[1]->load("font.ttf",35);
     fontList[2]->load("font.ttf",25);
-	
+    
     fonts[BIG] = fontList[0];
     fonts[MEDIUM] = fontList[1];
     fonts[SMALL] = fontList[2];
@@ -39,17 +39,26 @@ void TextRenderer::draw() {
     
     long now = ofGetElapsedTimeMillis();
     for (auto text:texts) {
-        float position = ofMap(now, text.startTime, text.startTime + text.lengthAnimation, 0, 1);
+        if(text.hasBG){
+            ofSetColor(0, 0, 0,128);
+            ofDrawRectangle(0, 0, gameElements->getWidth(), gameElements->getHeigth());
+        }
+        //max fade-in time 2 seconds
+        int fadeInTime = text.lengthAnimation
+        if( text.lengthAnimation >= 2000) fadeInTime = 2000;
+        
+        float position = ofMap(now, text.startTime, text.startTime + fadeInTime, 0, 1);
         float scale = ani_ease_bounce.calcCurveAt(position);
         ofPushMatrix();
         ofTranslate(300, 300);
         ofPushMatrix();
         ofScale(scale, scale);
+        ofSetColor(text.textColor);
         fontList[text.size]->drawString(text.content, 0, 0);
         ofPopMatrix();
         ofPopMatrix();
     }
-	
+    
     for(int i=texts.size()-1 ; i>=0 ; i--){
         if(texts[i].startTime + texts[i].lengthAnimation < now){
             texts.erase(texts.begin() + i);

@@ -5,6 +5,7 @@ void ofApp::setup(){
     ofSeedRandom();
     ofSetFrameRate( 60 );
     
+    
     //init controls
     elements.paddleLeft.addControl(mouse);
     elements.paddleRight.addControl(mouse);
@@ -31,9 +32,15 @@ void ofApp::setup(){
     for (int i=0; i<renderer.size(); ++i) {
         ofAddListener(renderer[i]->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);
     }
+    ofAddListener(gameOverEvent, textRenderer, &TextRenderer::onNewTextElement);
+    
+    //init soundPlayer
+    soundPlayer.setup();
     
     //register listeners
-    ofAddListener(elements.scoreEvent, this, &ofApp::onPointsChanged);
+    ofAddListener(elements.newScoreEvent, this, &ofApp::onPointsChanged);
+    ofAddListener(elements.newGameEvent, &soundPlayer, &SoundPlayer::onGameEvent);
+    ofAddListener(elements.newPlayModeEvent, &soundPlayer, &SoundPlayer::onPlaymodeChanged);
 }
 
 //--------------------------------------------------------------
@@ -127,6 +134,28 @@ void ofApp::restartGame(){
 }
 
 /**
+ * notify events to start fireworks ;)
+ */
+void ofApp::endGame(int winner){
+    string text = "Player ";
+    text += ofToString(winner);
+    text += " wins!";
+    
+    TextElement t(text,
+                  MEDIUM,
+                  true,
+                  4000,
+                  ofColor(255),
+                  true);
+    ofNotifyEvent(gameOverEvent, t);
+    
+    GameEvent g = P1_WIN;
+    if (winner == 2) g = P2_WIN;
+    
+    ofNotifyEvent(elements.newGameEvent, g);
+}
+
+/**
  * when special Rule is finished return back to basic rules
  */
 void ofApp::onEndRules(bool& isEnd){
@@ -144,10 +173,9 @@ void ofApp::onEndRenderer(bool& isEnd){
     }
 }
 
-void ofApp::onPointsChanged(PlayerScore& e){
-    cout << e.points << "  " << elements.getWinScore() <<endl;
-    int c = elements.getWinScore();
-    if (e.points >= c){
+void ofApp::onPointsChanged(PlayerScoreEvent& e){
+    if (e.points >= elements.getWinScore()){
+        endGame(e.id);
         restartGame();
     }
 }

@@ -21,9 +21,8 @@ public:
     void update();
     void draw();
     
-    void onSoundSetChanged(string& name);
     void onGameEvent(GameEvent& event);
-    void onPlaymodeChanged(string& name);
+    void onPlaymodeChanged(PlayModeEvent& event);
     
 protected:
     bool loadSoundSet(string name);

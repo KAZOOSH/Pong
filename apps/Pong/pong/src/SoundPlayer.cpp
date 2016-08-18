@@ -42,17 +42,17 @@ void SoundPlayer::draw() {
     
 }
 
-void SoundPlayer::onSoundSetChanged(string& name){
-    loadSoundSet(name);
-}
-
 void SoundPlayer::onGameEvent(GameEvent& event){
     player[event]->play();
+    cout << event <<endl;
 }
 
-void SoundPlayer::onPlaymodeChanged(string& name){
-    playMode.load("sounds/playmodes/" + name + ".mp3");
+void SoundPlayer::onPlaymodeChanged(PlayModeEvent& event){
+    playMode.load("sounds/playmodes/" + event.name + ".mp3");
     playMode.play();
+    if (event.hasSoundset) {
+        loadSoundSet(event.nameSoundset);
+    }
 }
 
 bool SoundPlayer::loadSoundSet(string name){
