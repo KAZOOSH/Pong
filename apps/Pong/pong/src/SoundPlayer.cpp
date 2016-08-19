@@ -63,4 +63,5 @@ bool SoundPlayer::loadSoundSet(string name){
     player[P1_WIN]->load("sounds/" + name + "/p1_win.mp3");
     player[P2_WIN]->load("sounds/" + name + "/p2_win.mp3");
     player[START]->load("sounds/" + name + "/start.mp3");
+	return true;
 }

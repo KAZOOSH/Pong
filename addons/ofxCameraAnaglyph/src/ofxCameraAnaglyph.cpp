@@ -82,15 +82,15 @@ void ofxCameraAnaglyph::endStereo() {
 //--------------------------------------------------------------
 void ofxCameraAnaglyph::calculateCamSettings( bool bLeft ) {
     
-    settings.near = getNearClip();
-	if (settings.near < 0.1) settings.near = 0.1;
-    settings.far = getFarClip();
+    settings.near_ = getNearClip();
+	if (settings.near_ < 0.1) settings.near_ = 0.1;
+    settings.far_ = getFarClip();
     
 	// Misc stuff
 	settings.ratio      = ofGetCurrentViewport().width / (double)ofGetCurrentViewport().height;
 	settings.radians    = DTOR * getFov() / 2;
-	settings.wd2        = settings.near * tan( settings.radians );
-	settings.ndfl       = settings.near / focalLength;
+	settings.wd2        = settings.near_ * tan( settings.radians );
+	settings.ndfl       = settings.near_ / focalLength;
     
     if( bLeft ) {
         settings.left  = - settings.ratio * settings.wd2 + 0.5 * eyeSeparation * settings.ndfl;
@@ -109,7 +109,7 @@ void ofxCameraAnaglyph::loadMatrices( bool bLeft ) {
     
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glFrustum( settings.left, settings.right, settings.bottom, settings.top, settings.near, settings.far);
+	glFrustum( settings.left, settings.right, settings.bottom, settings.top, settings.near_, settings.far_);
 	
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();

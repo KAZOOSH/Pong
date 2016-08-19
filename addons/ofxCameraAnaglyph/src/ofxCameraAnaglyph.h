@@ -44,7 +44,7 @@ public:
     
     struct AnaglyphSettings {
         GLdouble ratio, radians, wd2, ndfl;
-        GLdouble left, right, top, bottom, near, far;
+        GLdouble left, right, top, bottom, near_, far_;
     };
     
 protected:
