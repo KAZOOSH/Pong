@@ -230,5 +230,10 @@ void ofApp::keyPressed(int key){
     if(key == '1') {
         playModeController.shufflePlaymode();
     }
+    
+    if(key == '2') {
+        playModeController.setRules("Walls");
+        playModeController.setRenderer("Walls");
+    }
 }
 

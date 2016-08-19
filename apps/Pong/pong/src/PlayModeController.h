@@ -24,6 +24,9 @@
 #include "AnaglyphRenderer.h"
 //-> include other renderers here
 
+#include "WallPlayMode.h"
+//-> include other playmodes here
+
 /**
  * controls and switches the playmodes
  */

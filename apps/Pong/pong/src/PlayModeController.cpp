@@ -25,6 +25,10 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     renderer.push_back(new AnaglyphRenderer(gameElements));
     //-> add other renderers to vector here
     
+    //add playmodes
+    rules.push_back(new WallPlayMode(gameElements));
+    renderer.push_back(new WallPlayMode(gameElements));
+    
     for (int i=0; i<rules.size(); ++i) {
         ofAddListener(rules[i]->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);
     }
