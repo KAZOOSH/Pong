@@ -20,3 +20,7 @@ AbstractGameControl::AbstractGameControl(GameElements* gameElements_, string nam
 void AbstractGameControl::begin(){
     startTime = ofGetElapsedTimeMillis();
 }
+
+string AbstractGameControl::getName(){
+    return name;
+}

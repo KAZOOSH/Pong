@@ -12,28 +12,15 @@ void ofApp::setup(){
     elements.paddleLeft.addControl(mouse);
     elements.paddleRight.addControl(mouse);
     
-    //init rules
-    activeRules = 0;
-    rules.push_back(new BasicRules(&elements));
-    rules.push_back(new MultiBallRule(&elements));
-    //->add other rules to vector here
-    
-    //init renderer
-    activeRenderer = 0;
-    renderer.push_back(new BasicRenderer(&elements));
-    renderer.push_back(new AnaglyphRenderer(&elements));
-    //-> add other renderers to vector here
     
     //init warper
     initWarper();
     
+    
+    
     textRenderer = new TextRenderer(&elements);
-    for (int i=0; i<rules.size(); ++i) {
-        ofAddListener(rules[i]->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);
-    }
-    for (int i=0; i<renderer.size(); ++i) {
-        ofAddListener(renderer[i]->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);
-    }
+    playModeController.setup(&elements,textRenderer);
+    
     ofAddListener(gameOverEvent, textRenderer, &TextRenderer::onNewTextElement);
     
     //init soundPlayer
@@ -63,7 +50,7 @@ void ofApp::update(){
         }
     }
     else {
-        rules[activeRules]->update();
+        playModeController.getCurrentRules()->update();
     }
     
 }
@@ -72,7 +59,7 @@ void ofApp::update(){
 void ofApp::draw(){
     //render game view in fbo
     gameFbo.begin();
-    renderer[activeRenderer]->draw();
+    playModeController.getCurrentRenderer()->draw();
     textRenderer->draw();
     gameFbo.end();
     
@@ -135,23 +122,12 @@ void ofApp::drawWarpedImage(){
     ofSetColor(ofColor::white);
 }
 
-void ofApp::setActiveRules(int index){
-    activeRules = index;
-    rules[activeRules]->begin();
-}
-
-void ofApp::setActiveRenderer(int index){
-    activeRenderer = index;
-    renderer[activeRenderer]->begin();
-}
-
 /**
  * resets all elements
  */
 void ofApp::restartGame(){
+    playModeController.resetStartModes();
     elements.resetElements();
-    activeRules = 0;
-    activeRenderer = 0;
     isGameRunning = false;
     isInitMessageShown = false;
 }
@@ -217,7 +193,7 @@ void ofApp::startGame(){
  */
 void ofApp::onEndRules(bool& isEnd){
     if (isEnd) {
-        activeRules = 0;
+        playModeController.setRules(0);
     }
 }
 
@@ -226,7 +202,7 @@ void ofApp::onEndRules(bool& isEnd){
  */
 void ofApp::onEndRenderer(bool& isEnd){
     if (isEnd) {
-        activeRenderer = 0;
+        playModeController.setRenderer(0);
     }
 }
 
@@ -252,7 +228,7 @@ void ofApp::keyPressed(int key){
     }
     
     if(key == '1') {
-        setActiveRules(1);
+        playModeController.shufflePlaymode();
     }
 }
 

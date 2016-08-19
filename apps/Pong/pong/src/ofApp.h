@@ -4,6 +4,7 @@
 #include "ofxQuadWarp.h"
 
 #include "GameElements.h"
+#include "PlayModeController.h"
 #include "SoundPlayer.h"
 #include "AbstractRules.h"
 #include "BasicRules.h"
@@ -27,9 +28,6 @@ public:
     
     void initWarper();
     void drawWarpedImage();
-    
-    void setActiveRules(int index);
-    void setActiveRenderer(int index);
     
     void restartGame();
     void endGame(int winner);
@@ -65,12 +63,7 @@ private:
     
     SoundPlayer soundPlayer;//!< manages sounds and plays it
     GameElements elements; //!< balls and paddles, shared over all classes
-    
-    vector<AbstractRules*> rules; //!< rule set
-    int activeRules;
-    
-    vector<AbstractRenderer*> renderer; //!< renderer collection
-    int activeRenderer;
+    PlayModeController playModeController;
     
     TextRenderer* textRenderer;
     

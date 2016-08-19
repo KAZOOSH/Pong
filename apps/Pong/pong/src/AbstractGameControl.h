@@ -18,6 +18,7 @@ class AbstractGameControl {
 public:
     AbstractGameControl(GameElements* gameElements, string name);
     virtual void begin();
+    string getName();
     
     ofEvent<TextElement> newTextEvent;
     
