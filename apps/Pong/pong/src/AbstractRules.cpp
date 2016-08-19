@@ -12,7 +12,19 @@
 
 //------------------------------------------------------------------
 AbstractRules::AbstractRules(GameElements* gameElements_,string name):AbstractGameControl(gameElements_,name) {
-	
+    
 }
 
+void AbstractRules::update(){
+    if (runTime != -1) {
+        if (startTime + runTime < ofGetElapsedTimeMillis()) {
+            end();
+        }
+    }
+    applyRules();
+}
 
+void AbstractRules::end(){
+    bool endState = true;
+    ofNotifyEvent(endRules, endState);
+}

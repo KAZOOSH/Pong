@@ -19,7 +19,7 @@ class BasicRules : public AbstractRules{
 	
 	BasicRules(GameElements* gameElements, string name = "BasicRules");
 	
-	virtual void update();
+	virtual void applyRules();
 	
 protected:
     bool paddleHittest(Ball* ball);

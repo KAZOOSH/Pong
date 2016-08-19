@@ -13,10 +13,11 @@
 //------------------------------------------------------------------
 BasicRenderer::BasicRenderer(GameElements* gameElements, string name):AbstractRenderer(gameElements, name) {
     font.load("font.ttf",70);
+    runTime = -1;
 }
 
 //------------------------------------------------------------------
-void BasicRenderer::draw() {
+void BasicRenderer::render() {
     ofBackground(0);
     
     drawScore();
@@ -27,7 +28,7 @@ void BasicRenderer::draw() {
     for(auto&& ball : gameElements->balls){
         ball->draw();
     }
-	
+    
 }
 
 void BasicRenderer::drawScore(){

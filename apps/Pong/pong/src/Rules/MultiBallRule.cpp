@@ -32,13 +32,8 @@ void MultiBallRule::begin() {
     
 }
 
-
-//------------------------------------------------------------------
-void MultiBallRule::update() {
-    BasicRules::update();
-    if (startTime + maxRuntime < ofGetElapsedTimeMillis()) {
-        gameElements->removeAllExtraBalls();
-        bool endState = true;
-        ofNotifyEvent(endRules, endState);
-    }
+void MultiBallRule::end(){
+    gameElements->removeAllExtraBalls();
+    bool endState = true;
+    ofNotifyEvent(endRules, endState);
 }

@@ -23,7 +23,7 @@ AnaglyphRenderer::AnaglyphRenderer(GameElements* gameElements, string name):Basi
 }
 
 //------------------------------------------------------------------
-void AnaglyphRenderer::draw() {
+void AnaglyphRenderer::render() {
 	
     ofBackground(0);
     

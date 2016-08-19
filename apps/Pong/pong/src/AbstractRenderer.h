@@ -17,8 +17,10 @@ class AbstractRenderer : public AbstractGameControl{
   public:
 	
 	AbstractRenderer(GameElements* gameElements, string name);
-	virtual void draw() = 0;
+	void draw();
+    virtual void render() = 0;
     
+    virtual void end();
     ofEvent<bool> endRenderer;
     
 };

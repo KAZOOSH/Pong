@@ -9,7 +9,15 @@ Use the project generator to create a project for your IDE (```[project folder]/
 
 ##Development
 
-###Playmodes and Rendermodes
+###Playmode Concept
+The Game is a container that executes a specific *Ruleset* that defines the physics of the game and a specific *Rendermode* that defines the visual aspects.
+
+####Creation
+..todo
+
+####Planning
+
+#####Rules and Renderers
 * Deflector Beam
 * Blockout Mode
 * Walls
@@ -17,7 +25,7 @@ Use the project generator to create a project for your IDE (```[project folder]/
 * Shoot the ball Mode
 * Anaglyph Gravity
 
-###Playmodes
+#####Rules
 * Basic - done
 * Multiball - done
 * Double Speed
@@ -28,7 +36,7 @@ Use the project generator to create a project for your IDE (```[project folder]/
 * Panel size
 * crazy panel, panel reload
 
-###Rendermodes
+#####Renderers
 * Basic - done
 * Anaglyph - done
 * Funny Background (or video)

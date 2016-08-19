@@ -18,6 +18,7 @@ class AbstractGameControl {
 public:
     AbstractGameControl(GameElements* gameElements, string name);
     virtual void begin();
+    virtual void end() = 0;
     string getName();
     
     ofEvent<TextElement> newTextEvent;
@@ -26,7 +27,9 @@ protected:
     GameElements* gameElements;
     long startTime;
     string name;
-	
+    
+    int runTime;
+    
 };
 
 #endif

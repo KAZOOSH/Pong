@@ -12,12 +12,12 @@
 
 //------------------------------------------------------------------
 BasicRules::BasicRules(GameElements* gameElements, string name):AbstractRules(gameElements,name) {
-    
+    runTime = -1;
 }
 
 
 
-void BasicRules::update() {
+void BasicRules::applyRules() {
     for(auto&& ball : gameElements->balls){
         //move ball
         ball->update();

@@ -19,7 +19,7 @@ class MultiBallRule : public BasicRules{
 	
 	MultiBallRule(GameElements* gameElements, string name = "Multiball");
     virtual void begin();
-    virtual void update();
+    virtual void end();
 	
 private:
     int maxRuntime;

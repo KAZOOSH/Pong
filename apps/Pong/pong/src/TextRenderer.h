@@ -19,7 +19,7 @@ class TextRenderer : public AbstractRenderer{
 public:
     
     TextRenderer(GameElements* gameElements, string name = "TextRenderer");
-    virtual void draw();
+    virtual void render();
     
     void onNewTextElement(TextElement& t);
     

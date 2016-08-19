@@ -18,7 +18,7 @@ class BasicRenderer : public AbstractRenderer{
   public:
 	
     BasicRenderer(GameElements* gameElements, string name = "BasicRenderer");
-    virtual void draw();
+    virtual void render();
     
 protected:
     void drawScore();

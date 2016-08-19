@@ -69,6 +69,8 @@ void PlayModeController::shufflePlaymode(){
             }
         }
     }
+    
+    isNextSelectRules = !isNextSelectRules;
 }
 
 void PlayModeController::setRenderer(int index){

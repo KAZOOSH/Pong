@@ -14,6 +14,7 @@
 AbstractGameControl::AbstractGameControl(GameElements* gameElements_, string name_) {
     gameElements = gameElements_;
     name = name_;
+    runTime = 15000;
 }
 
 

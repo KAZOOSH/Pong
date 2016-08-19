@@ -36,7 +36,7 @@ TextRenderer::TextRenderer(GameElements* gameElements, string name):AbstractRend
 /**
  * render all texts
  */
-void TextRenderer::draw() {
+void TextRenderer::render() {
     long now = ofGetElapsedTimeMillis();
     for (auto text:texts) {
         //draw bg
