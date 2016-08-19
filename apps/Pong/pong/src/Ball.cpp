@@ -12,7 +12,7 @@
 Ball::Ball(){
     position = ofVec2f(0,0);
     velocity = ofVec2f(0,0);
-    radius = 40;
+    radius = 25;
     id = ofGetElapsedTimeMicros();
     
 }
@@ -21,7 +21,7 @@ Ball::Ball(){
 //------------------------------------------------------------------
 void Ball::update() {
     position += velocity;
-	
+    
 }
 
 
@@ -30,9 +30,9 @@ void Ball::draw() {
     ofSetColor(200);
     ofDrawRectangle(position.x - radius*0.5, position.y - radius*0.5, radius*2, radius*2);
     
-	
+    
 }
 /*
-void Ball::setVelocity(ofVec2f velocity_){
-    velocity = velocity_;
-}*/
+ void Ball::setVelocity(ofVec2f velocity_){
+ velocity = velocity_;
+ }*/
