@@ -17,6 +17,7 @@
 #include "AbstractRules.h"
 #include "BasicRules.h"
 #include "MultiBallRule.h"
+#include "DoubleSpeedRule.h"
 //-> include other rules here
 
 #include "AbstractRenderer.h"

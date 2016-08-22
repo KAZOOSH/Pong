@@ -20,7 +20,7 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 #####Rules and Renderers
 * Deflector Beam
 * Blockout Mode
-* Walls
+* Walls (done)
 * Portals
 * Shoot the ball Mode
 * Anaglyph Gravity
@@ -28,7 +28,7 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 #####Rules
 * Basic - done
 * Multiball - done
-* Double Speed
+* Double Speed - done
 * Gravity Mode
 * Sticky Mode
 * Multiball Explosion with Healthbar

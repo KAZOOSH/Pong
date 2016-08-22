@@ -211,8 +211,7 @@ void ofApp::keyPressed(int key){
     }
     
     if(key == '2') {
-        playModeController.setRules("Walls");
-        playModeController.setRenderer("Walls");
+        playModeController.setRules("Double Speed");
     }
 }
 

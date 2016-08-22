@@ -17,6 +17,7 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     currentRules = 0;
     rules.push_back(new BasicRules(gameElements,"BasicRules",-1));
     rules.push_back(new MultiBallRule(gameElements));
+    rules.push_back(new DoubleSpeedRule(gameElements));
     //->add other rules to vector here
     
     //init renderer

@@ -21,8 +21,6 @@ class MultiBallRule : public BasicRules{
     virtual void begin();
     virtual void end();
 	
-private:
-    int maxRuntime;
 };
 
 #endif

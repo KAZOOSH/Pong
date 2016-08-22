@@ -17,16 +17,12 @@ MultiBallRule::MultiBallRule(GameElements* gameElements, string name):BasicRules
 //------------------------------------------------------------------
 void MultiBallRule::begin() {
     AbstractRules::begin();
-	
-    TextElement t = TextElement(name);
-    ofNotifyEvent(newTextEvent, t);
-    
-    maxRuntime = ofRandom(6000,20000);
     
     int nBalls = ofRandom(2, 4);
     for (int i=0; i<nBalls; ++i) {
+        float vStart = gameElements->balls[0]->velocity.x;
         gameElements->addBall(ofVec2f(gameElements->getWidth()/2, ofRandom(50, gameElements->getHeigth()-50)),
-                              ofVec2f(ofRandom(-3, 3),0));
+                              ofVec2f(ofRandom(vStart*0.5, vStart*2.0),0));
     }
     
     
