@@ -26,6 +26,7 @@
 #include "BasicRenderer.h"
 #include "AnaglyphRenderer.h"
 #include "RoundBallRenderer.h"
+#include "PsyRenderer.h"
 //-> include other renderers here
 
 #include "WallPlayMode.h"

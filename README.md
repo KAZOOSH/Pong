@@ -12,38 +12,38 @@ Use the project generator to create a project for your IDE (```[project folder]/
 ###Playmode Concept
 The Game is a container that executes a specific *Ruleset* that defines the physics of the game and a specific *Rendermode* that defines the visual aspects.
 
-####Creation
+####Create a Playmode
 ..todo
 
-####Planning
+####Playmodes Todo
 
 #####Rules and Renderers
-* Deflector Beam
-* Blockout Mode
-* Walls (done)
-* Portals
-* Shoot the ball Mode
-* Anaglyph Gravity
+- [ ] Deflector Beam
+- [ ] Blockout Mode
+- [x] Walls
+- [ ] Portals
+- [ ] Shoot the ball Mode
+- [ ] Anaglyph Gravity
 
 #####Rules
-* Basic - done
-* Multiball - done
-* Double Speed - done
-* Gravity Mode
-* Sticky Mode
-* Multiball Explosion with Healthbar
-* Ball size
-* Paddle size - done
-* crazy panel, panel reload
+- [x] Basic 
+- [x] Multiball 
+- [x] Double Speed 
+- [ ] Gravity Mode
+- [ ] Sticky Mode
+- [ ] Multiball Explosion with Healthbar
+- [x] Ball size 
+- [x] Paddle size 
+- [ ] crazy panel, panel reload
 
 #####Renderers
-* Basic - done
-* Anaglyph - done
-* Funny Background (or video)
-* Tron
-* Round ball - done
-* LSD Mode
-* Sonar Mode
-* Table Tennis
-* Womens Tennis
-* Pokeball
+- [x] Basic
+- [x] Anaglyph
+- [ ] Funny Background (or video)
+- [ ] Tron
+- [x] Round Ball
+- [ ] LSD Mode
+- [ ] Sonar Mode
+- [ ] Table Tennis
+- [ ] Womens Tennis
+- [ ] Pokeball

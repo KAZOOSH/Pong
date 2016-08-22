@@ -2,6 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    
     ofSeedRandom();
     ofSetFrameRate( 60 );
     isGameRunning = false;
@@ -211,7 +212,7 @@ void ofApp::keyPressed(int key){
     }
     
     if(key == '2') {
-        playModeController.setRules("Tiny Ball");
+        playModeController.setRenderer("PSY");
     }
     if(key == '3') {
         playModeController.setRules("Huge Ball");
