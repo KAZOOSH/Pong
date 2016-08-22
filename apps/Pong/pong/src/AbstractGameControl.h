@@ -16,12 +16,13 @@
 
 class AbstractGameControl {
 public:
-    AbstractGameControl(GameElements* gameElements, string name);
+    AbstractGameControl(GameElements* gameElements, string name, string type);
     virtual void begin();
-    virtual void end() = 0;
+    virtual void end();
     string getName();
     
     ofEvent<TextElement> newTextEvent;
+    ofEvent<string> runtimeExtendedEvent;
     
 protected:
     GameElements* gameElements;
@@ -29,6 +30,8 @@ protected:
     string name;
     
     int runTime;
+    
+    string type;
     
 };
 

@@ -11,8 +11,8 @@
 
 
 //------------------------------------------------------------------
-BasicRules::BasicRules(GameElements* gameElements, string name):AbstractRules(gameElements,name) {
-    runTime = -1;
+BasicRules::BasicRules(GameElements* gameElements, string name,int runtime_):AbstractRules(gameElements,name) {
+    runTime = runtime_;
 }
 
 

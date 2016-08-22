@@ -6,15 +6,6 @@
 #include "GameElements.h"
 #include "PlayModeController.h"
 #include "SoundPlayer.h"
-#include "AbstractRules.h"
-#include "BasicRules.h"
-#include "MultiBallRule.h"
-//-> include other rules here
-
-#include "AbstractRenderer.h"
-#include "BasicRenderer.h"
-#include "AnaglyphRenderer.h"
-//-> include other renderers here
 
 #include "TextRenderer.h"
 
@@ -37,8 +28,6 @@ public:
     ofEvent<TextElement> gameOverEvent;
     
     //listeners
-    void onEndRules(bool& isEnd);
-    void onEndRenderer(bool& isEnd);
     void onPointsChanged(PlayerScoreEvent& e);
     
     void keyPressed(int key);

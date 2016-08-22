@@ -28,9 +28,11 @@ TextRenderer::TextRenderer(GameElements* gameElements, string name):AbstractRend
     //set initial position
     ani_ease_bounce.reset( 0.0f );
     ani_ease_bounce.setRepeatType(LOOP_BACK_AND_FORTH);
-    ani_ease_bounce.setCurve(EASE_IN_OUT_BOUNCE);
+    ani_ease_bounce.setCurve(SWIFT_GOOGLE);
     ani_ease_bounce.animateTo( 1.0f );
     ani_ease_bounce.setDuration(1);
+    
+    runTime = -1;
 }
 
 /**

@@ -34,6 +34,4 @@ void MultiBallRule::begin() {
 
 void MultiBallRule::end(){
     gameElements->removeAllExtraBalls();
-    bool endState = true;
-    ofNotifyEvent(endRules, endState);
 }

@@ -11,20 +11,15 @@
 
 
 //------------------------------------------------------------------
-AbstractRules::AbstractRules(GameElements* gameElements_,string name):AbstractGameControl(gameElements_,name) {
+AbstractRules::AbstractRules(GameElements* gameElements_,string name):AbstractGameControl(gameElements_,name,"Rules") {
     
 }
 
 void AbstractRules::update(){
     if (runTime != -1) {
         if (startTime + runTime < ofGetElapsedTimeMillis()) {
-            end();
+            ofNotifyEvent(runtimeExtendedEvent, type);
         }
     }
     applyRules();
-}
-
-void AbstractRules::end(){
-    bool endState = true;
-    ofNotifyEvent(endRules, endState);
 }

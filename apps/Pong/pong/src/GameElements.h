@@ -51,6 +51,7 @@ struct PlayModeEvent{
         if(_nameSoundset == "") nameSoundset = name;
         else nameSoundset = _nameSoundset;
     };
+    
     string name;
     bool hasSoundset;
     string nameSoundset;

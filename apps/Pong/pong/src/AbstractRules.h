@@ -22,9 +22,6 @@ public:
     AbstractRules(GameElements* gameElements,string name);
     void update();
     virtual void applyRules() = 0;
-    virtual void end();
-    
-    ofEvent<bool> endRules;
 };
 
 #endif

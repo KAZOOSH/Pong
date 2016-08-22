@@ -11,9 +11,9 @@
 
 
 //------------------------------------------------------------------
-BasicRenderer::BasicRenderer(GameElements* gameElements, string name):AbstractRenderer(gameElements, name) {
+BasicRenderer::BasicRenderer(GameElements* gameElements, string name, int runtime_):AbstractRenderer(gameElements, name) {
     font.load("font.ttf",70);
-    runTime = -1;
+    runTime = runtime_;
 }
 
 //------------------------------------------------------------------

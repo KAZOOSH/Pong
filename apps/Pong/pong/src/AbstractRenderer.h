@@ -20,9 +20,6 @@ class AbstractRenderer : public AbstractGameControl{
 	void draw();
     virtual void render() = 0;
     
-    virtual void end();
-    ofEvent<bool> endRenderer;
-    
 };
 
 #endif

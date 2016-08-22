@@ -41,6 +41,9 @@ public:
     void resetStartModes();
     void shufflePlaymode();
     
+    //listener
+    void onEndMode(string& type);
+    
     //for testing
     void setRenderer(int index);
     void setRenderer(string name);

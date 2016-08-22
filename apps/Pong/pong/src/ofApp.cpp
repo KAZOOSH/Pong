@@ -17,7 +17,6 @@ void ofApp::setup(){
     initWarper();
     
     
-    
     textRenderer = new TextRenderer(&elements);
     playModeController.setup(&elements,textRenderer);
     
@@ -183,26 +182,6 @@ void ofApp::startGame(){
         GameEvent g = START;
         ofNotifyEvent(elements.newGameEvent, g);
         isGameRunning = true;
-    }
-}
-
-
-
-/**
- * when special Rule is finished return back to basic rules
- */
-void ofApp::onEndRules(bool& isEnd){
-    if (isEnd) {
-        playModeController.setRules(0);
-    }
-}
-
-/**
- * when special Renderer is finished return back to basic renderer
- */
-void ofApp::onEndRenderer(bool& isEnd){
-    if (isEnd) {
-        playModeController.setRenderer(0);
     }
 }
 

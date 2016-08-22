@@ -11,20 +11,15 @@
 
 
 //------------------------------------------------------------------
-AbstractRenderer::AbstractRenderer(GameElements* gameElements_, string name):AbstractGameControl(gameElements_,name) {
+AbstractRenderer::AbstractRenderer(GameElements* gameElements_, string name):AbstractGameControl(gameElements_,name,"Renderer") {
     
 }
 
 void AbstractRenderer::draw(){
     if (runTime != -1) {
         if (startTime + runTime < ofGetElapsedTimeMillis()) {
-            end();
+            ofNotifyEvent(runtimeExtendedEvent, type);
         }
     }
     render();
-}
-
-void AbstractRenderer::end(){
-    bool endState = true;
-    ofNotifyEvent(endRenderer, endState);
 }

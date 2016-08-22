@@ -17,7 +17,7 @@ class BasicRules : public AbstractRules{
 	
   public:
 	
-	BasicRules(GameElements* gameElements, string name = "BasicRules");
+	BasicRules(GameElements* gameElements, string name = "", int runtime = 20000);
 	
 	virtual void applyRules();
 	

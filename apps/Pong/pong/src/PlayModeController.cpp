@@ -15,25 +15,28 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     
     //init rules
     currentRules = 0;
-    rules.push_back(new BasicRules(gameElements));
+    rules.push_back(new BasicRules(gameElements,"BasicRules",-1));
     rules.push_back(new MultiBallRule(gameElements));
     //->add other rules to vector here
     
     //init renderer
     currentRenderer = 0;
-    renderer.push_back(new BasicRenderer(gameElements));
+    renderer.push_back(new BasicRenderer(gameElements,"BasicRenderer",-1));
     renderer.push_back(new AnaglyphRenderer(gameElements));
     //-> add other renderers to vector here
     
-    //add playmodes
-    rules.push_back(new WallPlayMode(gameElements));
-    renderer.push_back(new WallPlayMode(gameElements));
+    //add playmodes -> add the playmode to renderer and rules
+    WallPlayMode* wallPlayMode = new WallPlayMode(gameElements);
+    rules.push_back(wallPlayMode);
+    renderer.push_back(wallPlayMode);
     
     for (int i=0; i<rules.size(); ++i) {
         ofAddListener(rules[i]->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);
+        ofAddListener(rules[i]->runtimeExtendedEvent, this, &PlayModeController::onEndMode);
     }
     for (int i=0; i<renderer.size(); ++i) {
         ofAddListener(renderer[i]->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);
+        ofAddListener(renderer[i]->runtimeExtendedEvent, this, &PlayModeController::onEndMode);
     }
 }
 
@@ -77,8 +80,21 @@ void PlayModeController::shufflePlaymode(){
     isNextSelectRules = !isNextSelectRules;
 }
 
+/**
+ * when special Mode is finished return back to basic mode
+ */
+void PlayModeController::onEndMode(string& type){
+    if (type == "Renderer") {
+        setRenderer(0);
+    }else if(type == "Rules"){
+        setRules(0);
+    }
+}
+
+
 void PlayModeController::setRenderer(int index){
     if(index < renderer.size()){
+        renderer[currentRenderer]->end();
         currentRenderer = index;
         renderer[currentRenderer]->begin();
     }
@@ -94,6 +110,7 @@ void PlayModeController::setRenderer(string name){
 
 void PlayModeController::setRules(int index){
     if(index < rules.size()){
+        rules[currentRules]->end();
         currentRules = index;
         rules[currentRules]->begin();
     }

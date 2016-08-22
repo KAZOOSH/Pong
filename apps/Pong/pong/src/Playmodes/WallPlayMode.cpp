@@ -26,20 +26,17 @@ bool Wall::wallHittest(Ball* ball){
     int w_y_min = dimensions.y;
     int w_y_max = dimensions.y + dimensions.height;
     
-    //left edge
-    if (b_x_max >= w_x_min && b_x_max <= w_x_max&&
-        
-        ((b_y_min >= w_y_min && b_y_min <= w_y_max)||
-         (b_y_max >= w_y_min && b_y_max <= w_y_max))
-        
-        ) {
-        
-        cout << b_y_min <<" >= " << w_y_min <<"&& " << b_y_min << " <= " << w_y_max <<endl;
-        cout << b_y_max <<" >= " << w_y_min <<"&& " << b_y_max << " <= " << w_y_max <<endl;
-        
-        ball->velocity.x *= -1;
-        return true;
+    //edge side
+    if (b_x_max >= w_x_min && b_x_max <= w_x_max){
+        if((b_y_max >= w_y_min && b_y_max <= w_y_max)||
+           (b_y_min >= w_y_min && b_y_min <= w_y_max))
+            
+        {
+            ball->velocity.x *= -1;
+            return true;
+        }
     }
+    
     /*
      //right edge
      if (b_x_min >= w_x_min && b_x_max <= w_x_max
@@ -87,13 +84,14 @@ bool Wall::wallHittest(Ball* ball){
 
 WallPlayMode::WallPlayMode(GameElements* gameElements, string name):BasicRenderer(gameElements, name), BasicRules(gameElements, name){
     
-    walls.push_back(Wall(ofRectangle(gameElements->getWidth()*0.25, gameElements->getHeigth()*0.5, 30, 10)));
-    //walls.push_back(Wall(ofRectangle(gameElements->getWidth()*0.5, gameElements->getHeigth()*0.5, 10, 10)));
-    //walls.push_back(Wall(ofRectangle(gameElements->getWidth()*0.75, gameElements->getHeigth()*0.5, 10, 10)));
+    walls.push_back(Wall(ofRectangle(gameElements->getWidth()*0.25, gameElements->getHeigth()*0.5, 10, 10)));
+    walls.push_back(Wall(ofRectangle(gameElements->getWidth()*0.5, gameElements->getHeigth()*0.5, 10, 10)));
+    walls.push_back(Wall(ofRectangle(gameElements->getWidth()*0.75, gameElements->getHeigth()*0.5, 10, 10)));
 }
 
 //------------------------------------------------------------------
 void WallPlayMode::begin() {
+    BasicRenderer::begin();
     BasicRules::begin();
     updateWalls();
 }
@@ -102,17 +100,17 @@ void WallPlayMode::updateWalls(){
     GameElements* gameElements = BasicRules::gameElements;
     
     int ySide = ofRandom(ofRandom(gameElements->getHeigth()));
-    int wSide = 100;
+    int wSide = 50;
     int hSide = ofRandom(gameElements->getHeigth()*.1, gameElements->getHeigth()*0.5);
     
     walls[0].dimensions = ofRectangle(gameElements->getWidth()*0.25,ySide,wSide,hSide);
-    //walls[2].dimensions = ofRectangle(gameElements->getWidth()*0.75,ySide,wSide,hSide);
+    walls[2].dimensions = ofRectangle(gameElements->getWidth()*0.75,ySide,wSide,hSide);
     
     int yCenter = ofRandom(ofRandom(gameElements->getHeigth()));
-    int wCenter = 20;
+    int wCenter = 50;
     int hCenter = ofRandom(gameElements->getHeigth()*.1, gameElements->getHeigth()*0.5);
     
-    //walls[1].dimensions = ofRectangle(.5*(gameElements->getWidth()-wCenter),yCenter,wCenter,hCenter);
+    walls[1].dimensions = ofRectangle(.5*(gameElements->getWidth()-wCenter),yCenter,wCenter,hCenter);
     
 }
 

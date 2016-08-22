@@ -14,17 +14,17 @@
 
 
 class BasicRenderer : public AbstractRenderer{
-	
-  public:
-	
-    BasicRenderer(GameElements* gameElements, string name = "BasicRenderer");
+    
+public:
+    
+    BasicRenderer(GameElements* gameElements, string name = "", int runtime = 20000);
     virtual void render();
     
 protected:
     void drawScore();
     
     ofTrueTypeFont font;
-	
+    
 };
 
 #endif
