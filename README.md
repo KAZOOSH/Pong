@@ -33,7 +33,7 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 * Sticky Mode
 * Multiball Explosion with Healthbar
 * Ball size
-* Panel size
+* Paddle size - done
 * crazy panel, panel reload
 
 #####Renderers

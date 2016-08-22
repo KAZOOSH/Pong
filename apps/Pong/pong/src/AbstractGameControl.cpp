@@ -22,8 +22,13 @@ AbstractGameControl::AbstractGameControl(GameElements* gameElements_, string nam
 void AbstractGameControl::begin(){
     startTime = ofGetElapsedTimeMillis();
     
+    textSize t_size = BIG;
+    if (name.size()>10) {
+        t_size = MEDIUM;
+    }
+    
     TextElement t(name,
-                  BIG,
+                  t_size,
                   true,
                   2000);
     ofNotifyEvent(newTextEvent,t);

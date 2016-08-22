@@ -15,14 +15,18 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     
     //init rules
     currentRules = 0;
-    rules.push_back(new BasicRules(gameElements,"BasicRules",-1));
+    rules.push_back(new BasicRules(gameElements,"",-1));
     rules.push_back(new MultiBallRule(gameElements));
     rules.push_back(new DoubleSpeedRule(gameElements));
+    rules.push_back(new PaddleSizeRule(gameElements, "Small Paddle", 0.75));
+    rules.push_back(new PaddleSizeRule(gameElements, "Big Paddle", 1.5));
+    rules.push_back(new BallSizeRule(gameElements, "Tiny Ball", 0.5));
+    rules.push_back(new BallSizeRule(gameElements, "Huge Ball", 2.0));
     //->add other rules to vector here
     
     //init renderer
     currentRenderer = 0;
-    renderer.push_back(new BasicRenderer(gameElements,"BasicRenderer",-1));
+    renderer.push_back(new BasicRenderer(gameElements,"",-1));
     renderer.push_back(new AnaglyphRenderer(gameElements));
     renderer.push_back(new RoundBallRenderer(gameElements));
     //-> add other renderers to vector here
@@ -61,7 +65,14 @@ void PlayModeController::resetStartModes(){
  */
 void PlayModeController::shufflePlaymode(){
     if(isNextSelectRules){
-        setRules(ofRandom(rules.size()));
+        //eliminate game mode
+        for (int i=0; i<renderer.size(); ++i) {
+            if(renderer[i]->getName() == rules[currentRules]->getName()){
+                setRenderer(0);
+            }
+        }
+        
+        setRules(ofRandom(1,rules.size()));
         //find corresponding renderer
         for (int i=0; i<renderer.size(); ++i) {
             if(renderer[i]->getName() == rules[currentRules]->getName()){
@@ -70,10 +81,17 @@ void PlayModeController::shufflePlaymode(){
         }
     }
     else{
-        setRenderer(ofRandom(rules.size()));
+        //eliminate game mode
+        for (int i=0; i<rules.size(); ++i) {
+            if(rules[i]->getName() == renderer[currentRenderer]->getName()){
+                setRules(0);
+            }
+        }
+        
+        setRenderer(ofRandom(1,renderer.size()));
         //find corresponding renderer
-        for (int i=0; i<renderer.size(); ++i) {
-            if(renderer[i]->getName() == renderer[currentRenderer]->getName()){
+        for (int i=0; i<rules.size(); ++i) {
+            if(rules[i]->getName() == renderer[currentRenderer]->getName()){
                 setRules(i);
             }
         }

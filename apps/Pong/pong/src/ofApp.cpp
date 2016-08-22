@@ -211,7 +211,10 @@ void ofApp::keyPressed(int key){
     }
     
     if(key == '2') {
-        playModeController.setRenderer("Round Ball");
+        playModeController.setRules("Tiny Ball");
+    }
+    if(key == '3') {
+        playModeController.setRules("Huge Ball");
     }
 }
 
