@@ -25,7 +25,7 @@ void PsyRenderer::render() {
     ofPushMatrix();
     
     shader.setUniform2f("dimensions", ofVec2f(gameElements->getWidth(),gameElements->getHeigth()));
-    shader.setUniform1f("iGlobalTime", ofGetElapsedTimeMillis());
+    shader.setUniform1f("iGlobalTime", ofGetElapsedTimef());
     shader.setUniform1f("radius", gameElements->balls[0]->radius);
     shader.setUniform2f("b1_pos", gameElements->balls[0]->position);
     
