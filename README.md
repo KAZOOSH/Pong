@@ -43,6 +43,7 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 - [ ] Tron
 - [x] Round Ball
 - [ ] LSD Mode
+- [x] PSY Mode
 - [ ] Sonar Mode
 - [ ] Table Tennis
 - [ ] Womens Tennis
