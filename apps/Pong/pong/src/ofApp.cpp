@@ -211,7 +211,7 @@ void ofApp::keyPressed(int key){
     }
     
     if(key == '2') {
-        playModeController.setRules("Double Speed");
+        playModeController.setRenderer("Round Ball");
     }
 }
 

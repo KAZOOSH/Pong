@@ -41,7 +41,7 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 * Anaglyph - done
 * Funny Background (or video)
 * Tron
-* Round ball
+* Round ball - done
 * LSD Mode
 * Sonar Mode
 * Table Tennis

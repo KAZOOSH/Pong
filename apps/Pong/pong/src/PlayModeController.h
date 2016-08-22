@@ -23,6 +23,7 @@
 #include "AbstractRenderer.h"
 #include "BasicRenderer.h"
 #include "AnaglyphRenderer.h"
+#include "RoundBallRenderer.h"
 //-> include other renderers here
 
 #include "WallPlayMode.h"

@@ -24,6 +24,7 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     currentRenderer = 0;
     renderer.push_back(new BasicRenderer(gameElements,"BasicRenderer",-1));
     renderer.push_back(new AnaglyphRenderer(gameElements));
+    renderer.push_back(new RoundBallRenderer(gameElements));
     //-> add other renderers to vector here
     
     //add playmodes -> add the playmode to renderer and rules
