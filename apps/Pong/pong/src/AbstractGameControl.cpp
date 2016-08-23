@@ -35,7 +35,18 @@ void AbstractGameControl::begin(){
 }
 
 void AbstractGameControl::end(){
-    
+    if (name.size()>0) {
+        textSize t_size = BIG;
+        if (name.size()>10) {
+            t_size = MEDIUM;
+        }
+        
+        TextElement t(name + " end",
+                      t_size,
+                      true,
+                      500);
+        ofNotifyEvent(newTextEvent,t);
+    }
 }
 
 string AbstractGameControl::getName(){

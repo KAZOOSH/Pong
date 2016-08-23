@@ -212,7 +212,7 @@ void ofApp::keyPressed(int key){
     }
     
     if(key == '2') {
-        playModeController.setRules("Gravity");
+        playModeController.setRenderer("PSY");
     }
     if(key == '3') {
         playModeController.setRules("Huge Ball");

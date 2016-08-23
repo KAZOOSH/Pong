@@ -36,6 +36,9 @@ void PsyRenderer::render() {
     
     shader.end();
     
+    ofSetColor(255);
+    drawScore();
+    
     // ofSetColor(ofColor::white);
     // img.draw(0, 0);
     

@@ -22,6 +22,7 @@ public:
     
 protected:
     void drawScore();
+    void drawMidLine();
     
     ofTrueTypeFont font;
     

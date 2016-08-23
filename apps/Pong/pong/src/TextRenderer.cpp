@@ -78,5 +78,11 @@ void TextRenderer::render() {
 }
 
 void TextRenderer::onNewTextElement(TextElement& t){
+    //only allow 1 text at once
+    //texts.push_back(t);
+    if (texts.size()>0) {
+        texts.pop_back();
+    }
+    
     texts.push_back(t);
 }
