@@ -20,6 +20,7 @@
 #include "DoubleSpeedRule.h"
 #include "PaddleSizeRule.h"
 #include "BallSizeRule.h"
+#include "GravityRule.h"
 //-> include other rules here
 
 #include "AbstractRenderer.h"

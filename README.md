@@ -29,7 +29,7 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 - [x] Basic 
 - [x] Multiball 
 - [x] Double Speed 
-- [ ] Gravity Mode
+- [x] Gravity Mode
 - [ ] Sticky Mode
 - [ ] Multiball Explosion with Healthbar
 - [x] Ball size 

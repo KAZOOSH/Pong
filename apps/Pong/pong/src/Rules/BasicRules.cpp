@@ -18,15 +18,16 @@ BasicRules::BasicRules(GameElements* gameElements, string name,int runtime_):Abs
 
 
 void BasicRules::applyRules() {
-    for(auto&& ball : gameElements->balls){
-        //move ball
-        ball->update();
-        
-        //check paddle and/or wall hit
-        if (!paddleHittest(ball)){
-            wallHittest(ball);
-        }
-    }
+		for (auto&& ball : gameElements->balls) {
+			//move ball
+			ball->update();
+
+			//check paddle and/or wall hit
+			if (!paddleHittest(ball)) {
+				wallHittest(ball);
+			}
+		}
+    
     
 }
 
@@ -69,11 +70,13 @@ void BasicRules::wallHittest(Ball* ball){
     //wall top
     else if (ball->position.y - ball->radius <= 0) {
         ball->velocity.y *= -1;
+		ball->position.y = ball->radius;
         gameElements->notifyGameEvent(CONTACT_WALL);
     }
     //wall bottom
     else if (ball->position.y + ball->radius >= gameElements->getHeigth()) {
         ball->velocity.y *= -1;
+		ball->position.y = gameElements->getHeigth() - ball->radius;
         gameElements->notifyGameEvent(CONTACT_WALL);
     }
 }
