@@ -57,12 +57,14 @@ void BasicRules::wallHittest(Ball* ball){
     //wall left, player 2 gets point
     if (ball->position.x - ball->radius <= 0) {
         ball->position = ofVec2f( gameElements->getWidth()/2, gameElements->getHeigth()/2);
+        ball->velocity = ofVec2f(ball->velocity.x,0);
         gameElements->increasePoints(2);
         gameElements->notifyGameEvent(BALL_OUT_P1);
     }
     //wall right, player 1 gets point
     else if (ball->position.x + ball->radius >= gameElements->getWidth()) {
         ball->position = ofVec2f( gameElements->getWidth()/2, gameElements->getHeigth()/2);
+        ball->velocity = ofVec2f(ball->velocity.x,0);
         gameElements->increasePoints(1);
         gameElements->notifyGameEvent(BALL_OUT_P2);
     }
