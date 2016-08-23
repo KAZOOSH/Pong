@@ -13,6 +13,7 @@ GameElements::GameElements(){
     //setup game size
     widthGame = 1500;
     heightGame = 1080;
+    
     winScore = 10;
     
     paddleLeft.setup(0, widthGame, heightGame);

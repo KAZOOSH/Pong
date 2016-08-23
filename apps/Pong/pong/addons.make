@@ -1,4 +1,6 @@
 ofxAnimatable
 ofxCameraAnaglyph
+ofxNetwork
+ofxOPC
 ofxOpenCv
 ofxQuadWarp

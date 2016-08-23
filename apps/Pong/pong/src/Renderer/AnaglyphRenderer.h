@@ -15,12 +15,12 @@
 
 
 class AnaglyphRenderer : public BasicRenderer{
-	
-  public:
-	
+    
+public:
+    
     AnaglyphRenderer(GameElements* gameElements, string name = "Anaglyph");
     virtual void render();
-	
+    
 protected:
     void drawAnaglyphElements();
     ofxCameraAnaglyph cam;
