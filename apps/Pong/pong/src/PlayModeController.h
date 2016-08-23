@@ -28,6 +28,7 @@
 #include "AnaglyphRenderer.h"
 #include "RoundBallRenderer.h"
 #include "PsyRenderer.h"
+#include "TennisRenderer.h"
 //-> include other renderers here
 
 #include "WallPlayMode.h"

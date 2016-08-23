@@ -28,7 +28,7 @@ void Ball::update() {
 //------------------------------------------------------------------
 void Ball::draw() {
     ofSetColor(200);
-    ofDrawRectangle(position.x - radius*0.5, position.y - radius*0.5, radius*2, radius*2);
+    ofDrawRectangle(position.x - radius, position.y - radius, radius*2, radius*2);
     
     
 }

@@ -28,7 +28,7 @@ void RoundBallRenderer::render() {
     
     for(auto&& ball : gameElements->balls){
         float r = ball->radius;
-        ofDrawCircle(ball->position.x + r*.5, ball->position.y + r*.5, r);
+        ofDrawCircle(ball->position.x, ball->position.y, r);
     }
 	
 }

@@ -31,7 +31,8 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     renderer.push_back(new AnaglyphRenderer(gameElements));
     renderer.push_back(new RoundBallRenderer(gameElements));
     renderer.push_back(new PsyRenderer(gameElements));
-    //-> add other renderers to vector here
+	renderer.push_back(new TennisRenderer(gameElements));
+	//-> add other renderers to vector here
     
     //add playmodes -> add the playmode to renderer and rules
     WallPlayMode* wallPlayMode = new WallPlayMode(gameElements);
