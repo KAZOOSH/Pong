@@ -32,6 +32,10 @@ void AbstractGameControl::begin(){
                   true,
                   2000);
     ofNotifyEvent(newTextEvent,t);
+    
+    //notify game event
+    PlayModeEvent e = PlayModeEvent(name);
+    ofNotifyEvent(gameElements->newPlayModeEvent, e);
 }
 
 void AbstractGameControl::end(){

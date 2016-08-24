@@ -11,7 +11,9 @@
 #define _LedControl
 
 #include "ofMain.h"
+#include "ofxOPC.h"
 
+#define N_LEDS 24
 
 class LedControl {
 	
@@ -22,6 +24,10 @@ class LedControl {
 	void setup();
 	void update();
 	void draw();
+    
+private:
+    vector<ofColor> colors;
+    ofxOPC opcClient;
 	
 };
 
