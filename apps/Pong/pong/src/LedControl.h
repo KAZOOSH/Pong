@@ -12,23 +12,29 @@
 
 #include "ofMain.h"
 #include "ofxOPC.h"
+#include "GameElements.h"
 
-#define N_LEDS 24
+#define N_LEDS 40
 
 class LedControl {
-	
-  public:
-	
-	LedControl();
-	
-	void setup();
-	void update();
-	void draw();
+    
+public:
+    
+    void setup(GameElements* gameElements);
+    void update();
+    
+    float pixelPerLed;
+    
+protected:
+    void calculateLeds(Paddle* paddle, vector<ofColor>* colors);
     
 private:
+    
     vector<ofColor> colors;
     ofxOPC opcClient;
-	
+    GameElements* gameElements;
+    
+    vector<ofColor> colorsPaddle1,colorsPaddle2;
 };
 
 #endif

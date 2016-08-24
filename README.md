@@ -21,7 +21,7 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 - [ ] Deflector Beam
 - [ ] Blockout Mode
 - [x] Walls
-- [ ] Portals
+- [x] Portals
 - [ ] Shoot the ball Mode
 - [ ] Anaglyph Gravity
 

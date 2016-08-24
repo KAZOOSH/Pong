@@ -26,6 +26,8 @@ void ofApp::setup(){
     //init soundPlayer
     soundPlayer.setup();
     
+    ledControl.setup(&elements);
+    
     //register listeners
     ofAddListener(elements.newScoreEvent, this, &ofApp::onPointsChanged);
     ofAddListener(elements.newGameEvent, &soundPlayer, &SoundPlayer::onGameEvent);
@@ -40,7 +42,9 @@ void ofApp::update(){
     //init message
     if(!isInitMessageShown){
         if (ofGetElapsedTimeMillis() - tGameFinished > 4000) {
+            restartGame();
             showInitMessage();
+            
         }
     }
     
@@ -53,6 +57,7 @@ void ofApp::update(){
         playModeController.getCurrentRules()->update();
     }
     
+    ledControl.update();
 }
 
 //--------------------------------------------------------------
@@ -128,14 +133,15 @@ void ofApp::drawWarpedImage(){
 void ofApp::restartGame(){
     playModeController.resetStartModes();
     elements.resetElements();
-    isGameRunning = false;
-    isInitMessageShown = false;
+    
 }
 
 /**
  * notify events to start fireworks ;)
  */
 void ofApp::endGame(int winner){
+    isGameRunning = false;
+    isInitMessageShown = false;
     
     tGameFinished = ofGetElapsedTimeMillis();
     
@@ -155,10 +161,12 @@ void ofApp::endGame(int winner){
     if (winner == 2) g = P2_WIN;
     
     ofNotifyEvent(elements.newGameEvent, g);
+    
+    
 }
 
 void ofApp::showInitMessage(){
-    TextElement t("Get in Position!",
+    TextElement t("Paddles up!",
                   MEDIUM,
                   true,
                   2000);
@@ -189,7 +197,6 @@ void ofApp::startGame(){
 void ofApp::onPointsChanged(PlayerScoreEvent& e){
     if (e.points >= elements.getWinScore()){
         endGame(e.id);
-        restartGame();
     }
 }
 
@@ -207,15 +214,14 @@ void ofApp::keyPressed(int key){
         warper.save();
     }
     
-    if(key == '1') {
+    if(key == 'p') {
         playModeController.shufflePlaymode();
     }
     
     if(key == '2') {
-        playModeController.setRenderer("Portals");
-		playModeController.setRules("Portals");
-		//playModeController.setRules("Walls");
-	}
+        playModeController.setRenderer("Trails");
+        //playModeController.setRules("Walls");
+    }
     if(key == '3') {
         playModeController.setRules("Huge Ball");
     }

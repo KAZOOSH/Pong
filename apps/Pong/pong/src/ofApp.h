@@ -11,6 +11,8 @@
 
 #include "MouseControl.h"
 
+#include "LedControl.h"
+
 class ofApp : public ofBaseApp{
 public:
     void setup(); //!< configures App
@@ -47,4 +49,6 @@ private:
     TextRenderer* textRenderer;
     
     MouseControl mouse;
+    
+    LedControl ledControl;
 };
