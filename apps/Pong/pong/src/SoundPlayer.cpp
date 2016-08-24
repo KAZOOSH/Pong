@@ -26,6 +26,7 @@ void SoundPlayer::setup() {
     player[START] = playerList[7];
     
     loadSoundSet("basic");
+    currentSoundSet = "basic";
     
 }
 
@@ -51,6 +52,9 @@ void SoundPlayer::onPlaymodeChanged(PlayModeEvent& event){
     playMode.play();
     if (event.hasSoundset) {
         loadSoundSet(event.nameSoundset);
+        currentSoundSet = event.nameSoundset;
+    }else if(currentSoundSet != "basic"){
+        loadSoundSet("basic");
     }
 }
 
@@ -63,5 +67,5 @@ bool SoundPlayer::loadSoundSet(string name){
     player[P1_WIN]->load("sounds/" + name + "/p1_win.mp3");
     player[P2_WIN]->load("sounds/" + name + "/p2_win.mp3");
     player[START]->load("sounds/" + name + "/start.mp3");
-	return true;
+    return true;
 }

@@ -30,6 +30,7 @@ protected:
 private:
     vector<ofSoundPlayer*> playerList;
     map<GameEvent, ofSoundPlayer*> player;
+    string currentSoundSet;
     
     ofSoundPlayer playMode;
 };
