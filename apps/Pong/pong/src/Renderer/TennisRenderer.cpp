@@ -5,6 +5,13 @@ TennisRenderer::TennisRenderer(GameElements * gameElements, string name) :BasicR
 	tennis_ball.load("images/tennis_ball.png");
 }
 
+void TennisRenderer::begin()
+{
+	BasicRenderer::begin();
+	PlayModeEvent e = PlayModeEvent(name,true,"tennis");
+	ofNotifyEvent(gameElements->newPlayModeEvent, e);
+}
+
 void TennisRenderer::render() {
 	court.draw(0, 0, gameElements->getWidth(),gameElements->getHeigth());
 

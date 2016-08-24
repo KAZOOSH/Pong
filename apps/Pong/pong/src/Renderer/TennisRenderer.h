@@ -5,6 +5,7 @@ class TennisRenderer :
 {
 public:
 	TennisRenderer(GameElements* gameElements, string name = "Tennis");
+	virtual void begin();
 	virtual void render();
 private:
 	ofImage court;
