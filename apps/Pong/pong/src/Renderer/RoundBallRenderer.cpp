@@ -20,7 +20,8 @@ void RoundBallRenderer::render() {
     ofBackground(0);
     
     drawScore();
-    
+	drawMidLine();
+
     gameElements->paddleRight.draw();
     gameElements->paddleLeft.draw();
     

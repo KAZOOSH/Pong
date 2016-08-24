@@ -36,7 +36,17 @@ bool Wall::wallHittest(Ball* ball){
             return true;
         }
     }
-    
+
+	if (b_x_min <= w_x_max && b_x_min >= w_x_min) {
+		if ((b_y_max >= w_y_min && b_y_max <= w_y_max) ||
+			(b_y_min >= w_y_min && b_y_min <= w_y_max))
+
+		{
+			ball->velocity.x *= -1;
+			return true;
+		}
+	}
+
     /*
      //right edge
      if (b_x_min >= w_x_min && b_x_max <= w_x_max

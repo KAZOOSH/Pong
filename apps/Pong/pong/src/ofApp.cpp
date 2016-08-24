@@ -212,7 +212,7 @@ void ofApp::keyPressed(int key){
     }
     
     if(key == '2') {
-        playModeController.setRenderer("Tennis");
+        playModeController.setRules("Swerve");
     }
     if(key == '3') {
         playModeController.setRules("Huge Ball");

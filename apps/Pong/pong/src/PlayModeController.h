@@ -21,7 +21,8 @@
 #include "PaddleSizeRule.h"
 #include "BallSizeRule.h"
 #include "GravityRule.h"
-//-> include other rules here
+#include "SwerveRule.h"
+ //-> include other rules here
 
 #include "AbstractRenderer.h"
 #include "BasicRenderer.h"

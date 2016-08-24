@@ -16,6 +16,8 @@ BasicRenderer::BasicRenderer(GameElements* gameElements, string name, int runtim
     runTime = runtime_;
 }
 
+
+
 //------------------------------------------------------------------
 void BasicRenderer::render() {
     ofBackground(0);
@@ -32,9 +34,10 @@ void BasicRenderer::render() {
     
 }
 
+
 void BasicRenderer::drawScore(){
     font.drawString(ofToString(gameElements->getPoints(1)), gameElements->getWidth()*0.25, gameElements->getHeigth()*0.25);
-    font.drawString(ofToString(gameElements->getPoints(2)), gameElements->getWidth()*0.75, gameElements->getHeigth()*0.25);
+    font.drawString(ofToString(gameElements->getPoints(2)), gameElements->getWidth()*0.7, gameElements->getHeigth()*0.25);
 }
 
 void BasicRenderer::drawMidLine(){

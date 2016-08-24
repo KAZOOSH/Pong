@@ -19,7 +19,6 @@ public:
     
     BasicRenderer(GameElements* gameElements, string name = "", int runtime = 20000);
     virtual void render();
-    
 protected:
     void drawScore();
     void drawMidLine();

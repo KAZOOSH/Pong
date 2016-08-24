@@ -23,7 +23,8 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     rules.push_back(new BallSizeRule(gameElements, "Tiny Ball", 0.5));
     rules.push_back(new BallSizeRule(gameElements, "Huge Ball", 2.0));
 	rules.push_back(new GravityRule(gameElements));
-    //->add other rules to vector here
+	rules.push_back(new SwerveRule(gameElements));
+	//->add other rules to vector here
     
     //init renderer
     currentRenderer = 0;
