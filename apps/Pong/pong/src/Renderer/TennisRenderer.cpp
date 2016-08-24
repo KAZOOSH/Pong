@@ -2,7 +2,7 @@
 
 TennisRenderer::TennisRenderer(GameElements * gameElements, string name) :BasicRenderer(gameElements, name) {
 	court.load("images/court.jpg");
-	tennis_ball.load("images/tennis_ball.png");	
+	tennis_ball.load("images/tennis_ball.png");
 }
 
 void TennisRenderer::render() {
@@ -16,11 +16,11 @@ void TennisRenderer::render() {
 	for (auto&& ball : gameElements->balls) {
 		float r = ball->radius;
 		ofPushMatrix();
-		ofTranslate(ball->position.x, ball->position.y);
-		ofPushMatrix();
-			ofRotate(ofGetElapsedTimef());
-		tennis_ball.draw(0,0, 2 * r, 2 * r);
-		ofPopMatrix();
+			ofTranslate(ball->position.x, ball->position.y);
+			ofPushMatrix();
+				ofRotate(ofGetElapsedTimef()*300);
+				tennis_ball.draw(-r,-r, 2*r, 2*r);
+			ofPopMatrix();
 		ofPopMatrix();
 
 		//ofDrawCircle(ball->position.x + r*.5, ball->position.y + r*.5, r);
