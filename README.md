@@ -35,6 +35,7 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 - [x] Ball size 
 - [x] Paddle size 
 - [ ] crazy panel, panel reload
+- [x] swerve ball
 
 #####Renderers
 - [x] Basic
@@ -46,5 +47,5 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 - [x] PSY Mode
 - [ ] Sonar Mode
 - [ ] Table Tennis
-- [ ] Womens Tennis
+- [x] Tennis
 - [ ] Pokeball

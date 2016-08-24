@@ -37,9 +37,13 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     
     //add playmodes -> add the playmode to renderer and rules
     WallPlayMode* wallPlayMode = new WallPlayMode(gameElements);
-    rules.push_back(wallPlayMode);
+	rules.push_back(wallPlayMode);
     renderer.push_back(wallPlayMode);
-    
+
+	PortalPlayMode* portalPlayMode = new PortalPlayMode(gameElements);
+	rules.push_back(portalPlayMode);
+	renderer.push_back(portalPlayMode);
+
     for (int i=0; i<rules.size(); ++i) {
         ofAddListener(rules[i]->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);
         ofAddListener(rules[i]->runtimeExtendedEvent, this, &PlayModeController::onEndMode);

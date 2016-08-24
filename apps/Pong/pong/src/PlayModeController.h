@@ -33,6 +33,7 @@
 //-> include other renderers here
 
 #include "WallPlayMode.h"
+#include "PortalPlayMode.h"
 //-> include other playmodes here
 
 /**

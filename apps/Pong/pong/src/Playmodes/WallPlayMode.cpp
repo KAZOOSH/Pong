@@ -117,8 +117,11 @@ void WallPlayMode::updateWalls(){
     walls[2].dimensions = ofRectangle(gameElements->getWidth()*0.75,ySide,wSide,hSide);
     
     int yCenter = ofRandom(ofRandom(gameElements->getHeigth()));
-    int wCenter = 50;
-    int hCenter = ofRandom(gameElements->getHeigth()*.1, gameElements->getHeigth()*0.5);
+	while (yCenter>gameElements->getHeigth()*0.2 && yCenter<gameElements->getHeigth()*0.6) {
+		yCenter = ofRandom(ofRandom(gameElements->getHeigth()));
+	}
+	int wCenter = 50;
+    int hCenter = ofRandom(gameElements->getHeigth()*.1, gameElements->getHeigth()*0.2);
     
     walls[1].dimensions = ofRectangle(.5*(gameElements->getWidth()-wCenter),yCenter,wCenter,hCenter);
     

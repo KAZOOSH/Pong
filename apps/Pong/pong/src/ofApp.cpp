@@ -212,8 +212,10 @@ void ofApp::keyPressed(int key){
     }
     
     if(key == '2') {
-        playModeController.setRules("Swerve");
-    }
+        playModeController.setRenderer("Portals");
+		playModeController.setRules("Portals");
+		//playModeController.setRules("Walls");
+	}
     if(key == '3') {
         playModeController.setRules("Huge Ball");
     }
