@@ -32,8 +32,10 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 - [x] Gravity Mode
 - [ ] Sticky Mode
 - [ ] Multiball Explosion with Healthbar
-- [x] Ball size 
-- [x] Paddle size 
+- [x] Huge Ball
+- [x] Small Ball 
+- [x] Small Paddle
+- [x] Huge Paddle 
 - [ ] crazy panel, panel reload
 - [x] swerve ball
 

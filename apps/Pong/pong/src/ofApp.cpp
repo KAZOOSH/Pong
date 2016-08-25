@@ -64,6 +64,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     //render game view in fbo
+    ofBackground(0);
     gameFbo.begin();
     playModeController.getCurrentRenderer()->draw();
     textRenderer->render();
@@ -180,8 +181,8 @@ void ofApp::showInitMessage(){
  */
 void ofApp::startGame(){
     
-    if(elements.paddleLeft.getPosition() < 10 &&
-       elements.paddleRight.getPosition() < 10){
+    if(elements.paddleLeft.getPosition() < 50 &&
+       elements.paddleRight.getPosition() < 50){
         
         TextElement t("GO!",
                       BIG,
@@ -203,6 +204,9 @@ void ofApp::onPointsChanged(PlayerScoreEvent& e){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    if(key == 'f') {
+        ofToggleFullscreen();
+    }
     if(key == 's' || key == 'S') {
         warper.toggleShow();
     }
@@ -225,6 +229,47 @@ void ofApp::keyPressed(int key){
     }
     if(key == '3') {
         playModeController.setRules("Huge Ball");
+    }
+    
+    if(key == OF_KEY_UP) {
+        ledControl.setBrightness(ledControl.getBrightness()+1);
+        cout << "brightness " << ledControl.getBrightness() << endl;
+    }
+    if(key == OF_KEY_DOWN) {
+        ledControl.setBrightness(ledControl.getBrightness()-1);
+        cout << "brightness " << ledControl.getBrightness() << endl;
+    }
+    if(key == OF_KEY_RIGHT) {
+        ledControl.pixelPerLed++;
+        cout << "pixel per led " << ledControl.pixelPerLed << endl;
+    }
+    if(key == OF_KEY_LEFT) {
+        ledControl.pixelPerLed--;
+        cout << "pixel per led " << ledControl.pixelPerLed << endl;
+    }
+    if(key == '+') {
+        elements.paddleLeft.height++;
+        elements.paddleRight.height++;
+        cout << "paddle size " << elements.paddleLeft.height << endl;
+    }
+    if(key == '-') {
+        elements.paddleLeft.height--;
+        elements.paddleRight.height--;
+        cout << "paddle size " << elements.paddleLeft.height << endl;
+    }
+    if(key == 'd') {
+        elements.paddleLeft.isDebug = !elements.paddleLeft.isDebug;
+        elements.paddleRight.isDebug = !elements.paddleRight.isDebug;
+    }
+    if(key == 'n') {
+        for (auto& ball:elements.balls) {
+            ball->velocity = ofVec2f(ball->velocity.x-1,ball->velocity.y);
+        }
+    }
+    if(key == 'm') {
+        for (auto& ball:elements.balls) {
+            ball->velocity = ofVec2f(ball->velocity.x+1,ball->velocity.y);
+        }
     }
 }
 

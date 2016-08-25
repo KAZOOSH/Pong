@@ -23,7 +23,7 @@ SerialControl::SerialControl():AbstractControl() {
     if (!devicesInfo.empty())
     {
         // Connect to the first matching device.
-        bool success = paddleLeft.setup(devicesInfo[0], 115200);
+        bool success = paddleRight.setup(devicesInfo[0], 115200);
         
         if(success)
         {
@@ -34,15 +34,15 @@ SerialControl::SerialControl():AbstractControl() {
             ofLogNotice("ofApp::setup") << "Unable to setup paddle left " << devicesInfo[0];
         }
         
-        success = paddleRight.setup(devicesInfo[1], 115200);
+        success = paddleLeft.setup(devicesInfo[1], 115200);
         
         if(success)
         {
-            ofLogNotice("ofApp::setup") << "Successfully setup paddle right " << devicesInfo[0];
+            ofLogNotice("ofApp::setup") << "Successfully setup paddle right " << devicesInfo[1];
         }
         else
         {
-            ofLogNotice("ofApp::setup") << "Unable to setup paddle right " << devicesInfo[0];
+            ofLogNotice("ofApp::setup") << "Unable to setup paddle right " << devicesInfo[1];
         }
         
     }
@@ -60,8 +60,8 @@ SerialControl::SerialControl():AbstractControl() {
 void SerialControl::update(){
     try
     {
-        readControl(paddleLeft, newPositionPaddle1Event);
-        readControl(paddleLeft, newPositionPaddle2Event);
+        readControl(paddleLeft, newPositionPaddle1Event,true);
+        readControl(paddleRight, newPositionPaddle2Event, false);
         
     }catch (const std::exception& exc)
     {
@@ -69,7 +69,7 @@ void SerialControl::update(){
     }
 }
 
-void SerialControl::readControl(ofx::IO::SerialDevice& serial, ofEvent<float>& event){
+void SerialControl::readControl(ofx::IO::SerialDevice& serial, ofEvent<float>& event, bool invertCoords){
     uint8_t buffer[100];
     
     serial.writeByte('0');
@@ -84,6 +84,9 @@ void SerialControl::readControl(ofx::IO::SerialDevice& serial, ofEvent<float>& e
         value = (buffer[0] << 8) + buffer[1];
         
         float yPaddle = ofMap(value, -1024, 1024, 0, 1);
+        if (invertCoords) {
+            yPaddle = ofMap(value, 1024, -1024, 0, 1);
+        }
         ofNotifyEvent(event, yPaddle, this);
         
     }

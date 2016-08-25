@@ -32,6 +32,8 @@ class Paddle {
     
     int height;
     
+    bool isDebug;
+    
 private:
     int x, y;
     int wGame, hGame;

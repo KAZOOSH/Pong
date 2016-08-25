@@ -24,7 +24,7 @@ public:
     void update();
     
 private:
-    void readControl(ofx::IO::SerialDevice& serial, ofEvent<float>& event);
+    void readControl(ofx::IO::SerialDevice& serial, ofEvent<float>& event, bool invertCoords);
     
 private:
     ofx::IO::SerialDevice paddleLeft, paddleRight;

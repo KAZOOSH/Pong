@@ -65,7 +65,7 @@ public:
     int getWidth();
     int getHeigth();
     
-    void addBall(ofVec2f position, ofVec2f velocity = ofVec2f(-7, 0));
+    void addBall(ofVec2f position, ofVec2f velocity = ofVec2f(-13, 0));
     bool removeBall(long id);
     void removeAllExtraBalls();
     

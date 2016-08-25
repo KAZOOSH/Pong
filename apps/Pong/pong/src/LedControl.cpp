@@ -21,6 +21,8 @@ void LedControl::setup(GameElements* gameElements_) {
         colorsPaddle1.push_back(0);
         colorsPaddle2.push_back(0);
     }
+    
+    brightness = 128;
 }
 
 
@@ -36,22 +38,30 @@ void LedControl::update() {
     }
     else
     {
-        opcClient.writeChannel(0,colorsPaddle1);
+        opcClient.writeChannel(2,colorsPaddle1);
         opcClient.writeChannel(1,colorsPaddle2);
     }
+}
+
+u_int8_t LedControl::getBrightness(){
+    return brightness;
+}
+
+void LedControl::setBrightness(u_int8_t brightness_){
+    brightness = brightness_;
 }
 
 void LedControl::calculateLeds(Paddle* paddle, vector<ofColor>* colors){
     float p_absolut = ofMap(paddle->getPosition(),0, gameElements->getHeigth(),0,1);
     int nLedsPaddle = paddle->height / pixelPerLed;
     
-    int pixelStart = ofMap(p_absolut, 0,1, 0, N_LEDS - nLedsPaddle);
+    int pixelStart = ofMap(p_absolut, 1,0, 0, N_LEDS - nLedsPaddle);
     
     for(int i=0; i<N_LEDS; ++i){
         if(i < pixelStart || i > pixelStart + nLedsPaddle)
             colors->at(i) = ofColor(0);
         else
-            colors->at(i) = ofColor(255);
+            colors->at(i) = ofColor(brightness);
     }
     
 }
