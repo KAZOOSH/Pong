@@ -23,16 +23,26 @@ SerialControl::SerialControl():AbstractControl() {
     if (!devicesInfo.empty())
     {
         // Connect to the first matching device.
-        bool success = serial.setup(devicesInfo[0], 115200);
+        bool success = paddleLeft.setup(devicesInfo[0], 115200);
         
         if(success)
         {
-            serial.registerAllEvents(this);
-            ofLogNotice("ofApp::setup") << "Successfully setup paddle " << devicesInfo[0];
+            ofLogNotice("ofApp::setup") << "Successfully setup paddle left " << devicesInfo[0];
         }
         else
         {
-            ofLogNotice("ofApp::setup") << "Unable to setup paddle " << devicesInfo[0];
+            ofLogNotice("ofApp::setup") << "Unable to setup paddle left " << devicesInfo[0];
+        }
+        
+        success = paddleRight.setup(devicesInfo[1], 115200);
+        
+        if(success)
+        {
+            ofLogNotice("ofApp::setup") << "Successfully setup paddle right " << devicesInfo[0];
+        }
+        else
+        {
+            ofLogNotice("ofApp::setup") << "Unable to setup paddle right " << devicesInfo[0];
         }
         
     }
@@ -45,15 +55,37 @@ SerialControl::SerialControl():AbstractControl() {
     
 }
 
-void SerialControl::onSerialBuffer(const ofx::IO::SerialBufferEventArgs& args){
-    
-    float p1 = ofMap(args.getBuffer()[0], 0, 255, 0, 1);
-    float p2 = ofMap(args.getBuffer()[1], 0, 255, 0, 1);
-    ofNotifyEvent(newPositionPaddle1Event, p1, this);
-    ofNotifyEvent(newPositionPaddle2Event, p2, this);
+
+
+void SerialControl::update(){
+    try
+    {
+        readControl(paddleLeft, newPositionPaddle1Event);
+        readControl(paddleLeft, newPositionPaddle2Event);
+        
+    }catch (const std::exception& exc)
+    {
+        ofLogError("ofApp::update") << exc.what();
+    }
 }
 
-void SerialControl::onSerialError(const ofx::IO::SerialBufferErrorEventArgs& args)
-{
+void SerialControl::readControl(ofx::IO::SerialDevice& serial, ofEvent<float>& event){
+    uint8_t buffer[100];
+    
+    serial.writeByte('0');
+    
+    while (serial.available() > 0)
+    {
+        // read all bytes (to prevent input queuing)
+        // however, only the first byte will be parsed
+        std::size_t sz = serial.readBytes(buffer, 100);
+        
+        int16_t value;
+        value = (buffer[0] << 8) + buffer[1];
+        
+        float yPaddle = ofMap(value, -1024, 1024, 0, 1);
+        ofNotifyEvent(event, yPaddle, this);
+        
+    }
     
 }

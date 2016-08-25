@@ -57,6 +57,7 @@ void ofApp::update(){
         playModeController.getCurrentRules()->update();
     }
     
+    mouse.update();
     ledControl.update();
 }
 

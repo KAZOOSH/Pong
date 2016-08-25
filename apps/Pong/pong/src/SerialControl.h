@@ -21,12 +21,13 @@ class SerialControl : public AbstractControl{
 public:
     
     SerialControl();
-    
-    void onSerialBuffer(const ofx::IO::SerialBufferEventArgs& args);
-    void onSerialError(const ofx::IO::SerialBufferErrorEventArgs& args);
+    void update();
     
 private:
-    ofx::IO::PacketSerialDevice serial;
+    void readControl(ofx::IO::SerialDevice& serial, ofEvent<float>& event);
+    
+private:
+    ofx::IO::SerialDevice paddleLeft, paddleRight;
 };
 
 #endif

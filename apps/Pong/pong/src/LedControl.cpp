@@ -15,7 +15,7 @@ void LedControl::setup(GameElements* gameElements_) {
     opcClient.setup("127.0.0.1", 7890);
     gameElements = gameElements_;
     
-    pixelPerLed = 1.0;
+    pixelPerLed = 10.0;
     
     for(int i=0; i<N_LEDS; ++i){
         colorsPaddle1.push_back(0);
@@ -36,8 +36,8 @@ void LedControl::update() {
     }
     else
     {
-        opcClient.writeChannel(1,colorsPaddle1);
-        opcClient.writeChannel(2,colorsPaddle2);
+        opcClient.writeChannel(0,colorsPaddle1);
+        opcClient.writeChannel(1,colorsPaddle2);
     }
 }
 

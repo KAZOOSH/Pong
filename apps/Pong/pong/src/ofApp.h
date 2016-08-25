@@ -10,6 +10,7 @@
 #include "TextRenderer.h"
 
 #include "MouseControl.h"
+#include "SerialControl.h"
 
 #include "LedControl.h"
 
@@ -48,7 +49,7 @@ private:
     
     TextRenderer* textRenderer;
     
-    MouseControl mouse;
+    SerialControl mouse;
     
     LedControl ledControl;
 };
