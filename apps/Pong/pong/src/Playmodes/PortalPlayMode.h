@@ -13,6 +13,9 @@
 #include "BasicRenderer.h"
 #include "BasicRules.h"
 
+#include "ofxGifDecoder.h"
+#include "ofxGifFile.h"
+
 class Portal {
 public:
 	Portal(ofRectangle dimensions);
@@ -33,7 +36,10 @@ public:
 private:
 	void updatePortals();
 	vector<Portal> portals;
-	ofImage portalicon;
+    
+    
+    ofxGifDecoder decoder;
+    ofxGifFile portalImg;
 
 };
 

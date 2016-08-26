@@ -56,7 +56,9 @@ PortalPlayMode::PortalPlayMode(GameElements* gameElements, string name) :BasicRe
     
     portals.push_back(Portal(ofRectangle(gameElements->getWidth()*0.25, gameElements->getHeigth()*0.5, 10, 10)));
     portals.push_back(Portal(ofRectangle(gameElements->getWidth()*0.5, gameElements->getHeigth()*0.5, 10, 10)));
-    portalicon.load("images/portalicon.png");
+    
+    decoder.decode("images/portal.gif");
+    portalImg = decoder.getFile();
     
 }
 
@@ -70,14 +72,14 @@ void PortalPlayMode::begin() {
 void PortalPlayMode::updatePortals() {
     GameElements* gameElements = BasicRules::gameElements;
     
-    int wFirst = 50;
+    int wFirst = 200;
     int hFirst = 200;
     int xFirst = ofRandom(gameElements->getWidth()*.1, gameElements->getWidth()*0.4);
     int yFirst = ofRandom(hFirst,gameElements->getHeigth() - hFirst);
     
     portals[0].dimensions = ofRectangle(xFirst, yFirst, wFirst, hFirst);
     
-    int wSecond = 50;
+    int wSecond = 200;
     int hSecond = 200;
     int xSecond = ofRandom(gameElements->getWidth()*.6, gameElements->getWidth()*0.9);
     int ySecond = ofRandom(hSecond,gameElements->getHeigth()-hSecond);
@@ -134,8 +136,11 @@ void PortalPlayMode::render() {
     BasicRenderer::render();
     
     for (auto portal : portals) {
-        portalicon.draw(portal.dimensions);
-        
-        
+        int maxFrames = portalImg.getNumFrames()-2;
+        int frameNumber = (ofGetFrameNum()/4)%(maxFrames*2);
+        if (frameNumber >= maxFrames) {
+            frameNumber = maxFrames*2-frameNumber;
+        }
+        portalImg.drawFrame(frameNumber, portal.dimensions.x,portal.dimensions.y,portal.dimensions.width,portal.dimensions.height);
     }
 }

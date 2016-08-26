@@ -299,7 +299,10 @@ void ofApp::keyPressed(int key){
     if(key == 'p') {
         playModeController.shufflePlaymode();
     }
-    
+    if(key == '1') {
+        playModeController.setRules("Portals");
+        playModeController.setRenderer("Portals");
+    }
     
     if(key == OF_KEY_UP) {
         ledControl.setBrightness(ledControl.getBrightness()+1);
