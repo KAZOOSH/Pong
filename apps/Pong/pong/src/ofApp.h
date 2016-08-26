@@ -27,6 +27,11 @@ public:
     void endGame(int winner);
     void showInitMessage();
     void startGame();
+    void drawDebugInformation();
+    
+    void initSettings();
+    void saveSettings();
+    void loadSettings();
     
     ofEvent<TextElement> gameOverEvent;
     
@@ -40,6 +45,8 @@ private:
     bool isInitMessageShown;
     bool isGameRunning;//!< game status
     
+    bool showDebugInfos;
+    
     ofxQuadWarp warper; //!< mapping tool
     ofFbo gameFbo; //!< game graphics are rendered in fbo
     
@@ -52,4 +59,6 @@ private:
     MouseControl mouse;
     
     LedControl ledControl;
+    
+    ofParameterGroup settings;
 };

@@ -26,13 +26,14 @@ public:
     u_int8_t getBrightness();
     void setBrightness(u_int8_t brightness);
     
-    float pixelPerLed;
+    ofParameter<float> pixelPerLed;
+    ofParameter<int> brightness;
     
 protected:
     void calculateLeds(Paddle* paddle, vector<ofColor>* colors);
     
 private:
-    u_int8_t brightness;
+    
     vector<ofColor> colors;
     ofxOPC opcClient;
     GameElements* gameElements;

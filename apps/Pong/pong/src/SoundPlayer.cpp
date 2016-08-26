@@ -28,6 +28,7 @@ void SoundPlayer::setup() {
     loadSoundSet("basic");
     currentSoundSet = "basic";
     
+    isModerationMode.set("isModerationMode", true);
 }
 
 
@@ -48,7 +49,7 @@ void SoundPlayer::onGameEvent(GameEvent& event){
 }
 
 void SoundPlayer::onPlaymodeChanged(PlayModeEvent& event){
-    if (event.name !="") {
+    if (event.name !="" && isModerationMode) {
         playMode.load("sounds/playmodes/" + event.name + ".mp3");
         playMode.play();
     }

@@ -17,13 +17,19 @@ BasicRules::BasicRules(GameElements* gameElements, string name,int durationMode_
 
 void BasicRules::begin(){
     AbstractRules::begin();
+    for (auto&& ball : gameElements->balls) {
+        //increase speed on time
+        ball->velocity.x > 0 ? ball->velocity.x = gameElements->minBallVelocity : ball->velocity.x = -gameElements->minBallVelocity;
+    }
 }
 
 void BasicRules::applyRules() {
     //update ball speeds
-    float maxV = gameElements->maxBallSpeed - gameElements->minBallSpeed;
+    float maxV = gameElements->maxBallVelocity - gameElements->minBallVelocity;
     float velocityIncreaseAmt = maxV/20/ofGetFrameRate();
-    
+    if (ofGetElapsedTimef() - (startTime/1000 + 20) > 0) {
+        velocityIncreaseAmt = 0;
+    }
     
     for (auto&& ball : gameElements->balls) {
         //increase speed on time

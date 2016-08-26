@@ -15,14 +15,14 @@ void LedControl::setup(GameElements* gameElements_) {
     opcClient.setup("127.0.0.1", 7890);
     gameElements = gameElements_;
     
-    pixelPerLed = 10.0;
+    pixelPerLed.set("pixelPerLED",10.0);
     
     for(int i=0; i<N_LEDS; ++i){
         colorsPaddle1.push_back(0);
         colorsPaddle2.push_back(0);
     }
     
-    brightness = 128;
+    brightness.set("brightness",128);
 }
 
 

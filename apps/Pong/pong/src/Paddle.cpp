@@ -11,7 +11,7 @@
 
 Paddle::Paddle(){
     y = 50;// gameElements->getHeigth()/2;
-    height = 100;
+    height.set("height",100);
     
     isDebug = true;
 }

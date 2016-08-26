@@ -24,6 +24,8 @@ public:
     void onGameEvent(GameEvent& event);
     void onPlaymodeChanged(PlayModeEvent& event);
     
+    ofParameter<bool> isModerationMode;
+    
 protected:
     bool loadSoundSet(string name);
     

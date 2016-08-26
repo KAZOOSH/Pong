@@ -85,7 +85,7 @@ public:
     Paddle paddleLeft, paddleRight; //!< paddles
     vector<Ball*> balls; //!< balls
     
-    ofParameter<float> minBallSpeed, maxBallSpeed;
+    ofParameter<float> minBallVelocity, maxBallVelocity;
     
     
 private:
