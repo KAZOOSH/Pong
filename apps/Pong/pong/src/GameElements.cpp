@@ -16,6 +16,9 @@ GameElements::GameElements(){
     
     winScore = 10;
     
+    minBallSpeed = 10;
+    maxBallSpeed = 20;
+    
     paddleLeft.setup(0, widthGame, heightGame);
     paddleRight.setup(widthGame-1, widthGame, heightGame);
     
@@ -110,7 +113,7 @@ int GameElements::getWinScore(){
  */
 void GameElements::resetElements(){
     balls.clear();
-    addBall(ofVec2f(widthGame/2, heightGame/2));
+    addBall(ofVec2f(widthGame/2, heightGame/2), ofVec2f(minBallSpeed, 0));
     pointsP1 = 0;
     pointsP2 = 0;
 }

@@ -48,8 +48,11 @@ void SoundPlayer::onGameEvent(GameEvent& event){
 }
 
 void SoundPlayer::onPlaymodeChanged(PlayModeEvent& event){
-    playMode.load("sounds/playmodes/" + event.name + ".mp3");
-    playMode.play();
+    if (event.name !="") {
+        playMode.load("sounds/playmodes/" + event.name + ".mp3");
+        playMode.play();
+    }
+    
     if (event.hasSoundset) {
         loadSoundSet(event.nameSoundset);
         currentSoundSet = event.nameSoundset;

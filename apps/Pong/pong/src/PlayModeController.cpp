@@ -47,11 +47,11 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     
     for (int i=0; i<rules.size(); ++i) {
         ofAddListener(rules[i]->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);
-        ofAddListener(rules[i]->runtimeExtendedEvent, this, &PlayModeController::onEndMode);
+        ofAddListener(rules[i]->durationExtendedEvent, this, &PlayModeController::onEndMode);
     }
     for (int i=0; i<renderer.size(); ++i) {
         ofAddListener(renderer[i]->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);
-        ofAddListener(renderer[i]->runtimeExtendedEvent, this, &PlayModeController::onEndMode);
+        ofAddListener(renderer[i]->durationExtendedEvent, this, &PlayModeController::onEndMode);
     }
 }
 

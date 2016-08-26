@@ -32,7 +32,7 @@ TextRenderer::TextRenderer(GameElements* gameElements, string name):AbstractRend
     ani_ease_bounce.animateTo( 1.0f );
     ani_ease_bounce.setDuration(1);
     
-    runTime = -1;
+    durationMode = -1;
 }
 
 /**

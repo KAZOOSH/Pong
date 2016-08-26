@@ -17,13 +17,15 @@ class BasicRules : public AbstractRules{
 	
   public:
 	
-	BasicRules(GameElements* gameElements, string name = "", int runtime = 20000);
+	BasicRules(GameElements* gameElements, string name = "", int durationMode = 20000);
 	
+    virtual void begin();
 	virtual void applyRules();
 	
 protected:
     bool paddleHittest(Ball* ball);
     void wallHittest(Ball* ball);
+    
 };
 
 #endif

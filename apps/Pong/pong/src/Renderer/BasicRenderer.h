@@ -17,7 +17,7 @@ class BasicRenderer : public AbstractRenderer{
     
 public:
     
-    BasicRenderer(GameElements* gameElements, string name = "", int runtime = 20000);
+    BasicRenderer(GameElements* gameElements, string name = "", int durationMode = 20000);
     virtual void render();
 protected:
     void drawScore();

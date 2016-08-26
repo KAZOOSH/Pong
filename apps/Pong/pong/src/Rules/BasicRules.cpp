@@ -11,22 +11,32 @@
 
 
 //------------------------------------------------------------------
-BasicRules::BasicRules(GameElements* gameElements, string name,int runtime_):AbstractRules(gameElements,name) {
-    runTime = runtime_;
+BasicRules::BasicRules(GameElements* gameElements, string name,int durationMode_):AbstractRules(gameElements,name) {
+    durationMode = durationMode_;
 }
 
-
+void BasicRules::begin(){
+    AbstractRules::begin();
+}
 
 void BasicRules::applyRules() {
-		for (auto&& ball : gameElements->balls) {
-			//move ball
-			ball->update();
-
-			//check paddle and/or wall hit
-			if (!paddleHittest(ball)) {
-				wallHittest(ball);
-			}
-		}
+    //update ball speeds
+    float maxV = gameElements->maxBallSpeed - gameElements->minBallSpeed;
+    float velocityIncreaseAmt = maxV/20/ofGetFrameRate();
+    
+    
+    for (auto&& ball : gameElements->balls) {
+        //increase speed on time
+        ball->velocity.x > 0 ? ball->velocity.x += velocityIncreaseAmt : ball->velocity.x -= velocityIncreaseAmt;
+        
+        //move ball
+        ball->update();
+        
+        //check paddle and/or wall hit
+        if (!paddleHittest(ball)) {
+            wallHittest(ball);
+        }
+    }
     
     
 }
@@ -72,13 +82,13 @@ void BasicRules::wallHittest(Ball* ball){
     //wall top
     else if (ball->position.y - ball->radius <= 0) {
         ball->velocity.y *= -1;
-		ball->position.y = ball->radius;
+        ball->position.y = ball->radius;
         gameElements->notifyGameEvent(CONTACT_WALL);
     }
     //wall bottom
     else if (ball->position.y + ball->radius >= gameElements->getHeigth()) {
         ball->velocity.y *= -1;
-		ball->position.y = gameElements->getHeigth() - ball->radius;
+        ball->position.y = gameElements->getHeigth() - ball->radius;
         gameElements->notifyGameEvent(CONTACT_WALL);
     }
 }

@@ -16,9 +16,9 @@ AbstractRules::AbstractRules(GameElements* gameElements_,string name):AbstractGa
 }
 
 void AbstractRules::update(){
-    if (runTime != -1) {
-        if (startTime + runTime < ofGetElapsedTimeMillis()) {
-            ofNotifyEvent(runtimeExtendedEvent, type);
+    if (durationMode != -1) {
+        if (startTime + durationMode < ofGetElapsedTimeMillis()) {
+            ofNotifyEvent(durationExtendedEvent, type);
         }
     }
     applyRules();

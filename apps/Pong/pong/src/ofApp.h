@@ -49,7 +49,7 @@ private:
     
     TextRenderer* textRenderer;
     
-    SerialControl mouse;
+    MouseControl mouse;
     
     LedControl ledControl;
 };

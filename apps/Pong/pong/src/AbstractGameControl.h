@@ -22,14 +22,14 @@ public:
     string getName();
     
     ofEvent<TextElement> newTextEvent;
-    ofEvent<string> runtimeExtendedEvent;
+    ofEvent<string> durationExtendedEvent;
     
 protected:
     GameElements* gameElements;
     long startTime;
     string name;
     
-    int runTime;
+    int durationMode;
     
     string type;
     

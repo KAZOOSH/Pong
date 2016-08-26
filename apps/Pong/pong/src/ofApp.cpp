@@ -181,8 +181,8 @@ void ofApp::showInitMessage(){
  */
 void ofApp::startGame(){
     
-    if(elements.paddleLeft.getPosition() < 50 &&
-       elements.paddleRight.getPosition() < 50){
+    if(elements.paddleLeft.getPosition() < elements.paddleLeft.height  &&
+       elements.paddleRight.getPosition() < elements.paddleRight.height){
         
         TextElement t("GO!",
                       BIG,
