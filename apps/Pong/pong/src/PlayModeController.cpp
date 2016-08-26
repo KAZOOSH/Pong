@@ -34,6 +34,7 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     renderer.push_back(new PsyRenderer(gameElements));
     renderer.push_back(new TennisRenderer(gameElements));
     renderer.push_back(new TrailRenderer(gameElements));
+    renderer.push_back(new GifBGRenderer(gameElements));
     //-> add other renderers to vector here
     
     //add playmodes -> add the playmode to renderer and rules

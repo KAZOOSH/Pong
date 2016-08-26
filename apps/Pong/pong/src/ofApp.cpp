@@ -300,8 +300,7 @@ void ofApp::keyPressed(int key){
         playModeController.shufflePlaymode();
     }
     if(key == '1') {
-        playModeController.setRules("Portals");
-        playModeController.setRenderer("Portals");
+        playModeController.setRenderer("Movie");
     }
     
     if(key == OF_KEY_UP) {

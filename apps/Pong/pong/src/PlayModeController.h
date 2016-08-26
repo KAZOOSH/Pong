@@ -31,6 +31,7 @@
 #include "PsyRenderer.h"
 #include "TennisRenderer.h"
 #include "TrailRenderer.h"
+#include "GifBGRenderer.h"
 //-> include other renderers here
 
 #include "WallPlayMode.h"
