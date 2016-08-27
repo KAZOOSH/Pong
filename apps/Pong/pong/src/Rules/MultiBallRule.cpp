@@ -22,7 +22,7 @@ void MultiBallRule::begin() {
     for (int i=0; i<nBalls; ++i) {
         float vStart = gameElements->balls[0]->velocity.x;
         gameElements->addBall(ofVec2f(gameElements->getWidth()/2, ofRandom(50, gameElements->getHeigth()-50)),
-                              ofVec2f(ofRandom(vStart*0.5, vStart*2.0),0));
+                              ofVec2f(ofRandom(vStart*0.8, vStart*1.2),0));
     }
     
     
