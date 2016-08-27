@@ -14,14 +14,15 @@
 
 
 class AbstractControl {
-	
-  public:
-	
+    
+public:
+    
     AbstractControl(){};
-	
+    virtual void update(){};
+    
     ofEvent<float> newPositionPaddle1Event;
     ofEvent<float> newPositionPaddle2Event;
-	
+    
 };
 
 #endif

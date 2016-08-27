@@ -8,6 +8,7 @@ void ofApp::setup(){
     isGameRunning = false;
     isInitMessageShown = false;
     tGameFinished = 0;
+    showDebugInfos = false;
     
     //init controls
     elements.paddleLeft.addControl(mouse);
@@ -26,10 +27,14 @@ void ofApp::setup(){
     //init soundPlayer
     soundPlayer.setup();
     
+    ledControl.setup(&elements);
+    
     //register listeners
     ofAddListener(elements.newScoreEvent, this, &ofApp::onPointsChanged);
     ofAddListener(elements.newGameEvent, &soundPlayer, &SoundPlayer::onGameEvent);
     ofAddListener(elements.newPlayModeEvent, &soundPlayer, &SoundPlayer::onPlaymodeChanged);
+    
+    initSettings();
 }
 
 //--------------------------------------------------------------
@@ -40,7 +45,9 @@ void ofApp::update(){
     //init message
     if(!isInitMessageShown){
         if (ofGetElapsedTimeMillis() - tGameFinished > 4000) {
+            restartGame();
             showInitMessage();
+            
         }
     }
     
@@ -53,14 +60,21 @@ void ofApp::update(){
         playModeController.getCurrentRules()->update();
     }
     
+    mouse.update();
+    ledControl.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     //render game view in fbo
+    ofBackground(0);
     gameFbo.begin();
     playModeController.getCurrentRenderer()->draw();
     textRenderer->render();
+    
+    if (showDebugInfos) {
+        drawDebugInformation();
+    }
     gameFbo.end();
     
     //warp fbo on screen
@@ -128,14 +142,15 @@ void ofApp::drawWarpedImage(){
 void ofApp::restartGame(){
     playModeController.resetStartModes();
     elements.resetElements();
-    isGameRunning = false;
-    isInitMessageShown = false;
+    
 }
 
 /**
  * notify events to start fireworks ;)
  */
 void ofApp::endGame(int winner){
+    isGameRunning = false;
+    isInitMessageShown = false;
     
     tGameFinished = ofGetElapsedTimeMillis();
     
@@ -155,10 +170,12 @@ void ofApp::endGame(int winner){
     if (winner == 2) g = P2_WIN;
     
     ofNotifyEvent(elements.newGameEvent, g);
+    
+    
 }
 
 void ofApp::showInitMessage(){
-    TextElement t("Get in Position!",
+    TextElement t("Paddles up!",
                   MEDIUM,
                   true,
                   2000);
@@ -171,8 +188,8 @@ void ofApp::showInitMessage(){
  */
 void ofApp::startGame(){
     
-    if(elements.paddleLeft.getPosition() < 10 &&
-       elements.paddleRight.getPosition() < 10){
+    if(elements.paddleLeft.getPosition() < elements.paddleLeft.height  &&
+       elements.paddleRight.getPosition() < elements.paddleRight.height){
         
         TextElement t("GO!",
                       BIG,
@@ -189,35 +206,168 @@ void ofApp::startGame(){
 void ofApp::onPointsChanged(PlayerScoreEvent& e){
     if (e.points >= elements.getWinScore()){
         endGame(e.id);
-        restartGame();
     }
+}
+
+void ofApp::drawDebugInformation(){
+    ofPushMatrix();
+    ofPushStyle();
+    ofSetColor(255,0,0);
+    
+    int ty = 20;
+    
+    ofTranslate(50, 50);
+    ofDrawBitmapString("Debug Information (d - show/hide)", 0, 0);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("=================================", 0, 0);
+    
+    ofTranslate(0, ty);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("General", 0, 0);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("toggle PlayMode (p)", 0, 0);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("current Rules: " + playModeController.getCurrentRules()->getName(), 0, 0);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("current Renderer: " + playModeController.getCurrentRenderer()->getName(), 0, 0);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("toggle Fullscreen (f)", 0, 0);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("save settings (s)", 0, 0);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("load settings (a)", 0, 0);
+    ofTranslate(0, ty);
+    string isModeration = soundPlayer.isModerationMode ? "true":"false";
+    ofDrawBitmapString("ModerationMode: " + isModeration + " (m - toggle)", 0, 0);
+    
+    ofTranslate(0, ty);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("Warper", 0, 0);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("toggle Show (w)", 0, 0);
+    ofTranslate(0, ty);
+    
+    ofTranslate(0, ty);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("Ball", 0, 0);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("Velocity: " + ofToString(abs(elements.balls[0]->velocity.x)), 0, 0);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("MinVelocity: " + ofToString(abs(elements.minBallVelocity),1) + " -+ (i,o)", 0, 0);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("MaxVelocity: " + ofToString(abs(elements.maxBallVelocity),1) + " -+ (k,l)", 0, 0);
+    
+    ofTranslate(0, ty);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("Paddle", 0, 0);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("Brightness: " + ofToString(ledControl.brightness) + " -+ (DOWN,UP)", 0, 0);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("PixelPerLed: " + ofToString(ledControl.pixelPerLed) + " -+ (LEFT,RIGHT)", 0, 0);
+    ofTranslate(0, ty);
+    ofDrawBitmapString("PaddleSize: " + ofToString(elements.paddleLeft.height) + " -+ (-,+)", 0, 0);
+    ofTranslate(0, ty);
+    string tPaddle = elements.paddleLeft.isDebug ? "true":"false";
+    ofDrawBitmapString("DebugPaddle: " + tPaddle + " (# - show/hide)", 0, 0);
+    
+    ofPopStyle();
+    ofPopMatrix();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    if(key == 's' || key == 'S') {
+    if(key == 'f') {
+        ofToggleFullscreen();
+    }
+    
+    if(key == 'd') {
+        showDebugInfos = !showDebugInfos;
+    }
+    
+    if(key == 'w') {
         warper.toggleShow();
     }
     
-    if(key == 'l' || key == 'L') {
-        warper.load();
+    if(key == 'a' ) {
+        loadSettings();
     }
     
-    if(key == 'h' || key == 'H') {
-        warper.save();
+    if(key == 's' ) {
+        saveSettings();
     }
     
-    if(key == '1') {
+    if(key == 'p') {
         playModeController.shufflePlaymode();
     }
     
-    if(key == '2') {
-        playModeController.setRenderer("Portals");
-		playModeController.setRules("Portals");
-		//playModeController.setRules("Walls");
-	}
-    if(key == '3') {
-        playModeController.setRules("Huge Ball");
+    
+    if(key == OF_KEY_UP) {
+        ledControl.setBrightness(ledControl.getBrightness()+1);
     }
+    if(key == OF_KEY_DOWN) {
+        ledControl.setBrightness(ledControl.getBrightness()-1);
+    }
+    if(key == OF_KEY_RIGHT) {
+        ledControl.pixelPerLed++;
+    }
+    if(key == OF_KEY_LEFT) {
+        ledControl.pixelPerLed--;
+    }
+    if(key == '+') {
+        elements.paddleLeft.height++;
+        elements.paddleRight.height++;
+    }
+    if(key == '-') {
+        elements.paddleLeft.height--;
+        elements.paddleRight.height--;
+    }
+    
+    if(key == '#'){
+        elements.paddleLeft.isDebug = !elements.paddleLeft.isDebug;
+        elements.paddleRight.isDebug = !elements.paddleRight.isDebug;
+    }
+    
+    if(key == 'i') {
+        elements.minBallVelocity--;
+    }
+    if(key == 'o') {
+        elements.minBallVelocity++;
+    }
+    if(key == 'k') {
+        elements.maxBallVelocity--;
+    }
+    if(key == 'l') {
+        elements.maxBallVelocity++;
+    }
+    
+    if(key == 'm') {
+        soundPlayer.isModerationMode = !soundPlayer.isModerationMode;
+    }
+}
+
+void ofApp::initSettings(){
+    settings.add(soundPlayer.isModerationMode);
+    settings.add(elements.minBallVelocity);
+    settings.add(elements.maxBallVelocity);
+    settings.add(ledControl.brightness);
+    settings.add(ledControl.pixelPerLed);
+    settings.add(elements.paddleLeft.height);
+    settings.add(elements.paddleRight.height);
+    
+    loadSettings();
+}
+
+void ofApp::saveSettings(){
+    ofXml xml;
+    xml.serialize(settings);
+    xml.save("settings.xml");
+    warper.save();
+}
+
+void ofApp::loadSettings(){
+    ofXml xml;
+    xml.load("settings.xml");
+    xml.deserialize(settings);
+    warper.load();
 }
 

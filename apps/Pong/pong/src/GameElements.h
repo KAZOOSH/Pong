@@ -65,7 +65,7 @@ public:
     int getWidth();
     int getHeigth();
     
-    void addBall(ofVec2f position, ofVec2f velocity = ofVec2f(-7, 0));
+    void addBall(ofVec2f position, ofVec2f velocity);
     bool removeBall(long id);
     void removeAllExtraBalls();
     
@@ -84,6 +84,8 @@ public:
     
     Paddle paddleLeft, paddleRight; //!< paddles
     vector<Ball*> balls; //!< balls
+    
+    ofParameter<float> minBallVelocity, maxBallVelocity;
     
     
 private:

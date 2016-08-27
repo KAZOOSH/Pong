@@ -11,22 +11,38 @@
 
 
 //------------------------------------------------------------------
-BasicRules::BasicRules(GameElements* gameElements, string name,int runtime_):AbstractRules(gameElements,name) {
-    runTime = runtime_;
+BasicRules::BasicRules(GameElements* gameElements, string name,int durationMode_):AbstractRules(gameElements,name) {
+    durationMode = durationMode_;
 }
 
-
+void BasicRules::begin(){
+    AbstractRules::begin();
+    for (auto&& ball : gameElements->balls) {
+        //increase speed on time
+        ball->velocity.x > 0 ? ball->velocity.x = gameElements->minBallVelocity : ball->velocity.x = -gameElements->minBallVelocity;
+    }
+}
 
 void BasicRules::applyRules() {
-		for (auto&& ball : gameElements->balls) {
-			//move ball
-			ball->update();
-
-			//check paddle and/or wall hit
-			if (!paddleHittest(ball)) {
-				wallHittest(ball);
-			}
-		}
+    //update ball speeds
+    float maxV = gameElements->maxBallVelocity - gameElements->minBallVelocity;
+    float velocityIncreaseAmt = maxV/20/ofGetFrameRate();
+    if (ofGetElapsedTimef() - (startTime/1000 + 20) > 0) {
+        velocityIncreaseAmt = 0;
+    }
+    
+    for (auto&& ball : gameElements->balls) {
+        //increase speed on time
+        ball->velocity.x > 0 ? ball->velocity.x += velocityIncreaseAmt : ball->velocity.x -= velocityIncreaseAmt;
+        
+        //move ball
+        ball->update();
+        
+        //check paddle and/or wall hit
+        if (!paddleHittest(ball)) {
+            wallHittest(ball);
+        }
+    }
     
     
 }
@@ -72,13 +88,13 @@ void BasicRules::wallHittest(Ball* ball){
     //wall top
     else if (ball->position.y - ball->radius <= 0) {
         ball->velocity.y *= -1;
-		ball->position.y = ball->radius;
+        ball->position.y = ball->radius;
         gameElements->notifyGameEvent(CONTACT_WALL);
     }
     //wall bottom
     else if (ball->position.y + ball->radius >= gameElements->getHeigth()) {
         ball->velocity.y *= -1;
-		ball->position.y = gameElements->getHeigth() - ball->radius;
+        ball->position.y = gameElements->getHeigth() - ball->radius;
         gameElements->notifyGameEvent(CONTACT_WALL);
     }
 }

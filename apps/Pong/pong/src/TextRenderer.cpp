@@ -32,7 +32,7 @@ TextRenderer::TextRenderer(GameElements* gameElements, string name):AbstractRend
     ani_ease_bounce.animateTo( 1.0f );
     ani_ease_bounce.setDuration(1);
     
-    runTime = -1;
+    durationMode = -1;
 }
 
 /**
@@ -80,9 +80,12 @@ void TextRenderer::render() {
 void TextRenderer::onNewTextElement(TextElement& t){
     //only allow 1 text at once
     //texts.push_back(t);
-    if (texts.size()>0) {
-        texts.pop_back();
+    if(t.content != ""){
+        if (texts.size()>0) {
+            texts.pop_back();
+        }
+        
+        texts.push_back(t);
     }
     
-    texts.push_back(t);
 }

@@ -11,8 +11,9 @@
 
 Paddle::Paddle(){
     y = 50;// gameElements->getHeigth()/2;
-    height = 100;
+    height.set("height",100);
     
+    isDebug = true;
 }
 
 //------------------------------------------------------------------
@@ -25,8 +26,11 @@ void Paddle::setup(int x_, int wGame_, int hGame_) {
 
 //------------------------------------------------------------------
 void Paddle::draw() {
-    ofSetColor(255);
-    ofDrawRectangle(x,y-height*0.5, 1, height);
+    if (isDebug) {
+        ofSetColor(255);
+        ofDrawRectangle(x-15,y-height*0.5, 30, height);
+    }
+    
 }
 
 void Paddle::addControl(AbstractControl& control){
@@ -39,7 +43,7 @@ void Paddle::addControl(AbstractControl& control){
 }
 
 void Paddle::onPositionChanged(float& pos){
-    y = ofMap(pos ,0 ,1 ,0 ,hGame);
+    y = ofMap(pos ,0 ,1 ,height*.5 ,hGame - height*.5,true);
 }
 
 int Paddle::getPosition(){

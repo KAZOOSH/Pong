@@ -30,7 +30,9 @@ class Paddle {
     bool isHit(Ball& b);
     float getHitzone(Ball& b);
     
-    int height;
+    ofParameter<int> height;
+    
+    bool isDebug;
     
 private:
     int x, y;

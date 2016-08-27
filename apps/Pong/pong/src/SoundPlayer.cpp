@@ -28,6 +28,7 @@ void SoundPlayer::setup() {
     loadSoundSet("basic");
     currentSoundSet = "basic";
     
+    isModerationMode.set("isModerationMode", true);
 }
 
 
@@ -44,12 +45,15 @@ void SoundPlayer::draw() {
 }
 
 void SoundPlayer::onGameEvent(GameEvent& event){
-   // player[event]->play();
+    player[event]->play();
 }
 
 void SoundPlayer::onPlaymodeChanged(PlayModeEvent& event){
-    playMode.load("sounds/playmodes/" + event.name + ".mp3");
-    playMode.play();
+    if (event.name !="" && isModerationMode) {
+        playMode.load("sounds/playmodes/" + event.name + ".mp3");
+        playMode.play();
+    }
+    
     if (event.hasSoundset) {
         loadSoundSet(event.nameSoundset);
         currentSoundSet = event.nameSoundset;
