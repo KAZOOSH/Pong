@@ -38,8 +38,8 @@ void LedControl::update() {
     }
     else
     {
-        opcClient.writeChannel(2,colorsPaddle1);
-        opcClient.writeChannel(1,colorsPaddle2);
+        opcClient.writeChannel(1,colorsPaddle1);
+        opcClient.writeChannel(2,colorsPaddle2);
     }
 }
 

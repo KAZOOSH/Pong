@@ -26,6 +26,7 @@ public:
     void restartGame();
     void endGame(int winner);
     void showInitMessage();
+    void prepareForStart();
     void startGame();
     void drawDebugInformation();
     
@@ -44,6 +45,9 @@ private:
     long tGameFinished;
     bool isInitMessageShown;
     bool isGameRunning;//!< game status
+    
+    bool isPlayerReady;
+    long tPlayerReady;
     
     bool showDebugInfos;
     

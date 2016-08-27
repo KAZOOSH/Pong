@@ -9,6 +9,7 @@ void ofApp::setup(){
     isInitMessageShown = false;
     tGameFinished = 0;
     showDebugInfos = false;
+    isPlayerReady = false;
     
     //init controls
     elements.paddleLeft.addControl(mouse);
@@ -53,6 +54,9 @@ void ofApp::update(){
     
     if(!isGameRunning){
         if (ofGetElapsedTimeMillis() - tGameFinished > 7000) {
+            prepareForStart();
+        }
+        if (isPlayerReady) {
             startGame();
         }
     }
@@ -149,6 +153,7 @@ void ofApp::restartGame(){
  * notify events to start fireworks ;)
  */
 void ofApp::endGame(int winner){
+    tPlayerReady = false;
     isGameRunning = false;
     isInitMessageShown = false;
     
@@ -186,17 +191,22 @@ void ofApp::showInitMessage(){
 /**
  * checks if paddles are ready to start game
  */
-void ofApp::startGame(){
-    
-    if(elements.paddleLeft.getPosition() < elements.paddleLeft.height  &&
-       elements.paddleRight.getPosition() < elements.paddleRight.height){
+void ofApp::prepareForStart(){
+    if(elements.paddleLeft.getPosition() < elements.paddleLeft.height*1.5  &&
+       elements.paddleRight.getPosition() < elements.paddleRight.height*1.5){
         
         TextElement t("GO!",
                       BIG,
                       true,
                       1500);
         ofNotifyEvent(gameOverEvent, t);
-        
+        isPlayerReady = true;
+        tPlayerReady = ofGetElapsedTimeMillis();
+    }
+}
+
+void ofApp::startGame(){
+    if( ofGetElapsedTimeMillis() - tPlayerReady > 1500){
         GameEvent g = START;
         ofNotifyEvent(elements.newGameEvent, g);
         isGameRunning = true;
