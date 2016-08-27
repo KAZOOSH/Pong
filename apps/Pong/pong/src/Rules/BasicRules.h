@@ -25,6 +25,7 @@ class BasicRules : public AbstractRules{
 protected:
     bool paddleHittest(Ball* ball);
     void wallHittest(Ball* ball);
+    void resetBallSpeed();
     
 };
 

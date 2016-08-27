@@ -76,6 +76,7 @@ void BasicRules::wallHittest(Ball* ball){
         ball->velocity = ofVec2f(ball->velocity.x,0);
         gameElements->increasePoints(2);
         gameElements->notifyGameEvent(BALL_OUT_P1);
+        resetBallSpeed();
     }
     //wall right, player 1 gets point
     else if (ball->position.x + ball->radius >= gameElements->getWidth()) {
@@ -83,6 +84,7 @@ void BasicRules::wallHittest(Ball* ball){
         ball->velocity = ofVec2f(ball->velocity.x,0);
         gameElements->increasePoints(1);
         gameElements->notifyGameEvent(BALL_OUT_P2);
+        resetBallSpeed();
     }
     
     //wall top
@@ -96,5 +98,11 @@ void BasicRules::wallHittest(Ball* ball){
         ball->velocity.y *= -1;
         ball->position.y = gameElements->getHeigth() - ball->radius;
         gameElements->notifyGameEvent(CONTACT_WALL);
+    }
+}
+
+void BasicRules::resetBallSpeed(){
+    for (auto& ball:gameElements->balls) {
+        ball->velocity = ofVec2f(gameElements->minBallVelocity);
     }
 }
