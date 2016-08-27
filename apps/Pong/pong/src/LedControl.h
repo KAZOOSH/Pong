@@ -12,7 +12,7 @@
 
 #include "ofMain.h"
 #include "ofxOPC.h"
-#include "GameElements.h"
+#include "Paddle.h"
 
 #define N_LEDS 35
 
@@ -20,14 +20,14 @@ class LedControl {
     
 public:
     
-    void setup(GameElements* gameElements);
+    void setup(Paddle* paddle1,Paddle* paddle2, int heightField);
     void update();
     
-    u_int8_t getBrightness();
-    void setBrightness(u_int8_t brightness);
+    ofColor getColor();
+    void setColor(ofColor color);
     
     ofParameter<float> pixelPerLed;
-    ofParameter<int> brightness;
+    ofParameter<ofColor> color;
     
 protected:
     void calculateLeds(Paddle* paddle, vector<ofColor>* colors);
@@ -36,8 +36,10 @@ private:
     
     vector<ofColor> colors;
     ofxOPC opcClient;
-    GameElements* gameElements;
     
+    Paddle* paddle1;
+    Paddle* paddle2;
+    int heightField;
     vector<ofColor> colorsPaddle1,colorsPaddle2;
 };
 

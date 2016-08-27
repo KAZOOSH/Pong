@@ -24,6 +24,9 @@ GameElements::GameElements(){
     
     resetElements();
     
+    ledControl.setup(&paddleLeft, &paddleRight,heightGame);
+    
+    
 }
 
 int GameElements::getWidth(){

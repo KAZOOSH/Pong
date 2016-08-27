@@ -12,8 +12,6 @@
 #include "MouseControl.h"
 #include "SerialControl.h"
 
-#include "LedControl.h"
-
 class ofApp : public ofBaseApp{
 public:
     void setup(); //!< configures App
@@ -62,7 +60,7 @@ private:
     
     MouseControl mouse;
     
-    LedControl ledControl;
+    
     
     ofParameterGroup settings;
 };

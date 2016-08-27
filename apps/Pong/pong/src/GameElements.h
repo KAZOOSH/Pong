@@ -12,6 +12,7 @@
 
 #include "Ball.h"
 #include "Paddle.h"
+#include "LedControl.h"
 
 
 //structs an enums for event handling
@@ -87,6 +88,7 @@ public:
     
     ofParameter<float> minBallVelocity, maxBallVelocity;
     
+    LedControl ledControl;
     
 private:
     int widthGame, heightGame;//!< actual game size

@@ -28,7 +28,6 @@ void ofApp::setup(){
     //init soundPlayer
     soundPlayer.setup();
     
-    ledControl.setup(&elements);
     
     //register listeners
     ofAddListener(elements.newScoreEvent, this, &ofApp::onPointsChanged);
@@ -65,7 +64,7 @@ void ofApp::update(){
     }
     
     mouse.update();
-    ledControl.update();
+    elements.ledControl.update();
 }
 
 //--------------------------------------------------------------
@@ -270,10 +269,10 @@ void ofApp::drawDebugInformation(){
     ofTranslate(0, ty);
     ofTranslate(0, ty);
     ofDrawBitmapString("Paddle", 0, 0);
+    //ofTranslate(0, ty);
+    //  ofDrawBitmapString("Brightness: " + ofToString(ledControl.brightness) + " -+ (DOWN,UP)", 0, 0);
     ofTranslate(0, ty);
-    ofDrawBitmapString("Brightness: " + ofToString(ledControl.brightness) + " -+ (DOWN,UP)", 0, 0);
-    ofTranslate(0, ty);
-    ofDrawBitmapString("PixelPerLed: " + ofToString(ledControl.pixelPerLed) + " -+ (LEFT,RIGHT)", 0, 0);
+    ofDrawBitmapString("PixelPerLed: " + ofToString(elements.ledControl.pixelPerLed) + " -+ (LEFT,RIGHT)", 0, 0);
     ofTranslate(0, ty);
     ofDrawBitmapString("PaddleSize: " + ofToString(elements.paddleLeft.height) + " -+ (-,+)", 0, 0);
     ofTranslate(0, ty);
@@ -286,6 +285,7 @@ void ofApp::drawDebugInformation(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    
     if(key == 'f') {
         ofToggleFullscreen();
     }
@@ -314,16 +314,16 @@ void ofApp::keyPressed(int key){
     }
     
     if(key == OF_KEY_UP) {
-        ledControl.setBrightness(ledControl.getBrightness()+1);
+        // ledControl.setBrightness(ledControl.getBrightness()+1);
     }
     if(key == OF_KEY_DOWN) {
-        ledControl.setBrightness(ledControl.getBrightness()-1);
+        //ledControl.setBrightness(ledControl.getBrightness()-1);
     }
     if(key == OF_KEY_RIGHT) {
-        ledControl.pixelPerLed++;
+        elements.ledControl.pixelPerLed++;
     }
     if(key == OF_KEY_LEFT) {
-        ledControl.pixelPerLed--;
+        elements.ledControl.pixelPerLed--;
     }
     if(key == '+') {
         elements.paddleLeft.height++;
@@ -361,8 +361,8 @@ void ofApp::initSettings(){
     settings.add(soundPlayer.isModerationMode);
     settings.add(elements.minBallVelocity);
     settings.add(elements.maxBallVelocity);
-    settings.add(ledControl.brightness);
-    settings.add(ledControl.pixelPerLed);
+    settings.add(elements.ledControl.color);
+    settings.add(elements.ledControl.pixelPerLed);
     settings.add(elements.paddleLeft.height);
     settings.add(elements.paddleRight.height);
     
