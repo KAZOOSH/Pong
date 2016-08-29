@@ -25,8 +25,9 @@ public:
     
 private:
     
-    ofxGifDecoder decoder;
-    ofxGifFile bg;
+    vector<ofxGifDecoder*> decoder;
+    
+    int currentScene;
 };
 
 #endif
