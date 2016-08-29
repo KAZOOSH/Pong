@@ -20,7 +20,7 @@ void GravityRule::end()
 void GravityRule::applyRules()
 {
 	
-	for (auto&& ball : gameElements->balls) {
+    Ball* ball = &gameElements->ball;
 		//move ball
 		ball->velocity.y = ball->velocity.y + 0.25;
 		ball->update();
@@ -33,5 +33,5 @@ void GravityRule::applyRules()
 		{
 			ball->velocity.y *= 2;
 		}
-	}
+	
 }

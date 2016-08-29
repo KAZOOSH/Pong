@@ -96,44 +96,49 @@ void PortalPlayMode::applyRules() {
     int new_y;
     
     int ct_portal = 0;
-    for (auto ball : BasicRules::gameElements->balls) {
-        new_x = ball->position.x;
-        new_y = ball->position.y;
-        for (auto portal : portals) {
-            if (portal.portalHittest(ball)) {
-                BasicRules::gameElements->notifyGameEvent(CONTACT_WALL);
-                if (ct_portal == 0) {
-                    if (ball->velocity.x > 0) {
-                        new_x = portals[1].dimensions.x + portals[1].dimensions.width*1.01 + ball->radius;
-                    }
-                    else {
-                        new_x = portals[1].dimensions.x - portals[1].dimensions.width*0.01 - ball->radius;
-                    }
-                    new_y += portals[1].dimensions.y-portals[0].dimensions.y;
+    
+    Ball* ball = &BasicRules::gameElements->ball;
+    
+    new_x = ball->position.x;
+    new_y = ball->position.y;
+    for (auto portal : portals) {
+        if (portal.portalHittest(ball)) {
+            BasicRules::gameElements->notifyGameEvent(CONTACT_WALL);
+            if (ct_portal == 0) {
+                if (ball->velocity.x > 0) {
+                    new_x = portals[1].dimensions.x + portals[1].dimensions.width*1.01 + ball->radius;
                 }
                 else {
-                    if (ball->velocity.x > 0) {
-                        new_x = portals[0].dimensions.x + portals[0].dimensions.width*1.01 + ball->radius;
-                    }
-                    else {
-                        new_x = portals[0].dimensions.x - portals[0].dimensions.width*0.01 - ball->radius;
-                    }
-                    new_y += portals[0].dimensions.y - portals[1].dimensions.y;
+                    new_x = portals[1].dimensions.x - portals[1].dimensions.width*0.01 - ball->radius;
                 }
-                
+                new_y += portals[1].dimensions.y-portals[0].dimensions.y;
             }
-            ct_portal++;
-        }		
-        ball->position.x = new_x;
-        ball->position.y = new_y;
-        
-    }
+            else {
+                if (ball->velocity.x > 0) {
+                    new_x = portals[0].dimensions.x + portals[0].dimensions.width*1.01 + ball->radius;
+                }
+                else {
+                    new_x = portals[0].dimensions.x - portals[0].dimensions.width*0.01 - ball->radius;
+                }
+                new_y += portals[0].dimensions.y - portals[1].dimensions.y;
+            }
+            
+        }
+        ct_portal++;
+    }		
+    ball->position.x = new_x;
+    ball->position.y = new_y;
+    
+    
 }
 
 
 //------------------------------------------------------------------
 void PortalPlayMode::render() {
     BasicRenderer::render();
+    
+    
+    BasicRenderer::gameElements->ledControl.setColor(ofColor(192,0,255));
     
     for (auto portal : portals) {
         int maxFrames = portalImg.getNumFrames()-2;

@@ -52,7 +52,7 @@ void ofApp::update(){
     }
     
     if(!isGameRunning){
-        if (ofGetElapsedTimeMillis() - tGameFinished > 7000) {
+        if (ofGetElapsedTimeMillis() - tGameFinished > 7000 && !isPlayerReady) {
             prepareForStart();
         }
         if (isPlayerReady) {
@@ -155,6 +155,7 @@ void ofApp::endGame(int winner){
     tPlayerReady = false;
     isGameRunning = false;
     isInitMessageShown = false;
+    isPlayerReady = false;
     
     tGameFinished = ofGetElapsedTimeMillis();
     
@@ -260,7 +261,7 @@ void ofApp::drawDebugInformation(){
     ofTranslate(0, ty);
     ofDrawBitmapString("Ball", 0, 0);
     ofTranslate(0, ty);
-    ofDrawBitmapString("Velocity: " + ofToString(abs(elements.balls[0]->velocity.x)), 0, 0);
+    ofDrawBitmapString("Velocity: " + ofToString(abs(elements.ball.velocity.x)), 0, 0);
     ofTranslate(0, ty);
     ofDrawBitmapString("MinVelocity: " + ofToString(abs(elements.minBallVelocity),1) + " -+ (i,o)", 0, 0);
     ofTranslate(0, ty);
@@ -311,6 +312,7 @@ void ofApp::keyPressed(int key){
     }
     if(key == '1') {
         playModeController.setRenderer("Movie");
+        // playModeController.setRules("Hecht");
     }
     
     if(key == OF_KEY_UP) {

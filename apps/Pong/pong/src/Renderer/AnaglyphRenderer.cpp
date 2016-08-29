@@ -12,22 +12,29 @@
 
 //------------------------------------------------------------------
 AnaglyphRenderer::AnaglyphRenderer(GameElements* gameElements, string name):BasicRenderer(gameElements, name) {
-
     
-     cam.setPosition( 0, 0, 10 );
-     cam.lookAt( ofVec3f(0,0,0));
-     cam.enableStereo();
-     cam.eyeSeparation   = 0.3;
-     cam.focalLength     = 100;
-     
+    
+    cam.setPosition( 0, 0, 10 );
+    cam.lookAt( ofVec3f(0,0,0));
+    cam.enableStereo();
+    cam.eyeSeparation   = 0.3;
+    cam.focalLength     = 100;
+    
 }
 
 //------------------------------------------------------------------
 void AnaglyphRenderer::render() {
-	
+    
     ofBackground(0);
     
     drawScore();
+    
+    if ((ofGetElapsedTimeMillis()/2000)%2) {
+        gameElements->ledControl.setColor(ofColor(255,0,0));
+    }else{
+        gameElements->ledControl.setColor(ofColor(255,0,255));
+    }
+    
     
     gameElements->paddleRight.draw();
     gameElements->paddleLeft.draw();
@@ -74,21 +81,21 @@ void AnaglyphRenderer::drawAnaglyphElements(){
     }
     
     
-    //draw balls
-    for(auto&& ball : gameElements->balls){
-        
-        ofSetColor(255);
-        
-        ofVec3f pBall = cam.screenToWorld(ball->position);
-        pBall.x *= 0.54;
-        pBall.y *= -0.54;
-        
-        float pz = ofMap(ball->position.x, 0, gameElements->getWidth(), 0, PI);
-        pz = sin(pz);
-        pBall.y *= (pz*0.3+1);
-        pz = ofMap(pz, 0, 1, 0, -5);
-        
-        ofDrawBox(pBall.x,pBall.y,pz, ball->radius/45.0, ball->radius/45.0,0.1);
-    }
-
+    //draw ball
+    
+    
+    ofSetColor(255);
+    
+    ofVec3f pBall = cam.screenToWorld(gameElements->ball.position);
+    pBall.x *= 0.54;
+    pBall.y *= -0.54;
+    
+    float pz = ofMap(gameElements->ball.position.x, 0, gameElements->getWidth(), 0, PI);
+    pz = sin(pz);
+    pBall.y *= (pz*0.3+1);
+    pz = ofMap(pz, 0, 1, 0, -5);
+    
+    ofDrawBox(pBall.x,pBall.y,pz, gameElements->ball.radius/45.0, gameElements->ball.radius/45.0,0.1);
+    
+    
 }

@@ -27,10 +27,8 @@ void RoundBallRenderer::render() {
     
     ofSetColor(200);
     
-    for(auto&& ball : gameElements->balls){
-        float r = ball->radius;
-        ofDrawCircle(ball->position.x, ball->position.y, r);
-    }
+    ofDrawCircle(gameElements->ball.position.x, gameElements->ball.position.y, gameElements->ball.radius);
+    
 	
 }
 

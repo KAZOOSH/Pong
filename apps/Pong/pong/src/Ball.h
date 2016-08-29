@@ -17,6 +17,7 @@ class Ball {
   public:
 	
 	Ball();
+    Ball(ofVec2f position, ofVec2f velocity);
 	
 	void update();
 	void draw();

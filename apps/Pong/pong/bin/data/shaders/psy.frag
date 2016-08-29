@@ -3,7 +3,7 @@
 uniform vec2 dimensions;
 uniform float iGlobalTime;
 uniform int nBalls;
-uniform vec2 b1_pos,b2_pos,b3_pos,b4_pos,b5_pos;
+uniform vec2 pos;
 uniform float radius;
 
 varying vec2 texCoordVarying;
@@ -18,7 +18,7 @@ void main()
 
     vec2 uv = gl_FragCoord.xy;// / dimensions;
 
-    vec2 screenCenter = (b1_pos.xy);
+    vec2 screenCenter = (pos.xy);
     vec2 circleCenter = screenCenter + vec2(sin(iGlobalTime * speed) * radius, cos(iGlobalTime * speed) * radius);
     vec3 result = backgroundColor;
     

@@ -22,15 +22,14 @@ BasicRenderer::BasicRenderer(GameElements* gameElements, string name, int durati
 void BasicRenderer::render() {
     ofBackground(0);
     
+    gameElements->ledControl.setColor(ofColor(128));
+    
     drawScore();
     drawMidLine();
     
     gameElements->paddleRight.draw();
     gameElements->paddleLeft.draw();
-    
-    for(auto&& ball : gameElements->balls){
-        ball->draw();
-    }
+    gameElements->ball.draw();
     
 }
 

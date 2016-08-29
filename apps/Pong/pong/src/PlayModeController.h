@@ -16,7 +16,7 @@
 
 #include "AbstractRules.h"
 #include "BasicRules.h"
-#include "MultiBallRule.h"
+#include "MultiBallMode.h"
 #include "DoubleSpeedRule.h"
 #include "PaddleSizeRule.h"
 #include "BallSizeRule.h"

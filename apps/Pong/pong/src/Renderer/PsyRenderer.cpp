@@ -20,14 +20,17 @@ PsyRenderer::PsyRenderer(GameElements* gameElements, string name):BasicRenderer(
 void PsyRenderer::render() {
     //img.getTextureReference().bind();
     
+    int color = (ofGetElapsedTimeMillis()/2000)%128;
+    gameElements->ledControl.setColor(ofColor(color));
+    
     shader.begin();
     
     ofPushMatrix();
     
     shader.setUniform2f("dimensions", ofVec2f(gameElements->getWidth(),gameElements->getHeigth()));
     shader.setUniform1f("iGlobalTime", ofGetElapsedTimef());
-    shader.setUniform1f("radius", gameElements->balls[0]->radius);
-    shader.setUniform2f("b1_pos", gameElements->balls[0]->position);
+    shader.setUniform1f("radius", gameElements->ball.radius);
+    shader.setUniform2f("pos", gameElements->ball.position);
     
     ofSetColor(128);
     ofDrawRectangle(0, 0, gameElements->getWidth(), gameElements->getHeigth());

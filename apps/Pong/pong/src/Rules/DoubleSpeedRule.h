@@ -19,7 +19,6 @@ public:
     
     DoubleSpeedRule(GameElements* gameElements, string name = "Double Speed");
     virtual void begin();
-    virtual void end();
     
 private:
     float speedMultiplicator;

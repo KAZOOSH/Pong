@@ -36,17 +36,17 @@ bool Wall::wallHittest(Ball* ball){
             return true;
         }
     }
-
-	if (b_x_min <= w_x_max && b_x_min >= w_x_min) {
-		if ((b_y_max >= w_y_min && b_y_max <= w_y_max) ||
-			(b_y_min >= w_y_min && b_y_min <= w_y_max))
-
-		{
-			ball->velocity.x *= -1;
-			return true;
-		}
-	}
-
+    
+    if (b_x_min <= w_x_max && b_x_min >= w_x_min) {
+        if ((b_y_max >= w_y_min && b_y_max <= w_y_max) ||
+            (b_y_min >= w_y_min && b_y_min <= w_y_max))
+            
+        {
+            ball->velocity.x *= -1;
+            return true;
+        }
+    }
+    
     /*
      //right edge
      if (b_x_min >= w_x_min && b_x_max <= w_x_max
@@ -117,10 +117,10 @@ void WallPlayMode::updateWalls(){
     walls[2].dimensions = ofRectangle(gameElements->getWidth()*0.75,ySide,wSide,hSide);
     
     int yCenter = ofRandom(ofRandom(gameElements->getHeigth()));
-	while (yCenter>gameElements->getHeigth()*0.2 && yCenter<gameElements->getHeigth()*0.6) {
-		yCenter = ofRandom(ofRandom(gameElements->getHeigth()));
-	}
-	int wCenter = 50;
+    while (yCenter>gameElements->getHeigth()*0.2 && yCenter<gameElements->getHeigth()*0.6) {
+        yCenter = ofRandom(ofRandom(gameElements->getHeigth()));
+    }
+    int wCenter = 50;
     int hCenter = ofRandom(gameElements->getHeigth()*.1, gameElements->getHeigth()*0.2);
     
     walls[1].dimensions = ofRectangle(.5*(gameElements->getWidth()-wCenter),yCenter,wCenter,hCenter);
@@ -132,12 +132,10 @@ void WallPlayMode::applyRules() {
     BasicRules::applyRules();
     
     for(auto wall:walls){
-        for(auto ball:BasicRules::gameElements->balls){
-            if(wall.wallHittest(ball)){
-                BasicRules::gameElements->notifyGameEvent(CONTACT_WALL);
-            }
-            
+        if(wall.wallHittest(&BasicRules::gameElements->ball)){
+            BasicRules::gameElements->notifyGameEvent(CONTACT_WALL);
         }
+        
     }
 }
 

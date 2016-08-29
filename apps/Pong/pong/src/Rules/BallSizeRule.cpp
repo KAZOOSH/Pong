@@ -18,14 +18,12 @@ BallSizeRule::BallSizeRule(GameElements* gameElements, string name, float sizeMu
 //------------------------------------------------------------------
 void BallSizeRule::begin() {
     AbstractRules::begin();
-    for (auto& ball:gameElements->balls) {
-        ball->radius *= sizeMultiplicator;
-    }
+    gameElements->ball.radius *= sizeMultiplicator;
+    
 }
 
 void BallSizeRule::end(){
     AbstractRules::end();
-    for (auto& ball:gameElements->balls) {
-        ball->radius /= sizeMultiplicator;
-    }
+    gameElements->ball.radius /= sizeMultiplicator;
+    
 }

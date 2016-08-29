@@ -38,40 +38,6 @@ int GameElements::getHeigth(){
 }
 
 /**
- * adds ball to game
- */
-void GameElements::addBall(ofVec2f position, ofVec2f velocity){
-    balls.push_back(new Ball());
-    balls.back()->velocity = velocity;
-    balls.back()->position = position;
-}
-
-/**
- * remove Ball with specific id from game
- */
-bool GameElements::removeBall(long id){
-    int index = -1;
-    for (int i= 0; i<balls.size(); ++i) {
-        if(balls[i]->id == id) index = i;
-    }
-    if (index!=-1){
-        balls.erase(balls.begin() + index);
-        return true;
-    }
-    ofLogWarning("GameElements::removeBall -> id not found");
-    return false;
-}
-
-/**
- * removes all balls but the first one from game
- */
-void GameElements::removeAllExtraBalls(){
-    for (int i= balls.size()-1; i>=1; --i) {
-        balls.pop_back();
-    }
-}
-
-/**
  * increases player points 
  * negative amounts are possible
  * 
@@ -115,8 +81,8 @@ int GameElements::getWinScore(){
  * resets all Elements to start value
  */
 void GameElements::resetElements(){
-    balls.clear();
-    addBall(ofVec2f(widthGame/2, heightGame/2), ofVec2f(minBallVelocity, 0));
+    ball.position = ofVec2f(widthGame/2, heightGame/2);
+    ball.velocity = ofVec2f(minBallVelocity, 0);
     pointsP1 = 0;
     pointsP2 = 0;
 }

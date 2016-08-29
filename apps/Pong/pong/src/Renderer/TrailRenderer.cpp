@@ -15,12 +15,14 @@ TrailRenderer::TrailRenderer(GameElements* gameElements, string name):BasicRende
 }
 
 void TrailRenderer::begin(){
+    BasicRenderer::begin();
     fbo.begin();
     ofClear(255,255,255, 0);
     fbo.end();
 }
 
 void TrailRenderer::render(){
+    
     ofEnableAlphaBlending();
     ofBackground(0);
     
@@ -28,9 +30,7 @@ void TrailRenderer::render(){
     ofFill();
     ofSetColor(255,255,255, 10);
     ofDrawRectangle(0, 0, gameElements->getWidth(), gameElements->getHeigth());
-    for(auto&& ball : gameElements->balls){
-        ball->draw();
-    }
+    gameElements->ball.draw();
     fbo.end();
     
     drawScore();
@@ -40,4 +40,10 @@ void TrailRenderer::render(){
     gameElements->paddleLeft.draw();
     
     fbo.draw(0, 0);
+    
+    int color = (ofGetElapsedTimeMillis()/2000)%512;
+    if (color>255) {
+        color = 512 - color;
+    }
+    gameElements->ledControl.setColor(ofColor(color));
 }

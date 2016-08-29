@@ -17,6 +17,13 @@ Ball::Ball(){
     
 }
 
+Ball::Ball(ofVec2f position_, ofVec2f velocity_){
+    position = position_;
+    velocity = velocity_;
+    radius = 25;
+    id = ofGetElapsedTimeMicros();
+}
+
 
 //------------------------------------------------------------------
 void Ball::update() {

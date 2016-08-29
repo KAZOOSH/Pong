@@ -17,38 +17,34 @@ BasicRules::BasicRules(GameElements* gameElements, string name,int durationMode_
 
 void BasicRules::begin(){
     AbstractRules::begin();
-    for (auto&& ball : gameElements->balls) {
-        //increase speed on time
-        ball->velocity.x > 0 ? ball->velocity.x = gameElements->minBallVelocity : ball->velocity.x = -gameElements->minBallVelocity;
-    }
+    //set minimum ball velocity
+    gameElements->ball.velocity.x > 0 ? gameElements->ball.velocity.x = gameElements->minBallVelocity : gameElements->ball.velocity.x = -gameElements->minBallVelocity;
+    
 }
 
 void BasicRules::applyRules() {
     //update ball speeds
     float maxV = gameElements->maxBallVelocity - gameElements->minBallVelocity;
     float velocityIncreaseAmt = maxV/20/ofGetFrameRate();
-    if (ofGetElapsedTimef() - (startTime/1000 + 20) > 0) {
-        velocityIncreaseAmt = 0;
+    
+    //increase speed on time
+    gameElements->ball.velocity.x > 0 ? gameElements->ball.velocity.x += velocityIncreaseAmt : gameElements->ball.velocity.x -= velocityIncreaseAmt;
+    if (gameElements->ball.velocity.x > gameElements->maxBallVelocity) {
+        gameElements->ball.velocity.x = gameElements->maxBallVelocity;
     }
     
-    for (auto&& ball : gameElements->balls) {
-        //increase speed on time
-        ball->velocity.x > 0 ? ball->velocity.x += velocityIncreaseAmt : ball->velocity.x -= velocityIncreaseAmt;
-        
-        //move ball
-        ball->update();
-        
-        //check paddle and/or wall hit
-        if (!paddleHittest(ball)) {
-            wallHittest(ball);
-        }
+    //move ball
+    gameElements->ball.update();
+    
+    //check paddle and/or wall hit
+    if (!paddleHittest(&gameElements->ball)) {
+        wallHittest(&gameElements->ball);
     }
-    
-    
 }
 
+
 /**
- * hittest between balls and paddle, update ball direction
+ * hittest between ball and paddle, update ball direction
  */
 bool BasicRules::paddleHittest(Ball* ball){
     if (gameElements->paddleLeft.isHit(*ball)) {
@@ -66,7 +62,7 @@ bool BasicRules::paddleHittest(Ball* ball){
 }
 
 /**
- * hittest between balls and walls, update score
+ * hittest between ball and walls, update score
  */
 void BasicRules::wallHittest(Ball* ball){
     
@@ -102,7 +98,9 @@ void BasicRules::wallHittest(Ball* ball){
 }
 
 void BasicRules::resetBallSpeed(){
-    for (auto& ball:gameElements->balls) {
-        ball->velocity = ofVec2f(gameElements->minBallVelocity);
+    int mult = 1;
+    if (gameElements->ball.velocity.x > 0) {
+        mult = -1;
     }
+    gameElements->ball.velocity = ofVec2f(mult*gameElements->minBallVelocity,0);
 }
