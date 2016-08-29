@@ -12,6 +12,14 @@
 #include "MouseControl.h"
 #include "SerialControl.h"
 
+enum Gamestate{
+    PLAYERS_PREPARING,
+    WAIT_FOR_START,
+    RUNNING,
+    END
+};
+
+
 class ofApp : public ofBaseApp{
 public:
     void setup(); //!< configures App
@@ -27,6 +35,7 @@ public:
     void prepareForStart();
     void startGame();
     void drawDebugInformation();
+    void changeGameState(Gamestate gamestate);
     
     void initSettings();
     void saveSettings();
@@ -40,12 +49,8 @@ public:
     void keyPressed(int key);
     
 private:
-    long tGameFinished;
-    bool isInitMessageShown;
-    bool isGameRunning;//!< game status
-    
-    bool isPlayerReady;
-    long tPlayerReady;
+    Gamestate gamestate; //<! current game status
+    long lastGamestateChange;
     
     bool showDebugInfos;
     

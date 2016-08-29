@@ -5,11 +5,9 @@ void ofApp::setup(){
     
     ofSeedRandom();
     ofSetFrameRate( 60 );
-    isGameRunning = false;
-    isInitMessageShown = false;
-    tGameFinished = 0;
-    showDebugInfos = false;
-    isPlayerReady = false;
+    
+    //set game state
+    changeGameState(END);
     
     //init controls
     elements.paddleLeft.addControl(mouse);
@@ -43,23 +41,22 @@ void ofApp::update(){
     
     
     //init message
-    if(!isInitMessageShown){
-        if (ofGetElapsedTimeMillis() - tGameFinished > 4000) {
-            restartGame();
-            showInitMessage();
-            
-        }
+    if(gamestate == END
+       && ofGetElapsedTimeMillis() - lastGamestateChange > 4000){
+        restartGame();
+        showInitMessage();
+    }
+    //prepare for start
+    else if(gamestate == PLAYERS_PREPARING
+            && ofGetElapsedTimeMillis() - lastGamestateChange > 2000){
+        prepareForStart();
+    }
+    else if (gamestate == WAIT_FOR_START
+             && ofGetElapsedTimeMillis() - lastGamestateChange > 1500) {
+        startGame();
     }
     
-    if(!isGameRunning){
-        if (ofGetElapsedTimeMillis() - tGameFinished > 7000 && !isPlayerReady) {
-            prepareForStart();
-        }
-        if (isPlayerReady) {
-            startGame();
-        }
-    }
-    else {
+    else if (gamestate == RUNNING){
         playModeController.getCurrentRules()->update();
     }
     
@@ -152,12 +149,6 @@ void ofApp::restartGame(){
  * notify events to start fireworks ;)
  */
 void ofApp::endGame(int winner){
-    tPlayerReady = false;
-    isGameRunning = false;
-    isInitMessageShown = false;
-    isPlayerReady = false;
-    
-    tGameFinished = ofGetElapsedTimeMillis();
     
     string text = "Player ";
     text += ofToString(winner);
@@ -176,7 +167,7 @@ void ofApp::endGame(int winner){
     
     ofNotifyEvent(elements.newGameEvent, g);
     
-    
+    changeGameState(END);
 }
 
 void ofApp::showInitMessage(){
@@ -185,7 +176,8 @@ void ofApp::showInitMessage(){
                   true,
                   2000);
     ofNotifyEvent(gameOverEvent, t);
-    isInitMessageShown = true;
+    
+    changeGameState(PLAYERS_PREPARING);
 }
 
 /**
@@ -200,17 +192,16 @@ void ofApp::prepareForStart(){
                       true,
                       1500);
         ofNotifyEvent(gameOverEvent, t);
-        isPlayerReady = true;
-        tPlayerReady = ofGetElapsedTimeMillis();
+        
+        changeGameState(WAIT_FOR_START);
     }
 }
 
 void ofApp::startGame(){
-    if( ofGetElapsedTimeMillis() - tPlayerReady > 1500){
-        GameEvent g = START;
-        ofNotifyEvent(elements.newGameEvent, g);
-        isGameRunning = true;
-    }
+    
+    GameEvent g = START;
+    ofNotifyEvent(elements.newGameEvent, g);
+    changeGameState(RUNNING);
 }
 
 void ofApp::onPointsChanged(PlayerScoreEvent& e){
@@ -282,6 +273,11 @@ void ofApp::drawDebugInformation(){
     
     ofPopStyle();
     ofPopMatrix();
+}
+
+void ofApp::changeGameState(Gamestate gamestate_){
+    gamestate = gamestate_;
+    lastGamestateChange = ofGetElapsedTimeMillis();
 }
 
 //--------------------------------------------------------------
