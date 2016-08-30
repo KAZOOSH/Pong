@@ -45,5 +45,5 @@ void TrailRenderer::render(){
     if (color>255) {
         color = 512 - color;
     }
-    gameElements->ledControl.setColor(ofColor(color));
+    gameElements->ledControl.setColors(ofColor(color));
 }

@@ -16,13 +16,14 @@ BasicRenderer::BasicRenderer(GameElements* gameElements, string name, int durati
     durationMode = durationMode_;
 }
 
-
+void BasicRenderer::begin(){
+    AbstractRenderer::begin();
+    gameElements->ledControl.setColors(ofColor(128));
+}
 
 //------------------------------------------------------------------
 void BasicRenderer::render() {
     ofBackground(0);
-    
-    gameElements->ledControl.setColor(ofColor(128));
     
     drawScore();
     drawMidLine();

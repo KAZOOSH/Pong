@@ -20,6 +20,7 @@ public:
     BasicRenderer(GameElements* gameElements, string name = "", int durationMode = 20000);
     virtual void render();
 protected:
+    void begin();
     void drawScore();
     void drawMidLine();
     

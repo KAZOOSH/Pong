@@ -21,7 +21,7 @@ void PsyRenderer::render() {
     //img.getTextureReference().bind();
     
     int color = (ofGetElapsedTimeMillis()/2000)%128;
-    gameElements->ledControl.setColor(ofColor(color));
+    gameElements->ledControl.setColors(ofColor(color));
     
     shader.begin();
     

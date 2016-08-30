@@ -311,12 +311,6 @@ void ofApp::keyPressed(int key){
         // playModeController.setRules("Hecht");
     }
     
-    if(key == OF_KEY_UP) {
-        // ledControl.setBrightness(ledControl.getBrightness()+1);
-    }
-    if(key == OF_KEY_DOWN) {
-        //ledControl.setBrightness(ledControl.getBrightness()-1);
-    }
     if(key == OF_KEY_RIGHT) {
         elements.ledControl.pixelPerLed++;
     }
@@ -359,7 +353,6 @@ void ofApp::initSettings(){
     settings.add(soundPlayer.isModerationMode);
     settings.add(elements.minBallVelocity);
     settings.add(elements.maxBallVelocity);
-    settings.add(elements.ledControl.color);
     settings.add(elements.ledControl.pixelPerLed);
     settings.add(elements.paddleLeft.height);
     settings.add(elements.paddleRight.height);

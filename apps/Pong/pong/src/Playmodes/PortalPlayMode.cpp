@@ -138,7 +138,7 @@ void PortalPlayMode::render() {
     BasicRenderer::render();
     
     
-    BasicRenderer::gameElements->ledControl.setColor(ofColor(192,0,255));
+    BasicRenderer::gameElements->ledControl.setColors(ofColor(192,0,255));
     
     for (auto portal : portals) {
         int maxFrames = portalImg.getNumFrames()-2;

@@ -30,9 +30,9 @@ void AnaglyphRenderer::render() {
     drawScore();
     
     if ((ofGetElapsedTimeMillis()/2000)%2) {
-        gameElements->ledControl.setColor(ofColor(255,0,0));
+        gameElements->ledControl.setColors(ofColor(255,0,0));
     }else{
-        gameElements->ledControl.setColor(ofColor(255,0,255));
+        gameElements->ledControl.setColors(ofColor(255,0,255));
     }
     
     
