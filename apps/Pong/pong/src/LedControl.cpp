@@ -24,6 +24,12 @@ void LedControl::setup(Paddle* paddle1_,Paddle* paddle2_,int heightField_) {
         panel1.colorBuffer.push_back(0);
         panel2.colorBuffer.push_back(0);
     }
+    
+    for (int i=0; i<panel1.paddle->height / pixelPerLed; ++i) {
+        panel1.colors.push_back(0);
+        panel2.colors.push_back(0);
+    }
+    
     setColors(ofColor(128));
     
     panel1.paddle->height.addListener(this, &LedControl::onPaddle1HeightChanged);
