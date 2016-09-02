@@ -1,3 +1,13 @@
+/*
+ *  ofApp.h
+ *  PONG
+ *
+ *  KAZOOSH!  - open platform for interactive installations - 2016
+ *  http://kazoosh.com
+ *
+ *  created by Brian Eschrich - 2016
+ */
+
 #pragma once
 
 #include "ofMain.h"

@@ -1,3 +1,13 @@
+/*
+ *  TennisRenderer.cpp
+ *  PONG
+ *
+ *  KAZOOSH!  - open platform for interactive installations - 2016
+ *  http://kazoosh.com
+ *
+ *  created by Max Haferlach - 2016
+ */
+
 #include "TennisRenderer.h"
 
 TennisRenderer::TennisRenderer(GameElements * gameElements, string name) :BasicRenderer(gameElements, name) {

@@ -1,10 +1,11 @@
 /*
 *  PortalPlayMode.h
-*  emptyExample
+*  PONG
 *
-*  Created by Brian Eschrich on 19.08.16
-*  Copyright 2016 __MyCompanyName__. All rights reserved.
+*  KAZOOSH!  - open platform for interactive installations - 2016 
+*  http://kazoosh.com 
 *
+*  created by Max Haferlach - 2016
 */
 
 #ifndef _PortalPlayMode
