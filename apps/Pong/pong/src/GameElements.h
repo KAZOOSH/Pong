@@ -1,10 +1,10 @@
 /*
  *  GameElements.h
- *  emptyExample
+ *  PONG
  *
- *  Created by Brian Eschrich on 15.08.16
- *  Copyright 2016 __MyCompanyName__. All rights reserved.
- *
+ *  KAZOOSH!  - open platform for interactive installations - http://kazoosh.com 
+ *    
+ *  created by Brian Eschrich - 2016
  */
 
 #ifndef _GameElements
@@ -12,6 +12,7 @@
 
 #include "Ball.h"
 #include "Paddle.h"
+#include "LedControl.h"
 
 
 //structs an enums for event handling
@@ -65,10 +66,6 @@ public:
     int getWidth();
     int getHeigth();
     
-    void addBall(ofVec2f position, ofVec2f velocity);
-    bool removeBall(long id);
-    void removeAllExtraBalls();
-    
     void increasePoints(int player, int amount = 1);
     int getPoints(int player);
     
@@ -83,10 +80,11 @@ public:
     ofEvent<PlayModeEvent> newPlayModeEvent; //!< triggered when playmode changed
     
     Paddle paddleLeft, paddleRight; //!< paddles
-    vector<Ball*> balls; //!< balls
+    Ball ball; //!< balls
     
     ofParameter<float> minBallVelocity, maxBallVelocity;
     
+    LedControl ledControl;
     
 private:
     int widthGame, heightGame;//!< actual game size

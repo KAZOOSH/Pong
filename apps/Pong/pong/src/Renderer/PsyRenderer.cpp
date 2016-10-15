@@ -1,10 +1,10 @@
 /*
  *  LsdRenderer.cpp
- *  emptyExample
+ *  PONG
  *
- *  Created by Brian Eschrich on 22.08.16
- *  Copyright 2016 __MyCompanyName__. All rights reserved.
- *
+ *  KAZOOSH!  - open platform for interactive installations - http://kazoosh.com 
+ *    
+ *  created by Brian Eschrich - 2016
  */
 
 #include "PsyRenderer.h"
@@ -20,14 +20,17 @@ PsyRenderer::PsyRenderer(GameElements* gameElements, string name):BasicRenderer(
 void PsyRenderer::render() {
     //img.getTextureReference().bind();
     
+    int color = (ofGetElapsedTimeMillis()/2000)%128;
+    gameElements->ledControl.setColors(ofColor(color));
+    
     shader.begin();
     
     ofPushMatrix();
     
     shader.setUniform2f("dimensions", ofVec2f(gameElements->getWidth(),gameElements->getHeigth()));
     shader.setUniform1f("iGlobalTime", ofGetElapsedTimef());
-    shader.setUniform1f("radius", gameElements->balls[0]->radius);
-    shader.setUniform2f("b1_pos", gameElements->balls[0]->position);
+    shader.setUniform1f("radius", gameElements->ball.radius);
+    shader.setUniform2f("pos", gameElements->ball.position);
     
     ofSetColor(128);
     ofDrawRectangle(0, 0, gameElements->getWidth(), gameElements->getHeigth());

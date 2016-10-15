@@ -1,10 +1,10 @@
 /*
  *  SerialControl.cpp
- *  emptyExample
+ *  PONG
  *
- *  Created by Brian Eschrich on 24.08.16
- *  Copyright 2016 __MyCompanyName__. All rights reserved.
- *
+ *  KAZOOSH!  - open platform for interactive installations - http://kazoosh.com 
+ *    
+ *  created by Brian Eschrich - 2016
  */
 
 #include "SerialControl.h"
@@ -23,26 +23,26 @@ SerialControl::SerialControl():AbstractControl() {
     if (!devicesInfo.empty())
     {
         // Connect to the first matching device.
-        bool success = paddleRight.setup(devicesInfo[0], 115200);
+        bool success = paddleRight.setup(devicesInfo[1], 115200);
         
         if(success)
         {
-            ofLogNotice("ofApp::setup") << "Successfully setup paddle left " << devicesInfo[0];
+            ofLogNotice("ofApp::setup") << "Successfully setup paddle left " << devicesInfo[1];
         }
         else
         {
-            ofLogNotice("ofApp::setup") << "Unable to setup paddle left " << devicesInfo[0];
+            ofLogNotice("ofApp::setup") << "Unable to setup paddle left " << devicesInfo[1];
         }
         
-        success = paddleLeft.setup(devicesInfo[1], 115200);
+        success = paddleLeft.setup(devicesInfo[0], 115200);
         
         if(success)
         {
-            ofLogNotice("ofApp::setup") << "Successfully setup paddle right " << devicesInfo[1];
+            ofLogNotice("ofApp::setup") << "Successfully setup paddle right " << devicesInfo[0];
         }
         else
         {
-            ofLogNotice("ofApp::setup") << "Unable to setup paddle right " << devicesInfo[1];
+            ofLogNotice("ofApp::setup") << "Unable to setup paddle right " << devicesInfo[0];
         }
         
     }

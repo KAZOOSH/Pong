@@ -1,3 +1,13 @@
+/*
+ *  ofApp.h
+ *  PONG
+ *
+ *  KAZOOSH!  - open platform for interactive installations - 2016
+ *  http://kazoosh.com
+ *
+ *  created by Brian Eschrich - 2016
+ */
+
 #pragma once
 
 #include "ofMain.h"
@@ -12,7 +22,13 @@
 #include "MouseControl.h"
 #include "SerialControl.h"
 
-#include "LedControl.h"
+enum Gamestate{
+    PLAYERS_PREPARING,
+    WAIT_FOR_START,
+    RUNNING,
+    END
+};
+
 
 class ofApp : public ofBaseApp{
 public:
@@ -26,8 +42,10 @@ public:
     void restartGame();
     void endGame(int winner);
     void showInitMessage();
+    void prepareForStart();
     void startGame();
     void drawDebugInformation();
+    void changeGameState(Gamestate gamestate);
     
     void initSettings();
     void saveSettings();
@@ -41,9 +59,8 @@ public:
     void keyPressed(int key);
     
 private:
-    long tGameFinished;
-    bool isInitMessageShown;
-    bool isGameRunning;//!< game status
+    Gamestate gamestate; //<! current game status
+    long lastGamestateChange;
     
     bool showDebugInfos;
     
@@ -58,7 +75,7 @@ private:
     
     MouseControl mouse;
     
-    LedControl ledControl;
+    
     
     ofParameterGroup settings;
 };

@@ -24,10 +24,10 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 - [x] Portals
 - [ ] Shoot the ball Mode
 - [ ] Anaglyph Gravity
+- [x] Multiball 
 
 #####Rules
 - [x] Basic 
-- [x] Multiball 
 - [x] Double Speed 
 - [x] Gravity Mode
 - [ ] Sticky Mode

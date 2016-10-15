@@ -1,10 +1,10 @@
 /*
  *  BasicRenderer.cpp
- *  emptyExample
+ *  PONG
  *
- *  Created by Brian Eschrich on 15.08.16
- *  Copyright 2016 __MyCompanyName__. All rights reserved.
- *
+ *  KAZOOSH!  - open platform for interactive installations - http://kazoosh.com 
+ *    
+ *  created by Brian Eschrich - 2016
  */
 
 #include "BasicRenderer.h"
@@ -16,7 +16,10 @@ BasicRenderer::BasicRenderer(GameElements* gameElements, string name, int durati
     durationMode = durationMode_;
 }
 
-
+void BasicRenderer::begin(){
+    AbstractRenderer::begin();
+    gameElements->ledControl.setColors(ofColor(128));
+}
 
 //------------------------------------------------------------------
 void BasicRenderer::render() {
@@ -27,10 +30,7 @@ void BasicRenderer::render() {
     
     gameElements->paddleRight.draw();
     gameElements->paddleLeft.draw();
-    
-    for(auto&& ball : gameElements->balls){
-        ball->draw();
-    }
+    gameElements->ball.draw();
     
 }
 

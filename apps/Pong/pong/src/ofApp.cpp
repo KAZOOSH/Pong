@@ -1,3 +1,13 @@
+/*
+ *  ofApp.cpp
+ *  PONG
+ *
+ *  KAZOOSH!  - open platform for interactive installations - 2016
+ *  http://kazoosh.com
+ *
+ *  created by Brian Eschrich - 2016
+ */
+
 #include "ofApp.h"
 
 //--------------------------------------------------------------
@@ -5,10 +15,9 @@ void ofApp::setup(){
     
     ofSeedRandom();
     ofSetFrameRate( 60 );
-    isGameRunning = false;
-    isInitMessageShown = false;
-    tGameFinished = 0;
-    showDebugInfos = false;
+    
+    //set game state
+    changeGameState(END);
     
     //init controls
     elements.paddleLeft.addControl(mouse);
@@ -27,7 +36,6 @@ void ofApp::setup(){
     //init soundPlayer
     soundPlayer.setup();
     
-    ledControl.setup(&elements);
     
     //register listeners
     ofAddListener(elements.newScoreEvent, this, &ofApp::onPointsChanged);
@@ -43,25 +51,27 @@ void ofApp::update(){
     
     
     //init message
-    if(!isInitMessageShown){
-        if (ofGetElapsedTimeMillis() - tGameFinished > 4000) {
-            restartGame();
-            showInitMessage();
-            
-        }
+    if(gamestate == END
+       && ofGetElapsedTimeMillis() - lastGamestateChange > 4000){
+        restartGame();
+        showInitMessage();
+    }
+    //prepare for start
+    else if(gamestate == PLAYERS_PREPARING
+            && ofGetElapsedTimeMillis() - lastGamestateChange > 2000){
+        prepareForStart();
+    }
+    else if (gamestate == WAIT_FOR_START
+             && ofGetElapsedTimeMillis() - lastGamestateChange > 1500) {
+        startGame();
     }
     
-    if(!isGameRunning){
-        if (ofGetElapsedTimeMillis() - tGameFinished > 7000) {
-            startGame();
-        }
-    }
-    else {
+    else if (gamestate == RUNNING){
         playModeController.getCurrentRules()->update();
     }
     
     mouse.update();
-    ledControl.update();
+    elements.ledControl.update();
 }
 
 //--------------------------------------------------------------
@@ -149,10 +159,6 @@ void ofApp::restartGame(){
  * notify events to start fireworks ;)
  */
 void ofApp::endGame(int winner){
-    isGameRunning = false;
-    isInitMessageShown = false;
-    
-    tGameFinished = ofGetElapsedTimeMillis();
     
     string text = "Player ";
     text += ofToString(winner);
@@ -171,7 +177,7 @@ void ofApp::endGame(int winner){
     
     ofNotifyEvent(elements.newGameEvent, g);
     
-    
+    changeGameState(END);
 }
 
 void ofApp::showInitMessage(){
@@ -180,16 +186,16 @@ void ofApp::showInitMessage(){
                   true,
                   2000);
     ofNotifyEvent(gameOverEvent, t);
-    isInitMessageShown = true;
+    
+    changeGameState(PLAYERS_PREPARING);
 }
 
 /**
  * checks if paddles are ready to start game
  */
-void ofApp::startGame(){
-    
-    if(elements.paddleLeft.getPosition() < elements.paddleLeft.height  &&
-       elements.paddleRight.getPosition() < elements.paddleRight.height){
+void ofApp::prepareForStart(){
+    if(elements.paddleLeft.getPosition() < elements.paddleLeft.height*1.5  &&
+       elements.paddleRight.getPosition() < elements.paddleRight.height*1.5){
         
         TextElement t("GO!",
                       BIG,
@@ -197,10 +203,15 @@ void ofApp::startGame(){
                       1500);
         ofNotifyEvent(gameOverEvent, t);
         
-        GameEvent g = START;
-        ofNotifyEvent(elements.newGameEvent, g);
-        isGameRunning = true;
+        changeGameState(WAIT_FOR_START);
     }
+}
+
+void ofApp::startGame(){
+    
+    GameEvent g = START;
+    ofNotifyEvent(elements.newGameEvent, g);
+    changeGameState(RUNNING);
 }
 
 void ofApp::onPointsChanged(PlayerScoreEvent& e){
@@ -251,7 +262,7 @@ void ofApp::drawDebugInformation(){
     ofTranslate(0, ty);
     ofDrawBitmapString("Ball", 0, 0);
     ofTranslate(0, ty);
-    ofDrawBitmapString("Velocity: " + ofToString(abs(elements.balls[0]->velocity.x)), 0, 0);
+    ofDrawBitmapString("Velocity: " + ofToString(abs(elements.ball.velocity.x)), 0, 0);
     ofTranslate(0, ty);
     ofDrawBitmapString("MinVelocity: " + ofToString(abs(elements.minBallVelocity),1) + " -+ (i,o)", 0, 0);
     ofTranslate(0, ty);
@@ -260,10 +271,10 @@ void ofApp::drawDebugInformation(){
     ofTranslate(0, ty);
     ofTranslate(0, ty);
     ofDrawBitmapString("Paddle", 0, 0);
+    //ofTranslate(0, ty);
+    //  ofDrawBitmapString("Brightness: " + ofToString(ledControl.brightness) + " -+ (DOWN,UP)", 0, 0);
     ofTranslate(0, ty);
-    ofDrawBitmapString("Brightness: " + ofToString(ledControl.brightness) + " -+ (DOWN,UP)", 0, 0);
-    ofTranslate(0, ty);
-    ofDrawBitmapString("PixelPerLed: " + ofToString(ledControl.pixelPerLed) + " -+ (LEFT,RIGHT)", 0, 0);
+    ofDrawBitmapString("PixelPerLed: " + ofToString(elements.ledControl.pixelPerLed) + " -+ (LEFT,RIGHT)", 0, 0);
     ofTranslate(0, ty);
     ofDrawBitmapString("PaddleSize: " + ofToString(elements.paddleLeft.height) + " -+ (-,+)", 0, 0);
     ofTranslate(0, ty);
@@ -274,8 +285,14 @@ void ofApp::drawDebugInformation(){
     ofPopMatrix();
 }
 
+void ofApp::changeGameState(Gamestate gamestate_){
+    gamestate = gamestate_;
+    lastGamestateChange = ofGetElapsedTimeMillis();
+}
+
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    
     if(key == 'f') {
         ofToggleFullscreen();
     }
@@ -299,19 +316,16 @@ void ofApp::keyPressed(int key){
     if(key == 'p') {
         playModeController.shufflePlaymode();
     }
-    
-    
-    if(key == OF_KEY_UP) {
-        ledControl.setBrightness(ledControl.getBrightness()+1);
+    if(key == '1') {
+        playModeController.setRenderer("Movie");
+        // playModeController.setRules("Hecht");
     }
-    if(key == OF_KEY_DOWN) {
-        ledControl.setBrightness(ledControl.getBrightness()-1);
-    }
+    
     if(key == OF_KEY_RIGHT) {
-        ledControl.pixelPerLed++;
+        elements.ledControl.pixelPerLed++;
     }
     if(key == OF_KEY_LEFT) {
-        ledControl.pixelPerLed--;
+        elements.ledControl.pixelPerLed--;
     }
     if(key == '+') {
         elements.paddleLeft.height++;
@@ -349,8 +363,7 @@ void ofApp::initSettings(){
     settings.add(soundPlayer.isModerationMode);
     settings.add(elements.minBallVelocity);
     settings.add(elements.maxBallVelocity);
-    settings.add(ledControl.brightness);
-    settings.add(ledControl.pixelPerLed);
+    settings.add(elements.ledControl.pixelPerLed);
     settings.add(elements.paddleLeft.height);
     settings.add(elements.paddleRight.height);
     

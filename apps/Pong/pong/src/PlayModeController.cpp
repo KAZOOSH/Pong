@@ -1,10 +1,10 @@
 /*
  *  PlayModeController.cpp
- *  emptyExample
+ *  PONG
  *
- *  Created by Brian Eschrich on 19.08.16
- *  Copyright 2016 __MyCompanyName__. All rights reserved.
- *
+ *  KAZOOSH!  - open platform for interactive installations - http://kazoosh.com 
+ *    
+ *  created by Brian Eschrich - 2016
  */
 
 #include "PlayModeController.h"
@@ -16,25 +16,26 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     //init rules
     currentRules = 0;
     rules.push_back(new BasicRules(gameElements,"",-1));
-    //rules.push_back(new MultiBallRule(gameElements));
-    //rules.push_back(new DoubleSpeedRule(gameElements));
-    //rules.push_back(new PaddleSizeRule(gameElements, "Small Paddle", 0.75));
-    //rules.push_back(new PaddleSizeRule(gameElements, "Big Paddle", 1.5));
-    //rules.push_back(new BallSizeRule(gameElements, "Tiny Ball", 0.5));
-    //rules.push_back(new BallSizeRule(gameElements, "Huge Ball", 2.0));
-    //rules.push_back(new GravityRule(gameElements));
+    rules.push_back(new DoubleSpeedRule(gameElements));
+    rules.push_back(new PaddleSizeRule(gameElements, "Small Paddle", 0.5));
+    rules.push_back(new PaddleSizeRule(gameElements, "Big Paddle", 2.0));
+    rules.push_back(new BallSizeRule(gameElements, "Tiny Ball", 0.3));
+    rules.push_back(new BallSizeRule(gameElements, "Huge Ball", 3.0));
+    rules.push_back(new GravityRule(gameElements));
+    rules.push_back(new SwerveRule(gameElements));
 	rules.push_back(new TopSpinRule(gameElements));
-	//rules.push_back(new SwerveRule(gameElements));
     //->add other rules to vector here
     
     //init renderer
     currentRenderer = 0;
     renderer.push_back(new BasicRenderer(gameElements,"",-1));
-    //renderer.push_back(new AnaglyphRenderer(gameElements));
-    //renderer.push_back(new RoundBallRenderer(gameElements));
-    //renderer.push_back(new PsyRenderer(gameElements));
-    //renderer.push_back(new TennisRenderer(gameElements));
-    //renderer.push_back(new TrailRenderer(gameElements));
+    renderer.push_back(new AnaglyphRenderer(gameElements));
+    renderer.push_back(new RoundBallRenderer(gameElements));
+    renderer.push_back(new PsyRenderer(gameElements));
+    renderer.push_back(new TennisRenderer(gameElements));
+    renderer.push_back(new TrailRenderer(gameElements));
+    renderer.push_back(new GifBGRenderer(gameElements));
+
     //-> add other renderers to vector here
     
     //add playmodes -> add the playmode to renderer and rules
@@ -45,6 +46,10 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     PortalPlayMode* portalPlayMode = new PortalPlayMode(gameElements);
 	//rules.push_back(portalPlayMode);
 	//renderer.push_back(portalPlayMode);
+    
+    MultiBallMode* multiBallMode = new MultiBallMode(gameElements);
+    rules.push_back(multiBallMode);
+    renderer.push_back(multiBallMode);
     
     for (int i=0; i<rules.size(); ++i) {
         ofAddListener(rules[i]->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);
@@ -76,6 +81,8 @@ void PlayModeController::resetStartModes(){
 void PlayModeController::shufflePlaymode(){
     if(isNextSelectRules){
         //eliminate game mode
+        
+        
         for (int i=0; i<renderer.size(); ++i) {
             if(renderer[i]->getName() == rules[currentRules]->getName()){
                 setRenderer(0);
@@ -83,6 +90,7 @@ void PlayModeController::shufflePlaymode(){
         }
         
         setRules(ofRandom(1,rules.size()));
+        cout << rules[currentRules]->getName() << endl;
         //find corresponding renderer
         for (int i=0; i<renderer.size(); ++i) {
             if(renderer[i]->getName() == rules[currentRules]->getName()){
@@ -99,6 +107,8 @@ void PlayModeController::shufflePlaymode(){
         }
         
         setRenderer(ofRandom(1,renderer.size()));
+        cout << renderer[currentRenderer]->getName() << endl;
+        
         //find corresponding renderer
         for (int i=0; i<rules.size(); ++i) {
             if(rules[i]->getName() == renderer[currentRenderer]->getName()){

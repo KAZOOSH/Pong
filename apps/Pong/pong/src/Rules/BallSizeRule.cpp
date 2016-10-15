@@ -1,10 +1,10 @@
 /*
  *  BallSizeRule.cpp
- *  emptyExample
+ *  PONG
  *
- *  Created by Brian Eschrich on 22.08.16
- *  Copyright 2016 __MyCompanyName__. All rights reserved.
- *
+ *  KAZOOSH!  - open platform for interactive installations - http://kazoosh.com 
+ *    
+ *  created by Brian Eschrich - 2016
  */
 
 #include "BallSizeRule.h"
@@ -18,14 +18,12 @@ BallSizeRule::BallSizeRule(GameElements* gameElements, string name, float sizeMu
 //------------------------------------------------------------------
 void BallSizeRule::begin() {
     AbstractRules::begin();
-    for (auto& ball:gameElements->balls) {
-        ball->radius *= sizeMultiplicator;
-    }
+    gameElements->ball.radius *= sizeMultiplicator;
+    
 }
 
 void BallSizeRule::end(){
     AbstractRules::end();
-    for (auto& ball:gameElements->balls) {
-        ball->radius /= sizeMultiplicator;
-    }
+    gameElements->ball.radius /= sizeMultiplicator;
+    
 }

@@ -1,10 +1,10 @@
 /*
  *  RoundBallRenderer.cpp
- *  emptyExample
+ *  PONG
  *
- *  Created by Brian Eschrich on 22.08.16
- *  Copyright 2016 __MyCompanyName__. All rights reserved.
- *
+ *  KAZOOSH!  - open platform for interactive installations - http://kazoosh.com 
+ *    
+ *  created by Brian Eschrich - 2016
  */
 
 #include "RoundBallRenderer.h"
@@ -27,10 +27,8 @@ void RoundBallRenderer::render() {
     
     ofSetColor(200);
     
-    for(auto&& ball : gameElements->balls){
-        float r = ball->radius;
-        ofDrawCircle(ball->position.x, ball->position.y, r);
-    }
+    ofDrawCircle(gameElements->ball.position.x, gameElements->ball.position.y, gameElements->ball.radius);
+    
 	
 }
 

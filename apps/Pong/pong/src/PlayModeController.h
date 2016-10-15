@@ -1,10 +1,10 @@
 /*
  *  PlayModeController.h
- *  emptyExample
+ *  PONG
  *
- *  Created by Brian Eschrich on 19.08.16
- *  Copyright 2016 __MyCompanyName__. All rights reserved.
- *
+ *  KAZOOSH!  - open platform for interactive installations - http://kazoosh.com 
+ *    
+ *  created by Brian Eschrich - 2016
  */
 
 #ifndef _PlayModeController
@@ -16,7 +16,7 @@
 
 #include "AbstractRules.h"
 #include "BasicRules.h"
-#include "MultiBallRule.h"
+#include "MultiBallMode.h"
 #include "DoubleSpeedRule.h"
 #include "PaddleSizeRule.h"
 #include "BallSizeRule.h"
@@ -32,6 +32,7 @@
 #include "PsyRenderer.h"
 #include "TennisRenderer.h"
 #include "TrailRenderer.h"
+#include "GifBGRenderer.h"
 //-> include other renderers here
 
 #include "WallPlayMode.h"

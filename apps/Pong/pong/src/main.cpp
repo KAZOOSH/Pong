@@ -1,3 +1,13 @@
+/*
+ *  main.cpp
+ *  PONG
+ *
+ *  KAZOOSH!  - open platform for interactive installations - 2016
+ *  http://kazoosh.com
+ *
+ *  created by Brian Eschrich - 2016
+ */
+
 #include "ofMain.h"
 #include "ofApp.h"
 #include <stdint.h>

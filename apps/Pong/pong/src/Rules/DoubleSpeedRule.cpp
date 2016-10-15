@@ -1,10 +1,10 @@
 /*
  *  DoubleSpeedRule.cpp
- *  emptyExample
+ *  PONG
  *
- *  Created by Brian Eschrich on 22.08.16
- *  Copyright 2016 __MyCompanyName__. All rights reserved.
- *
+ *  KAZOOSH!  - open platform for interactive installations - http://kazoosh.com 
+ *    
+ *  created by Brian Eschrich - 2016
  */
 
 #include "DoubleSpeedRule.h"
@@ -16,17 +16,9 @@ DoubleSpeedRule::DoubleSpeedRule(GameElements* gameElements, string name):BasicR
 
 //------------------------------------------------------------------
 void DoubleSpeedRule::begin() {
-    AbstractRules::begin();
-    for (auto& ball:gameElements->balls) {
-        ball->velocity *= speedMultiplicator;
-    }
+    BasicRules::begin();
+    gameElements->ball.velocity *= speedMultiplicator;
     
     
 }
 
-void DoubleSpeedRule::end(){
-    AbstractRules::end();
-    for (auto& ball:gameElements->balls) {
-        ball->velocity /= speedMultiplicator;
-    }
-}

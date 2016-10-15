@@ -1,10 +1,10 @@
 /*
  *  Ball.cpp
- *  emptyExample
+ *  PONG
  *
- *  Created by Brian Eschrich on 06.07.16
- *  Copyright 2016 __MyCompanyName__. All rights reserved.
- *
+ *  KAZOOSH!  - open platform for interactive installations - http://kazoosh.com 
+ *    
+ *  created by Brian Eschrich - 2016
  */
 
 #include "Ball.h"
@@ -14,6 +14,13 @@ Ball::Ball(){
     velocity = ofVec2f(0,0);
     radius = 25;
 	spin = 0;
+    id = ofGetElapsedTimeMicros();
+}
+
+Ball::Ball(ofVec2f position_, ofVec2f velocity_){
+    position = position_;
+    velocity = velocity_;
+    radius = 25;
     id = ofGetElapsedTimeMicros();
 }
 

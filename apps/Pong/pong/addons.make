@@ -1,5 +1,6 @@
 ofxAnimatable
 ofxCameraAnaglyph
+ofxGifDecoder
 ofxIO
 ofxNetwork
 ofxOPC

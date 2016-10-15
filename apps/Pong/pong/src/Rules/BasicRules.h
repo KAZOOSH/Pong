@@ -1,10 +1,10 @@
 /*
  *  BasicRules.h
- *  emptyExample
+ *  PONG
  *
- *  Created by Brian Eschrich on 15.08.16
- *  Copyright 2016 __MyCompanyName__. All rights reserved.
- *
+ *  KAZOOSH!  - open platform for interactive installations - http://kazoosh.com 
+ *    
+ *  created by Brian Eschrich - 2016
  */
 
 #ifndef _BasicRules
@@ -14,17 +14,18 @@
 
 
 class BasicRules : public AbstractRules{
-	
-  public:
-	
-	BasicRules(GameElements* gameElements, string name = "", int durationMode = 20000);
-	
+    
+public:
+    
+    BasicRules(GameElements* gameElements, string name = "", int durationMode = 20000);
+    
     virtual void begin();
-	virtual void applyRules();
-	
+    virtual void applyRules();
+    
 protected:
     bool paddleHittest(Ball* ball);
     void wallHittest(Ball* ball);
+    void resetBallSpeed();
     
 };
 

@@ -1,10 +1,10 @@
 /*
  *  RoundBallRenderer.h
- *  emptyExample
+ *  PONG
  *
- *  Created by Brian Eschrich on 22.08.16
- *  Copyright 2016 __MyCompanyName__. All rights reserved.
- *
+ *  KAZOOSH!  - open platform for interactive installations - http://kazoosh.com 
+ *    
+ *  created by Brian Eschrich - 2016
  */
 
 #ifndef _RoundBallRenderer

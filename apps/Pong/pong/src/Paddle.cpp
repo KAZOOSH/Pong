@@ -1,10 +1,10 @@
 /*
  *  Paddle.cpp
- *  emptyExample
+ *  PONG
  *
- *  Created by Brian Eschrich on 06.07.16
- *  Copyright 2016 __MyCompanyName__. All rights reserved.
- *
+ *  KAZOOSH!  - open platform for interactive installations - http://kazoosh.com 
+ *    
+ *  created by Brian Eschrich - 2016
  */
 
 #include "Paddle.h"
