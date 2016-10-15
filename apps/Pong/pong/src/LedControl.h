@@ -23,8 +23,8 @@ public:
     void setup(GameElements* gameElements);
     void update();
     
-    u_int8_t getBrightness();
-    void setBrightness(u_int8_t brightness);
+    uint8_t getBrightness();
+    void setBrightness(uint8_t brightness);
     
     ofParameter<float> pixelPerLed;
     ofParameter<int> brightness;

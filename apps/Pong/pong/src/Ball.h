@@ -22,12 +22,14 @@ class Ball {
 	void draw();
     
     //void setVelocity(ofVec2f velocity);
-
+	void setSpin(int spin);
+	int  getSpin();
     
 //private:
     float radius;
     ofVec2f position;
     ofVec2f velocity;
+	int spin;
     long id;
     
 };

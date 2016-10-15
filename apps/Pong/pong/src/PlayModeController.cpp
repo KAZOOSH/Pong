@@ -16,34 +16,35 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     //init rules
     currentRules = 0;
     rules.push_back(new BasicRules(gameElements,"",-1));
-    rules.push_back(new MultiBallRule(gameElements));
-    rules.push_back(new DoubleSpeedRule(gameElements));
-    rules.push_back(new PaddleSizeRule(gameElements, "Small Paddle", 0.75));
-    rules.push_back(new PaddleSizeRule(gameElements, "Big Paddle", 1.5));
-    rules.push_back(new BallSizeRule(gameElements, "Tiny Ball", 0.5));
-    rules.push_back(new BallSizeRule(gameElements, "Huge Ball", 2.0));
-    rules.push_back(new GravityRule(gameElements));
-    rules.push_back(new SwerveRule(gameElements));
+    //rules.push_back(new MultiBallRule(gameElements));
+    //rules.push_back(new DoubleSpeedRule(gameElements));
+    //rules.push_back(new PaddleSizeRule(gameElements, "Small Paddle", 0.75));
+    //rules.push_back(new PaddleSizeRule(gameElements, "Big Paddle", 1.5));
+    //rules.push_back(new BallSizeRule(gameElements, "Tiny Ball", 0.5));
+    //rules.push_back(new BallSizeRule(gameElements, "Huge Ball", 2.0));
+    //rules.push_back(new GravityRule(gameElements));
+	rules.push_back(new TopSpinRule(gameElements));
+	//rules.push_back(new SwerveRule(gameElements));
     //->add other rules to vector here
     
     //init renderer
     currentRenderer = 0;
     renderer.push_back(new BasicRenderer(gameElements,"",-1));
-    renderer.push_back(new AnaglyphRenderer(gameElements));
-    renderer.push_back(new RoundBallRenderer(gameElements));
-    renderer.push_back(new PsyRenderer(gameElements));
-    renderer.push_back(new TennisRenderer(gameElements));
-    renderer.push_back(new TrailRenderer(gameElements));
+    //renderer.push_back(new AnaglyphRenderer(gameElements));
+    //renderer.push_back(new RoundBallRenderer(gameElements));
+    //renderer.push_back(new PsyRenderer(gameElements));
+    //renderer.push_back(new TennisRenderer(gameElements));
+    //renderer.push_back(new TrailRenderer(gameElements));
     //-> add other renderers to vector here
     
     //add playmodes -> add the playmode to renderer and rules
     WallPlayMode* wallPlayMode = new WallPlayMode(gameElements);
-    rules.push_back(wallPlayMode);
-    renderer.push_back(wallPlayMode);
+	//rules.push_back(wallPlayMode);
+	//renderer.push_back(wallPlayMode);
     
     PortalPlayMode* portalPlayMode = new PortalPlayMode(gameElements);
-    rules.push_back(portalPlayMode);
-    renderer.push_back(portalPlayMode);
+	//rules.push_back(portalPlayMode);
+	//renderer.push_back(portalPlayMode);
     
     for (int i=0; i<rules.size(); ++i) {
         ofAddListener(rules[i]->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);

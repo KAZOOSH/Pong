@@ -9,7 +9,6 @@
 
 #include "LedControl.h"
 
-
 //------------------------------------------------------------------
 void LedControl::setup(GameElements* gameElements_) {
     opcClient.setup("127.0.0.1", 7890);
@@ -43,11 +42,11 @@ void LedControl::update() {
     }
 }
 
-u_int8_t LedControl::getBrightness(){
+uint8_t LedControl::getBrightness(){
     return brightness;
 }
 
-void LedControl::setBrightness(u_int8_t brightness_){
+void LedControl::setBrightness(uint8_t brightness_){
     brightness = brightness_;
 }
 

@@ -26,7 +26,7 @@ class Paddle {
     void onPositionChanged(float& pos);
     
     int getPosition();
-    
+	int getSpeed();
     bool isHit(Ball& b);
     float getHitzone(Ball& b);
     
@@ -36,6 +36,7 @@ class Paddle {
     
 private:
     int x, y;
+	int speed;
     int wGame, hGame;
 	
 };
