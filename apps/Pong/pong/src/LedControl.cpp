@@ -124,7 +124,8 @@ void LedControl::calculateLeds(LedPanel& panel){
         if(i < pixelStart || i > pixelStart + panel.nActiveLeds)
             panel.colorBuffer[i] = ofColor(0);
         else
-            panel.colorBuffer[i] = panel.colors[i-pixelStart];
+			panel.colorBuffer[i] = ofColor(1);
+            //panel.colorBuffer[i] = panel.colors[i-pixelStart];
     }
     
 }

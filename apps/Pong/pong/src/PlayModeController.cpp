@@ -23,7 +23,7 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     rules.push_back(new BallSizeRule(gameElements, "Huge Ball", 3.0));
     rules.push_back(new GravityRule(gameElements));
     rules.push_back(new SwerveRule(gameElements));
-	rules.push_back(new TopSpinRule(gameElements));
+	rules.push_back(new TopSpinRule(gameElements, "Topspin"));
     //->add other rules to vector here
     
     //init renderer
@@ -34,7 +34,7 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     renderer.push_back(new PsyRenderer(gameElements));
     renderer.push_back(new TennisRenderer(gameElements));
     renderer.push_back(new TrailRenderer(gameElements));
-    renderer.push_back(new GifBGRenderer(gameElements));
+    //renderer.push_back(new GifBGRenderer(gameElements));
 
     //-> add other renderers to vector here
     
@@ -43,7 +43,7 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
 	//rules.push_back(wallPlayMode);
 	//renderer.push_back(wallPlayMode);
     
-    PortalPlayMode* portalPlayMode = new PortalPlayMode(gameElements);
+    // PortalPlayMode* portalPlayMode = new PortalPlayMode(gameElements);
 	//rules.push_back(portalPlayMode);
 	//renderer.push_back(portalPlayMode);
     
@@ -71,7 +71,7 @@ AbstractRules* PlayModeController::getCurrentRules(){
 
 void PlayModeController::resetStartModes(){
     setRenderer(0);
-    setRules(0);
+    setRules(8);
 }
 
 /**

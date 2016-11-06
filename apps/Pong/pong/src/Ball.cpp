@@ -14,6 +14,7 @@ Ball::Ball(){
     velocity = ofVec2f(0,0);
     radius = 25;
 	spin = 0;
+	initialSpin = 0;
     id = ofGetElapsedTimeMicros();
 }
 
@@ -31,7 +32,6 @@ void Ball::update() {
     
 }
 
-
 //------------------------------------------------------------------
 void Ball::draw() {
     ofSetColor(200);
@@ -41,8 +41,17 @@ void Ball::draw() {
 void Ball::setSpin(int spin_) {
 	spin = spin_;
 }
+
+void Ball::setInitialSpin(int spin_) {
+	initialSpin = spin_;
+}
+
 int  Ball::getSpin() {
 	return spin;
+}
+
+int  Ball::getinitialSpin() {
+	return initialSpin;
 }
 
 /*
