@@ -23,6 +23,7 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     rules.push_back(new BallSizeRule(gameElements, "Huge Ball", 3.0));
     rules.push_back(new GravityRule(gameElements));
     rules.push_back(new SwerveRule(gameElements));
+    rules.push_back(new HeliumRule(gameElements));
     //->add other rules to vector here
     
     //init renderer
@@ -34,6 +35,9 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     renderer.push_back(new TennisRenderer(gameElements));
     renderer.push_back(new TrailRenderer(gameElements));
     renderer.push_back(new GifBGRenderer(gameElements));
+    renderer.push_back(new InvisibleRenderer(gameElements));
+    renderer.push_back(new SpriteBallRenderer(gameElements));
+    renderer.push_back(new SpriteBallRenderer(gameElements,"Dalmatian","images/dalmatian.png",4,2));
     //-> add other renderers to vector here
     
     //add playmodes -> add the playmode to renderer and rules
@@ -41,9 +45,9 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     rules.push_back(wallPlayMode);
     renderer.push_back(wallPlayMode);
     
-    PortalPlayMode* portalPlayMode = new PortalPlayMode(gameElements);
-    rules.push_back(portalPlayMode);
-    renderer.push_back(portalPlayMode);
+    /* PortalPlayMode* portalPlayMode = new PortalPlayMode(gameElements);
+     rules.push_back(portalPlayMode);
+     renderer.push_back(portalPlayMode);*/
     
     MultiBallMode* multiBallMode = new MultiBallMode(gameElements);
     rules.push_back(multiBallMode);

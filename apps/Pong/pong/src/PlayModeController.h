@@ -22,6 +22,7 @@
 #include "BallSizeRule.h"
 #include "GravityRule.h"
 #include "SwerveRule.h"
+#include "HeliumRule.h"
 //-> include other rules here
 
 #include "AbstractRenderer.h"
@@ -32,6 +33,8 @@
 #include "TennisRenderer.h"
 #include "TrailRenderer.h"
 #include "GifBGRenderer.h"
+#include "InvisibleRenderer.h"
+#include "SpriteBallRenderer.h"
 //-> include other renderers here
 
 #include "WallPlayMode.h"

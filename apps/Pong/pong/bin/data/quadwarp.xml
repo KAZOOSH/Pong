@@ -6,9 +6,9 @@
 		<point x="0" y="1080"/>
 	</src>
 	<dst>
-		<point x="351" y="28"/>
-		<point x="1824" y="40"/>
-		<point x="1778" y="1079"/>
-		<point x="374" y="1077"/>
+		<point x="249" y="46"/>
+		<point x="1597" y="45"/>
+		<point x="1587" y="972"/>
+		<point x="240" y="1029"/>
 	</dst>
 </quadwarp>

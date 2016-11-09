@@ -317,8 +317,8 @@ void ofApp::keyPressed(int key){
         playModeController.shufflePlaymode();
     }
     if(key == '1') {
-        playModeController.setRenderer("Movie");
-        // playModeController.setRules("Hecht");
+        playModeController.setRenderer("Dalmatian");
+        //playModeController.setRules("Helium");
     }
     
     if(key == OF_KEY_RIGHT) {

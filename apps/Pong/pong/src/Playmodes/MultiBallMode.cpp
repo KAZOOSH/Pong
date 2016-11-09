@@ -19,7 +19,7 @@ void MultiBallMode::begin() {
     BasicRenderer::begin();
     BasicRules::begin();
     
-    int nBalls = ofRandom(2, 4);
+    int nBalls = ofRandom(1, 2);
     for (int i=0; i<nBalls; ++i) {
         float vStart = BasicRules::gameElements->minBallVelocity;
         if (ofRandom(-1, 1)<0) {

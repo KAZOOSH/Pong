@@ -1,8 +1,7 @@
 <group>
 	<isModerationMode>1</isModerationMode>
 	<minBallVelocity>18</minBallVelocity>
-	<maxBallVelocity>35</maxBallVelocity>
-	<color>128, 128, 128, 255</color>
+	<maxBallVelocity>36</maxBallVelocity>
 	<pixelPerLED>11</pixelPerLED>
-	<height>186</height>
+	<height>130</height>
 </group>
