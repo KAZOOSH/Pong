@@ -323,7 +323,7 @@ void ofApp::keyPressed(int key){
         playModeController.shufflePlaymode();
     }
     if(key == '1') {
-        //playModeController.setRenderer("Goat Mode");
+        playModeController.setRenderer("PSY");
         // playModeController.setRules("Topspin");
     }
     

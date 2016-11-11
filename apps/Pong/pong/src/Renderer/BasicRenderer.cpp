@@ -24,6 +24,7 @@ void BasicRenderer::begin(){
 //------------------------------------------------------------------
 void BasicRenderer::render() {
     ofBackground(0);
+    gameElements->ledControl.setColors(ofColor(255));
     
     drawScore();
     drawMidLine();

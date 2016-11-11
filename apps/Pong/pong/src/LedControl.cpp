@@ -86,7 +86,7 @@ void LedControl::setColors(ofColor color_, int panel){
         setColorsPaddle1(colors);
         
     }
-    else if (panel == 0 || panel == 2) {
+    if (panel == 0 || panel == 2) {
         for (int i=0; i<panel2.nActiveLeds; ++i) {
             colors.push_back(color_);
         }
@@ -123,9 +123,10 @@ void LedControl::calculateLeds(LedPanel& panel){
     for(int i=0; i<N_LEDS; ++i){
         if(i < pixelStart || i > pixelStart + panel.nActiveLeds)
             panel.colorBuffer[i] = ofColor(0);
-        else
-            //panel.colorBuffer[i] = panel.colors[i-pixelStart];
-            panel.colorBuffer[i] = ofColor(255); //panel.colors[i-pixelStart];
+        else{
+            panel.colorBuffer[i] = panel.colors[i-pixelStart];
+            //panel.colorBuffer[i] = ofColor(255);
+        }
     }
     
 }
@@ -136,7 +137,6 @@ void LedControl::setColors(vector<ofColor> inColors, vector<ofColor>& paddleColo
             paddleColors[i] = inColors[i];
         }
     }
-    
 }
 
 void LedControl::onPaddle1HeightChanged(int& height){
