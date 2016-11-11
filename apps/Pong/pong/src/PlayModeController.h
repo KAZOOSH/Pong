@@ -21,7 +21,6 @@
 #include "PaddleSizeRule.h"
 #include "BallSizeRule.h"
 #include "GravityRule.h"
-#include "TopSpinRule.h"
 #include "SwerveRule.h"
 #include "HeliumRule.h"
 //-> include other rules here

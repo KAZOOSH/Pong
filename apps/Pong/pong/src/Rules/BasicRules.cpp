@@ -33,13 +33,26 @@ void BasicRules::applyRules() {
         gameElements->ball.velocity.x = gameElements->maxBallVelocity;
     }
     
+    //add spin
+    Ball* ball = &BasicRules::gameElements->ball;
+    float factor = 0;
+    //move ball
+    if (ball->getinitialSpin() != 0) {
+        factor = sin(PI * ((double)ball->getSpin() / (double)ball->getinitialSpin()));
+    }
+    
+    ball->velocity.y += ofMap(ball->getSpin() * factor, -100, 100, -3, 3, true);
+    ball->setSpin(ball->getSpin()*0.97);
+    ball->update();
+    
     //move ball
     gameElements->ball.update();
     
     //check paddle and/or wall hit
-    if (!paddleHittest(&gameElements->ball)) {
-        wallHittest(&gameElements->ball);
+    if (!paddleHittest(ball)) {
+        wallHittest(ball);
     }
+    
 }
 
 
@@ -47,15 +60,27 @@ void BasicRules::applyRules() {
  * hittest between ball and paddle, update ball direction
  */
 bool BasicRules::paddleHittest(Ball* ball){
+    bool isHit = false;
+    int speed;
     if (gameElements->paddleLeft.isHit(*ball)) {
         ball->velocity.y = gameElements->paddleLeft.getHitzone(*ball);
-        ball->velocity.x *= -1;
         gameElements->notifyGameEvent(CONTACT_PADDLE1);
-        return true;
+        speed = gameElements->paddleLeft.getSpeed();
+        isHit = true;
     }else if (gameElements->paddleRight.isHit(*ball)) {
         ball->velocity.y = gameElements->paddleRight.getHitzone(*ball);
-        ball->velocity.x *= -1;
         gameElements->notifyGameEvent(CONTACT_PADDLE2);
+        speed = gameElements->paddleRight.getSpeed();
+        isHit = true;
+    }
+    
+    if (isHit){
+        ball->velocity.x *= -1;
+        ball->setSpin(speed);
+        ball->setInitialSpin(speed);
+        if (speed > 2 || speed < -2) {
+            ball->velocity.y = ofMap(speed, -100, 100, -5, 5, true);
+        }
         return true;
     }
     return false;
@@ -87,12 +112,14 @@ void BasicRules::wallHittest(Ball* ball){
     else if (ball->position.y - ball->radius <= 0) {
         ball->velocity.y *= -1;
         ball->position.y = ball->radius;
+        ball->velocity.x += ofMap(ball->getSpin(), -100, 100, -5, 5, true);
         gameElements->notifyGameEvent(CONTACT_WALL);
     }
     //wall bottom
     else if (ball->position.y + ball->radius >= gameElements->getHeigth()) {
         ball->velocity.y *= -1;
         ball->position.y = gameElements->getHeigth() - ball->radius;
+        ball->velocity.x += ofMap(ball->getSpin(), -100, 100, -5, 5, true);
         gameElements->notifyGameEvent(CONTACT_WALL);
     }
 }

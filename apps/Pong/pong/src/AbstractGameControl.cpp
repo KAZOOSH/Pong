@@ -15,8 +15,8 @@ AbstractGameControl::AbstractGameControl(GameElements* gameElements_, string nam
     gameElements = gameElements_;
     name = name_;
     type = type_;
-    //durationMode = 15000;
-	durationMode = -1;
+    durationMode = 15000;
+    //durationMode = -1;
 }
 
 

@@ -13,6 +13,12 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    //OSX : bundling data in app 
+#ifdef __APPLE__
+    ofSetDataPathRoot("../Resources/data/");
+#endif
+    
+    
     ofSeedRandom();
     ofSetFrameRate( 60 );
     
@@ -317,8 +323,8 @@ void ofApp::keyPressed(int key){
         playModeController.shufflePlaymode();
     }
     if(key == '1') {
-        playModeController.setRenderer("Goat Mode");
-        //playModeController.setRules("Helium");
+        //playModeController.setRenderer("Goat Mode");
+        // playModeController.setRules("Topspin");
     }
     
     if(key == OF_KEY_RIGHT) {
