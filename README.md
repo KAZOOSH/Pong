@@ -42,7 +42,9 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 #####Renderers
 - [x] Basic
 - [x] Anaglyph
-- [ ] Funny Background (or video)
+- [x] Animated Sprite Ball
+- [x] GifBackground
+- [x] Invisible Mode
 - [ ] Tron
 - [x] Round Ball
 - [ ] LSD Mode

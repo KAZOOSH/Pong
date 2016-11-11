@@ -74,7 +74,7 @@ private:
     TextRenderer* textRenderer;
     
     MouseControl mouse;
-    
+    //SerialControl mouse;
     
     
     ofParameterGroup settings;
