@@ -37,7 +37,7 @@ public:
     
     void setup(Paddle* paddle1,Paddle* paddle2, int heightField);
     void update();
-    
+   
     vector<ofColor> getColorsPaddle1();
     vector<ofColor> getColorsPaddle2();
     void setColors(ofColor color, int panel = 0);

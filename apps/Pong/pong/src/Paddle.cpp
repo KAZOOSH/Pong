@@ -43,11 +43,17 @@ void Paddle::addControl(AbstractControl& control){
 }
 
 void Paddle::onPositionChanged(float& pos){
+	speed = y;
     y = ofMap(pos ,0 ,1 ,height*.5 ,hGame - height*.5,true);
+	speed -= y;
 }
 
 int Paddle::getPosition(){
     return y;
+}
+
+int Paddle::getSpeed() {
+	return speed;
 }
 
 /**

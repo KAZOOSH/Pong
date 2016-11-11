@@ -9,7 +9,6 @@
 
 #include "LedControl.h"
 
-
 //------------------------------------------------------------------
 void LedControl::setup(Paddle* paddle1_,Paddle* paddle2_,int heightField_) {
     opcClient.setup("127.0.0.1", 7890);
@@ -57,6 +56,7 @@ void LedControl::update() {
     }
 }
 
+
 /*
  * returns an array of the active leds on panel1
  */
@@ -69,6 +69,7 @@ vector<ofColor> LedControl::getColorsPaddle1(){
  */
 vector<ofColor> LedControl::getColorsPaddle2(){
     return panel2.colors;
+
 }
 
 /*
@@ -123,7 +124,12 @@ void LedControl::calculateLeds(LedPanel& panel){
         if(i < pixelStart || i > pixelStart + panel.nActiveLeds)
             panel.colorBuffer[i] = ofColor(0);
         else
+<<<<<<< HEAD
+			panel.colorBuffer[i] = ofColor(1);
+            //panel.colorBuffer[i] = panel.colors[i-pixelStart];
+=======
             panel.colorBuffer[i] = ofColor(255); //panel.colors[i-pixelStart];
+>>>>>>> master
     }
     
 }

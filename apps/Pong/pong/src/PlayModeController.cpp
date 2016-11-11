@@ -23,7 +23,11 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     rules.push_back(new BallSizeRule(gameElements, "Huge Ball", 3.0));
     rules.push_back(new GravityRule(gameElements));
     rules.push_back(new SwerveRule(gameElements));
+<<<<<<< HEAD
+	rules.push_back(new TopSpinRule(gameElements, "Topspin"));
+=======
     rules.push_back(new HeliumRule(gameElements));
+>>>>>>> master
     //->add other rules to vector here
     
     //init renderer
@@ -34,20 +38,31 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     renderer.push_back(new PsyRenderer(gameElements));
     renderer.push_back(new TennisRenderer(gameElements));
     renderer.push_back(new TrailRenderer(gameElements));
+<<<<<<< HEAD
+    //renderer.push_back(new GifBGRenderer(gameElements));
+
+=======
     renderer.push_back(new GifBGRenderer(gameElements));
     renderer.push_back(new InvisibleRenderer(gameElements));
     renderer.push_back(new SpriteBallRenderer(gameElements));
     renderer.push_back(new SpriteBallRenderer(gameElements,"Dalmatian","images/dalmatian.png",4,2));
+>>>>>>> master
     //-> add other renderers to vector here
     
     //add playmodes -> add the playmode to renderer and rules
     WallPlayMode* wallPlayMode = new WallPlayMode(gameElements);
-    rules.push_back(wallPlayMode);
-    renderer.push_back(wallPlayMode);
+	//rules.push_back(wallPlayMode);
+	//renderer.push_back(wallPlayMode);
     
+<<<<<<< HEAD
+    // PortalPlayMode* portalPlayMode = new PortalPlayMode(gameElements);
+	//rules.push_back(portalPlayMode);
+	//renderer.push_back(portalPlayMode);
+=======
     /* PortalPlayMode* portalPlayMode = new PortalPlayMode(gameElements);
      rules.push_back(portalPlayMode);
      renderer.push_back(portalPlayMode);*/
+>>>>>>> master
     
     MultiBallMode* multiBallMode = new MultiBallMode(gameElements);
     rules.push_back(multiBallMode);
@@ -73,7 +88,7 @@ AbstractRules* PlayModeController::getCurrentRules(){
 
 void PlayModeController::resetStartModes(){
     setRenderer(0);
-    setRules(0);
+    setRules(8);
 }
 
 /**
