@@ -317,7 +317,7 @@ void ofApp::keyPressed(int key){
         playModeController.shufflePlaymode();
     }
     if(key == '1') {
-        playModeController.setRenderer("Dalmatian");
+        playModeController.setRenderer("Goat Mode");
         //playModeController.setRules("Helium");
     }
     
