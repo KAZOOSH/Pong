@@ -163,3 +163,6 @@ apps/myApps/*
 
 apps/Pong/pong/bin/pong_debug.exp
 apps/Pong/pong/icon.rc
+apps/Pong/pong/icon.rc
+apps/Pong/pong/bin/*.dll
+apps/Pong/pong/bin/*.exe

@@ -73,8 +73,8 @@ private:
     
     TextRenderer* textRenderer;
     
-    //MouseControl mouse;
-    SerialControl mouse;
+    MouseControl mouse;
+    //SerialControl mouse;
     
     
     ofParameterGroup settings;
