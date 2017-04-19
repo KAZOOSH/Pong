@@ -8,7 +8,20 @@ Clone the repository on your local system. Download the 0.93 version of openFram
 Use the project generator to create a project for your IDE (```[project folder]/projectGenerator```). Import the folder ```apps/Pong/pong```and create a project out of it. Open the project in your IDE and compile.
 
 ## Hotkeys
-
+|   |   |
+|---|---|
+| show/hide Debug Information  | d |
+| toggle PlayMode  | p  |
+| toggle Fullscreen  | f  |
+| save settings  |  s |
+| load settings  |  a |
+| toggle ModerationMode  | m  |
+| toggle Warper  | w  |
+| min ball velocity -+  | i,o  |
+| max ball velocity -+  | k,l  |
+| paddle: pixel per LED -+ | LEFT,RIGHT  |
+| paddle: paddle size -+  | -,+  |
+| paddle: toggle debug mode  | #  |
 
 ##Development
 =======
@@ -69,11 +82,5 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 |---|---|
 | white  |  GND |
 | brown  |  +5V |
-| yellow  |  SCL |
-| green  |  SDA |
-
-white     | GND  | 	       
-brown     | +5V	|	
-yellow    | SCL | A5 
-green 	| SDA | A4 	
-
+| yellow  |  SCL , A5 |
+| green  |  SDA , A4|	
