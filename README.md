@@ -69,3 +69,4 @@ white     | GND  |
 brown     | +5V	|	
 yellow    | SCL | A5 
 green 	| SDA | A4 	
+
