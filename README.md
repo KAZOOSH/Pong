@@ -65,6 +65,13 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 ### Setup
 
 #### Arduino Pins
+|   |   |
+|---|---|
+| white  |  GND |
+| brown  |  +5V |
+| yellow  |  SCL |
+| green  |  SDA |
+
 white     | GND  | 	       
 brown     | +5V	|	
 yellow    | SCL | A5 
