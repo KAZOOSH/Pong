@@ -7,6 +7,9 @@ Clone the repository on your local system. Download the 0.93 version of openFram
 
 Use the project generator to create a project for your IDE (```[project folder]/projectGenerator```). Import the folder ```apps/Pong/pong```and create a project out of it. Open the project in your IDE and compile.
 
+## Hotkeys
+
+
 ##Development
 
 ###Playmode Concept
@@ -53,3 +56,13 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 - [ ] Table Tennis
 - [x] Tennis
 - [ ] Pokeball
+
+## Hardware
+
+### Setup
+
+#### Arduino Pins
+| white     | GND   	|        
+| brown     | +5V		|
+| yellow    | SCL , A5 	|
+| green 	| SDA , A4 	|

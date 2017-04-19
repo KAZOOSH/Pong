@@ -121,7 +121,7 @@ void LedControl::calculateLeds(LedPanel& panel){
     int pixelStart = ofMap(p_absolut, 1,0, 0, N_LEDS - panel.nActiveLeds);
     
     for(int i=0; i<N_LEDS; ++i){
-        if(i < pixelStart || i > pixelStart + panel.nActiveLeds)
+        if(i < pixelStart || i >= pixelStart + panel.nActiveLeds)
             panel.colorBuffer[i] = ofColor(0);
         else{
             panel.colorBuffer[i] = panel.colors[i-pixelStart];

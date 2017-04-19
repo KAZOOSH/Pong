@@ -53,6 +53,9 @@ public:
     
     ofEvent<TextElement> gameOverEvent;
     
+	ofParameter<bool> isSerialControl;
+	ofParameter<string> portLeftPaddle, portRightPaddle;
+
     //listeners
     void onPointsChanged(PlayerScoreEvent& e);
     
@@ -73,8 +76,8 @@ private:
     
     TextRenderer* textRenderer;
     
-    //MouseControl mouse;
-    SerialControl mouse;
+	AbstractControl* mouse;
+    //SerialControl mouse;
     
     
     ofParameterGroup settings;

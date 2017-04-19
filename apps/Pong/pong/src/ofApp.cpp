@@ -24,10 +24,20 @@ void ofApp::setup(){
     
     //set game state
     changeGameState(END);
+
+	initSettings();
     
+	if (isSerialControl) {
+		mouse = new SerialControl(portLeftPaddle, portRightPaddle);
+	}
+	else {
+		mouse = new MouseControl();
+	}
+	
+
     //init controls
-    elements.paddleLeft.addControl(mouse);
-    elements.paddleRight.addControl(mouse);
+    elements.paddleLeft.addControl(*mouse);
+    elements.paddleRight.addControl(*mouse);
     
     
     //init warper
@@ -48,7 +58,7 @@ void ofApp::setup(){
     ofAddListener(elements.newGameEvent, &soundPlayer, &SoundPlayer::onGameEvent);
     ofAddListener(elements.newPlayModeEvent, &soundPlayer, &SoundPlayer::onPlaymodeChanged);
     
-    initSettings();
+    
 }
 
 //--------------------------------------------------------------
@@ -76,7 +86,7 @@ void ofApp::update(){
         playModeController.getCurrentRules()->update();
     }
     
-    mouse.update();
+    mouse->update();
     elements.ledControl.update();
 }
 
@@ -372,7 +382,9 @@ void ofApp::initSettings(){
     settings.add(elements.ledControl.pixelPerLed);
     settings.add(elements.paddleLeft.height);
     settings.add(elements.paddleRight.height);
-    
+	settings.add(isSerialControl.set("isSerialControl", false));
+	settings.add(portLeftPaddle.set("portLeftPaddle", "COM1"));
+	settings.add(portRightPaddle.set("portRightPaddle", "COM2"));
     loadSettings();
 }
 

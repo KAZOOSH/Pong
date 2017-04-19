@@ -20,7 +20,7 @@ class SerialControl : public AbstractControl{
     
 public:
     
-    SerialControl();
+    SerialControl(string portPaddleLeft, string portPaddleRight);
     void update();
     
 private:

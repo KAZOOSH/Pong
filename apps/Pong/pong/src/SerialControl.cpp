@@ -9,7 +9,7 @@
 
 #include "SerialControl.h"
 
-SerialControl::SerialControl():AbstractControl() {
+SerialControl::SerialControl(string portPaddleLeft, string portPaddleRight):AbstractControl() {
     
     std::vector<ofx::IO::SerialDeviceInfo> devicesInfo = ofx::IO::SerialDeviceUtils::listDevices();
     
@@ -23,26 +23,26 @@ SerialControl::SerialControl():AbstractControl() {
     if (!devicesInfo.empty())
     {
         // Connect to the first matching device.
-        bool success = paddleRight.setup(devicesInfo[1], 115200);
+        bool success = paddleRight.setup(portPaddleRight, 115200);
         
         if(success)
         {
-            ofLogNotice("ofApp::setup") << "Successfully setup paddle left " << devicesInfo[1];
+            ofLogNotice("ofApp::setup") << "Successfully setup paddle left " << portPaddleRight;
         }
         else
         {
-            ofLogNotice("ofApp::setup") << "Unable to setup paddle left " << devicesInfo[1];
+            ofLogNotice("ofApp::setup") << "Unable to setup paddle left " << portPaddleRight;
         }
         
-        success = paddleLeft.setup(devicesInfo[0], 115200);
+        success = paddleLeft.setup(portPaddleLeft, 115200);
         
         if(success)
         {
-            ofLogNotice("ofApp::setup") << "Successfully setup paddle right " << devicesInfo[0];
+            ofLogNotice("ofApp::setup") << "Successfully setup paddle right " << portPaddleLeft;
         }
         else
         {
-            ofLogNotice("ofApp::setup") << "Unable to setup paddle right " << devicesInfo[0];
+            ofLogNotice("ofApp::setup") << "Unable to setup paddle right " << portPaddleLeft;
         }
         
     }
