@@ -23,10 +23,7 @@ Use the project generator to create a project for your IDE (```[project folder]/
 | paddle: paddle size -+  | -,+  |
 | paddle: toggle debug mode  | #  |
 
-##Development
-=======
 ## Development
-
 
 ### Playmode Concept
 The Game is a container that executes a specific *Ruleset* that defines the physics of the game and a specific *Rendermode* that defines the visual aspects.
