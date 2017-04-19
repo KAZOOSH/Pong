@@ -1,5 +1,5 @@
 <group>
-	<isModerationMode>1</isModerationMode>
+	<isModerationMode>0</isModerationMode>
 	<minBallVelocity>10</minBallVelocity>
 	<maxBallVelocity>31</maxBallVelocity>
 	<pixelPerLED>11</pixelPerLED>

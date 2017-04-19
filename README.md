@@ -7,20 +7,24 @@ Clone the repository on your local system. Download the 0.93 version of openFram
 
 Use the project generator to create a project for your IDE (```[project folder]/projectGenerator```). Import the folder ```apps/Pong/pong```and create a project out of it. Open the project in your IDE and compile.
 
+<<<<<<< HEAD
 ## Hotkeys
 
 
 ##Development
+=======
+## Development
+>>>>>>> origin/master
 
-###Playmode Concept
+### Playmode Concept
 The Game is a container that executes a specific *Ruleset* that defines the physics of the game and a specific *Rendermode* that defines the visual aspects.
 
-####Create a Playmode
+#### Create a Playmode
 ..todo
 
-####Playmodes Todo
+#### Playmodes Todo
 
-#####Rules and Renderers
+##### Rules and Renderers
 - [ ] Deflector Beam
 - [ ] Blockout Mode
 - [x] Walls
@@ -29,7 +33,7 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 - [ ] Anaglyph Gravity
 - [x] Multiball 
 
-#####Rules
+##### Rules
 - [x] Basic 
 - [x] Double Speed 
 - [x] Gravity Mode
@@ -42,7 +46,7 @@ The Game is a container that executes a specific *Ruleset* that defines the phys
 - [ ] crazy panel, panel reload
 - [x] swerve ball
 
-#####Renderers
+##### Renderers
 - [x] Basic
 - [x] Anaglyph
 - [x] Animated Sprite Ball
