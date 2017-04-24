@@ -8,6 +8,10 @@
 // Based on techniques described by Paul Bourke 
 // http://paulbourke.net/stereographics/stereorender/
 
+#ifdef TARGET_OPENGLES
+typedef GLfloat GLdouble;
+#endif
+
 #pragma once
 #include "ofMain.h"
 
