@@ -83,21 +83,21 @@ void ofxCameraAnaglyph::endStereo() {
 void ofxCameraAnaglyph::calculateCamSettings( bool bLeft ) {
     
     settings.near_ = getNearClip();
-	if (settings.near_ < 0.1) settings.near_ = 0.1;
+    if (settings.near_ < 0.1) settings.near_ = 0.1;
     settings.far_ = getFarClip();
     
-	// Misc stuff
-	settings.ratio      = ofGetCurrentViewport().width / (double)ofGetCurrentViewport().height;
-	settings.radians    = DTOR * getFov() / 2;
-	settings.wd2        = settings.near_ * tan( settings.radians );
-	settings.ndfl       = settings.near_ / focalLength;
+    // Misc stuff
+    settings.ratio      = ofGetCurrentViewport().width / (double)ofGetCurrentViewport().height;
+    settings.radians    = DTOR * getFov() / 2;
+    settings.wd2        = settings.near_ * tan( settings.radians );
+    settings.ndfl       = settings.near_ / focalLength;
     
     if( bLeft ) {
         settings.left  = - settings.ratio * settings.wd2 + 0.5 * eyeSeparation * settings.ndfl;
         settings.right =   settings.ratio * settings.wd2 + 0.5 * eyeSeparation * settings.ndfl;
     } else {
         settings.left  = - settings.ratio * settings.wd2 - 0.5 * eyeSeparation * settings.ndfl;
-		settings.right =   settings.ratio * settings.wd2 - 0.5 * eyeSeparation * settings.ndfl;
+        settings.right =   settings.ratio * settings.wd2 - 0.5 * eyeSeparation * settings.ndfl;
     }
     
     settings.top    = settings.wd2;
@@ -107,12 +107,15 @@ void ofxCameraAnaglyph::calculateCamSettings( bool bLeft ) {
 //--------------------------------------------------------------
 void ofxCameraAnaglyph::loadMatrices( bool bLeft ) {
     
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glFrustum( settings.left, settings.right, settings.bottom, settings.top, settings.near_, settings.far_);
-	
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+#ifndef TARGET_OPENGLES
+    glFrustum( settings.left, settings.right, settings.bottom, settings.top, settings.near_, settings.far_);
+#endif
+    
+    
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
     
     ofVec3f r = getSideDir().getNormalized() * (eyeSeparation/3.f);
     
