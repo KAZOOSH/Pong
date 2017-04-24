@@ -8,14 +8,13 @@
 // Based on techniques described by Paul Bourke 
 // http://paulbourke.net/stereographics/stereorender/
 
-#ifdef TARGET_OPENGLES
-#define GLdouble GLfloat;
-#endif
-
 #pragma once
 #include "ofMain.h"
 
 class ofxCameraAnaglyph : public ofCamera {
+#ifdef TARGET_OPENGLES
+    typedef GLfloat GLdouble;
+#endif
 public:
     
     ofxCameraAnaglyph();
