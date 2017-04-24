@@ -11,7 +11,12 @@
 
 
 TrailRenderer::TrailRenderer(GameElements* gameElements, string name):BasicRenderer(gameElements, name) {
+#ifdef TARGET_OPENGLES
+    fbo.allocate(gameElements->getWidth(), gameElements->getHeigth());
+#else
     fbo.allocate(gameElements->getWidth(), gameElements->getHeigth(), GL_RGBA32F_ARB);
+#endif
+    
 }
 
 void TrailRenderer::begin(){
