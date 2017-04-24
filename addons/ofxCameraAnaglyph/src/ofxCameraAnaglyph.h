@@ -9,7 +9,7 @@
 // http://paulbourke.net/stereographics/stereorender/
 
 #ifdef TARGET_OPENGLES
-typedef GLfloat GLdouble;
+typedef GLdouble GLfloat;
 #endif
 
 #pragma once
