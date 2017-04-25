@@ -7,6 +7,14 @@
 
 #include "ofxCameraAnaglyph.h"
 
+
+#ifdef TARGET_OPENGLES
+#define GLdouble     GLfloat
+#define GL_CLAMP     GL_CLAMP_TO_EDGE
+#define glClearDepth glClearDepthf
+#define glOrtho      glOrthof
+#define glFrustum    glFrustumf
+#endif
 //--------------------------------------------------------------
 ofxCameraAnaglyph::ofxCameraAnaglyph() {
     enableStereo();
@@ -109,11 +117,7 @@ void ofxCameraAnaglyph::loadMatrices( bool bLeft ) {
     
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-#ifndef TARGET_OPENGLES
     glFrustum( settings.left, settings.right, settings.bottom, settings.top, settings.near_, settings.far_);
-#endif
-    
-    
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     
