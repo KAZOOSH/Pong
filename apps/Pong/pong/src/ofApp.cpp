@@ -24,17 +24,17 @@ void ofApp::setup(){
     
     //set game state
     changeGameState(END);
-
-	initSettings();
     
-	if (isSerialControl) {
-		mouse = new SerialControl(portLeftPaddle, portRightPaddle);
-	}
-	else {
-		mouse = new MouseControl();
-	}
-	
-
+    initSettings();
+    
+    if (isSerialControl) {
+        mouse = new SerialControl(portLeftPaddle, portRightPaddle);
+    }
+    else {
+        mouse = new MouseControl();
+    }
+    
+    
     //init controls
     elements.paddleLeft.addControl(*mouse);
     elements.paddleRight.addControl(*mouse);
@@ -94,14 +94,14 @@ void ofApp::update(){
 void ofApp::draw(){
     //render game view in fbo
     ofBackground(0);
-    gameFbo.begin();
+    // gameFbo.begin();
     playModeController.getCurrentRenderer()->draw();
     textRenderer->render();
     
     if (showDebugInfos) {
         drawDebugInformation();
     }
-    gameFbo.end();
+    // gameFbo.end();
     
     //warp fbo on screen
     drawWarpedImage();
@@ -382,9 +382,9 @@ void ofApp::initSettings(){
     settings.add(elements.ledControl.pixelPerLed);
     settings.add(elements.paddleLeft.height);
     settings.add(elements.paddleRight.height);
-	settings.add(isSerialControl.set("isSerialControl", false));
-	settings.add(portLeftPaddle.set("portLeftPaddle", "COM1"));
-	settings.add(portRightPaddle.set("portRightPaddle", "COM2"));
+    settings.add(isSerialControl.set("isSerialControl", false));
+    settings.add(portLeftPaddle.set("portLeftPaddle", "COM1"));
+    settings.add(portRightPaddle.set("portRightPaddle", "COM2"));
     loadSettings();
 }
 
