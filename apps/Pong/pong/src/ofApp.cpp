@@ -41,7 +41,7 @@ void ofApp::setup(){
     
     
     //init warper
-    initWarper();
+    // initWarper();
     
     
     textRenderer = new TextRenderer(&elements);
