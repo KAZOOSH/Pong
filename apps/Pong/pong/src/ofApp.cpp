@@ -136,30 +136,30 @@ void ofApp::initWarper(){
 void ofApp::drawWarpedImage(){
     //======================== get our quad warp matrix.
     
-    ofMatrix4x4 mat = warper.getMatrix();
-    
-    //======================== use the matrix to transform our fbo.
-    
-    ofPushMatrix();
-    ofMultMatrix(mat);
+    /*ofMatrix4x4 mat = warper.getMatrix();
+     
+     //======================== use the matrix to transform our fbo.
+     
+     ofPushMatrix();
+     ofMultMatrix(mat);*/
     gameFbo.draw(0, 0);
-    ofPopMatrix();
-    
-    //======================== draw quad warp ui.
-    
-    ofSetColor(ofColor::magenta);
-    warper.drawQuadOutline();
-    
-    ofSetColor(ofColor::yellow);
-    warper.drawCorners();
-    
-    ofSetColor(ofColor::magenta);
-    warper.drawHighlightedCorner();
-    
-    ofSetColor(ofColor::red);
-    warper.drawSelectedCorner();
-    
-    ofSetColor(ofColor::white);
+    /*ofPopMatrix();
+     
+     //======================== draw quad warp ui.
+     
+     ofSetColor(ofColor::magenta);
+     warper.drawQuadOutline();
+     
+     ofSetColor(ofColor::yellow);
+     warper.drawCorners();
+     
+     ofSetColor(ofColor::magenta);
+     warper.drawHighlightedCorner();
+     
+     ofSetColor(ofColor::red);
+     warper.drawSelectedCorner();
+     
+     ofSetColor(ofColor::white);*/
 }
 
 /**
