@@ -29,15 +29,15 @@ void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRend
     //init renderer
     currentRenderer = 0;
     renderer.push_back(new BasicRenderer(gameElements,"",-1));
-    renderer.push_back(new AnaglyphRenderer(gameElements));
-    renderer.push_back(new RoundBallRenderer(gameElements));
-    renderer.push_back(new PsyRenderer(gameElements));
-    renderer.push_back(new TennisRenderer(gameElements));
-    renderer.push_back(new TrailRenderer(gameElements));
-    renderer.push_back(new GifBGRenderer(gameElements));
-    renderer.push_back(new InvisibleRenderer(gameElements));
-    renderer.push_back(new SpriteBallRenderer(gameElements));
-    renderer.push_back(new SpriteBallRenderer(gameElements,"Dalmatian","images/dalmatian.png",4,2));
+    /* renderer.push_back(new AnaglyphRenderer(gameElements));
+     renderer.push_back(new RoundBallRenderer(gameElements));
+     renderer.push_back(new PsyRenderer(gameElements));
+     renderer.push_back(new TennisRenderer(gameElements));
+     renderer.push_back(new TrailRenderer(gameElements));
+     renderer.push_back(new GifBGRenderer(gameElements));
+     renderer.push_back(new InvisibleRenderer(gameElements));
+     renderer.push_back(new SpriteBallRenderer(gameElements));
+     renderer.push_back(new SpriteBallRenderer(gameElements,"Dalmatian","images/dalmatian.png",4,2));*/
     //-> add other renderers to vector here
     
     //add playmodes -> add the playmode to renderer and rules
