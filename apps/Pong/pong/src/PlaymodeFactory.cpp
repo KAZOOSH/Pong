@@ -41,7 +41,7 @@ AbstractGameControl* PlaymodeFactory::make_playMode(string playModeName, GameEle
     else if (playModeName == "Round Ball") {
         c = new RoundBallRenderer(gameElements);
     }
-    else if (playModeName == "Psy") {
+    else if (playModeName == "PSY") {
         c = new PsyRenderer(gameElements);
     }
     else if (playModeName == "Tennis") {
@@ -53,7 +53,7 @@ AbstractGameControl* PlaymodeFactory::make_playMode(string playModeName, GameEle
     else if (playModeName == "Movie") {
         c = new GifBGRenderer(gameElements);
     }
-    else if (playModeName == "Invisible") {
+    else if (playModeName == "Invisible Ball") {
         c = new InvisibleRenderer(gameElements);
     }
     else if (playModeName == "Goat Mode") {
@@ -69,7 +69,7 @@ AbstractGameControl* PlaymodeFactory::make_playMode(string playModeName, GameEle
     else if (playModeName == "Portals") {
         c = new PortalPlayMode(gameElements);
     }
-    else if (playModeName == "MultiBall") {
+    else if (playModeName == "Multiball") {
         c = new MultiBallMode(gameElements);
     }
     

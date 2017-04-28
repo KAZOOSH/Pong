@@ -18,11 +18,15 @@ class BasicPlaymode : public AbstractGameControl{
 public:
     
     BasicPlaymode(GameElements* gameElements, string name = "", bool isRules = true, bool isRenderer = true, int durationMode = 20000);
-    void begin();
+    virtual void begin();
     virtual void render();
     virtual void applyRules();
     
+    
+    
 protected:
+    void beginRender();
+    void beginRules();
     
     void drawScore();
     void drawMidLine();

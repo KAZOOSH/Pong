@@ -19,11 +19,10 @@ BasicPlaymode::BasicPlaymode(GameElements* gameElements, string name, bool isRul
 void BasicPlaymode::begin(){
     AbstractGameControl::begin();
     if (isRenderer()) {
-        gameElements->ledControl.setColors(ofColor(128));
+        beginRender();
     }
     if(isRules()){
-        //set minimum ball velocity
-        gameElements->ball.velocity.x > 0 ? gameElements->ball.velocity.x = gameElements->minBallVelocity : gameElements->ball.velocity.x = -gameElements->minBallVelocity;
+        beginRules();
     }
 }
 
@@ -171,4 +170,13 @@ void BasicPlaymode::resetBallSpeed(){
         mult = -1;
     }
     gameElements->ball.velocity = ofVec2f(mult*gameElements->minBallVelocity,0);
+}
+
+void BasicPlaymode::beginRender(){
+    gameElements->ledControl.setColors(ofColor(128));
+}
+
+void BasicPlaymode::beginRules(){
+    //set minimum ball velocity
+    gameElements->ball.velocity.x > 0 ? gameElements->ball.velocity.x = gameElements->minBallVelocity : gameElements->ball.velocity.x = -gameElements->minBallVelocity;
 }

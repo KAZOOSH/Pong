@@ -51,7 +51,7 @@ void PlayModeController::resetStartModes(){
  */
 void PlayModeController::shufflePlaymode(){
     
-    string newModeName = shufflePlaymodeSet[ofRandom(shufflePlaymodeSet.size())];
+    string newModeName = shufflePlaymodeSet[0];
     
     setPlaymode(newModeName);
     
@@ -61,6 +61,7 @@ void PlayModeController::shufflePlaymode(){
         for (auto& p:playmodes) {
             shufflePlaymodeSet.push_back(p.first);
         }
+        random_shuffle(shufflePlaymodeSet.begin(), shufflePlaymodeSet.end());
     }
 }
 
@@ -83,16 +84,22 @@ void PlayModeController::onEndMode(AbstractGameControl& c){
 
 void PlayModeController::setPlaymode(string name){
     AbstractGameControl* nMode = playmodes[name];
-    if (nMode->isRules() && nMode->isRenderer()) {
-        setPlaymode(nMode);
+    
+    if(nMode == nullptr){
+        ofLogError("PlayModeController", name + " mode das not exist");
     }
-    else if (nMode->isRules()) {
-        //setRules(basicRules);
-        setRules(nMode);
-    }
-    else if (nMode->isRenderer()) {
-        //setRenderer(basicRenderer);
-        setRenderer(nMode);
+    else{
+        if (nMode->isRules() && nMode->isRenderer()) {
+            setPlaymode(nMode);
+        }
+        else if (nMode->isRules()) {
+            //setRules(basicRules);
+            setRules(nMode);
+        }
+        else if (nMode->isRenderer()) {
+            //setRenderer(basicRenderer);
+            setRenderer(nMode);
+        }
     }
 }
 
@@ -119,16 +126,26 @@ void PlayModeController::addPlaymode(string name){
     }
 }
 
+//todo renderer restart fix
+
 void PlayModeController::setRenderer(AbstractGameControl* r){
-    if(currentRenderer != nullptr) currentRenderer->end();
+    
+    if(currentRenderer != nullptr){
+        currentRenderer->end();
+    }
     currentRenderer = r;
     currentRenderer->begin();
+    
 }
 
 void PlayModeController::setRules(AbstractGameControl* r){
-    if (currentRules != nullptr) currentRules->end();
+    bool isResetRenderer = false;
+    if (currentRules != nullptr){
+        currentRules->end();
+    }
     currentRules = r;
     currentRules->begin();
+    
 }
 
 void PlayModeController::setPlaymode(AbstractGameControl* r){

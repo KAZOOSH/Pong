@@ -10,15 +10,15 @@
 	<!--> renderers <!-->
 	<playmode>Anaglyph</playmode>
 	<playmode>Round Ball</playmode>
-	<playmode>Psy</playmode>
+	<playmode>PSY</playmode>
 	<playmode>Tennis</playmode>
 	<playmode>Trails</playmode>
 	<playmode>Movie</playmode>
-	<playmode>Invisible</playmode>
+	<playmode>Invisible Ball</playmode>
 	<playmode>Goat Mode</playmode>
 	<playmode>Dalmatian</playmode>
 	<!--> playmodes <!-->
 	<playmode>Walls</playmode>
 	<playmode>Portals</playmode>
-	<playmode>MultiBall</playmode>
+	<playmode>Multiball</playmode>
 </playmodes>
