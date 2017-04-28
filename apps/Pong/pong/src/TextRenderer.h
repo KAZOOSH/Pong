@@ -10,15 +10,16 @@
 #ifndef _TextRenderer
 #define _TextRenderer
 
-#include "AbstractRenderer.h"
+
+#include "GameElements.h"
 #include "TextElement.h"
 #include "ofxAnimatableFloat.h"
 
-class TextRenderer : public AbstractRenderer{
+class TextRenderer{
     
 public:
     
-    TextRenderer(GameElements* gameElements, string name = "TextRenderer");
+    TextRenderer(GameElements* gameElements);
     virtual void render();
     
     void onNewTextElement(TextElement& t);
@@ -31,6 +32,8 @@ protected:
     vector<TextElement> texts;
     
     ofxAnimatableFloat ani_ease_bounce;
+    
+    GameElements* gameElements;
 };
 
 #endif

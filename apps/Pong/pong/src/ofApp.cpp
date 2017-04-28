@@ -24,17 +24,17 @@ void ofApp::setup(){
     
     //set game state
     changeGameState(END);
-
-	initSettings();
     
-	if (isSerialControl) {
-		mouse = new SerialControl(portLeftPaddle, portRightPaddle);
-	}
-	else {
-		mouse = new MouseControl();
-	}
-	
-
+    initSettings();
+    
+    if (isSerialControl) {
+        mouse = new SerialControl(portLeftPaddle, portRightPaddle);
+    }
+    else {
+        mouse = new MouseControl();
+    }
+    
+    
     //init controls
     elements.paddleLeft.addControl(*mouse);
     elements.paddleRight.addControl(*mouse);
@@ -333,7 +333,7 @@ void ofApp::keyPressed(int key){
         playModeController.shufflePlaymode();
     }
     if(key == '1') {
-        playModeController.setRenderer("PSY");
+        //playModeController.setRenderer("PSY");
         // playModeController.setRules("Topspin");
     }
     
@@ -382,9 +382,9 @@ void ofApp::initSettings(){
     settings.add(elements.ledControl.pixelPerLed);
     settings.add(elements.paddleLeft.height);
     settings.add(elements.paddleRight.height);
-	settings.add(isSerialControl.set("isSerialControl", false));
-	settings.add(portLeftPaddle.set("portLeftPaddle", "COM1"));
-	settings.add(portRightPaddle.set("portRightPaddle", "COM2"));
+    settings.add(isSerialControl.set("isSerialControl", false));
+    settings.add(portLeftPaddle.set("portLeftPaddle", "COM1"));
+    settings.add(portRightPaddle.set("portRightPaddle", "COM2"));
     loadSettings();
 }
 

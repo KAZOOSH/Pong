@@ -11,7 +11,7 @@
 
 
 //------------------------------------------------------------------
-AnaglyphRenderer::AnaglyphRenderer(GameElements* gameElements, string name):BasicRenderer(gameElements, name) {
+AnaglyphRenderer::AnaglyphRenderer(GameElements* gameElements, string name):BasicPlaymode(gameElements, name,false,true) {
     
     
     cam.setPosition( 0, 0, 10 );
@@ -24,7 +24,6 @@ AnaglyphRenderer::AnaglyphRenderer(GameElements* gameElements, string name):Basi
 
 //------------------------------------------------------------------
 void AnaglyphRenderer::render() {
-    
     ofBackground(0);
     
     drawScore();

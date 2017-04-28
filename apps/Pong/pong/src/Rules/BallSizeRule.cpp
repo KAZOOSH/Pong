@@ -10,20 +10,20 @@
 #include "BallSizeRule.h"
 
 
-BallSizeRule::BallSizeRule(GameElements* gameElements, string name, float sizeMultiplicator_):BasicRules(gameElements, name){
+BallSizeRule::BallSizeRule(GameElements* gameElements, string name, float sizeMultiplicator_):BasicPlaymode(gameElements, name,true,false){
     sizeMultiplicator = sizeMultiplicator_;
 }
 
 
 //------------------------------------------------------------------
 void BallSizeRule::begin() {
-    AbstractRules::begin();
+    AbstractGameControl::begin();
     gameElements->ball.radius *= sizeMultiplicator;
     
 }
 
 void BallSizeRule::end(){
-    AbstractRules::end();
+    AbstractGameControl::end();
     gameElements->ball.radius /= sizeMultiplicator;
     
 }

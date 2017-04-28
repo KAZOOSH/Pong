@@ -10,12 +10,12 @@
 #ifndef _GifBGRenderer
 #define _GifBGRenderer
 
-#include "BasicRenderer.h"
+#include "BasicPlaymode.h"
 
 #include "ofxGifDecoder.h"
 #include "ofxGifFile.h"
 
-class GifBGRenderer : public BasicRenderer{
+class GifBGRenderer : public BasicPlaymode{
     
 public:
     

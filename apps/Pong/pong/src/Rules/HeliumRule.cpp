@@ -12,19 +12,19 @@
 
 
 
-HeliumRule::HeliumRule(GameElements * gameElements, string name):BasicRules(gameElements,name)
+HeliumRule::HeliumRule(GameElements * gameElements, string name):BasicPlaymode(gameElements,name,true,false)
 {
     //runTime = -1;
 }
 
 void HeliumRule::begin()
 {
-    BasicRules::begin();
+    BasicPlaymode::begin();
 }
 
 void HeliumRule::end()
 {
-    BasicRules::end();
+    BasicPlaymode::end();
 }
 
 void HeliumRule::applyRules()

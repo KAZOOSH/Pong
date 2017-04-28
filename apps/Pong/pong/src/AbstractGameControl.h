@@ -16,22 +16,33 @@
 
 class AbstractGameControl {
 public:
-    AbstractGameControl(GameElements* gameElements, string name, string type);
+    AbstractGameControl(GameElements* gameElements, string name, bool isRules, bool isRenderer);
     virtual void begin();
     virtual void end();
     string getName();
     
+    void draw();
+    void update();
+    
+    bool isRenderer(){return _isRenderer;};
+    bool isRules(){return _isRules;};
+    
+    virtual void applyRules(){ofLogNotice("AbstractGameControl", "you need to implement rules if you want to use them");};
+    virtual void render() {ofLogNotice("AbstractGameControl", "you need to implement a render function if you want to use it");};
+    
     ofEvent<TextElement> newTextEvent;
-    ofEvent<string> durationExtendedEvent;
+    ofEvent<AbstractGameControl> durationExtendedEvent;
     
 protected:
     GameElements* gameElements;
     long startTime;
     string name;
-    
     int durationMode;
-    
     string type;
+    
+private:
+    bool _isRenderer;
+    bool _isRules;
     
 };
 

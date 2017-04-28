@@ -10,11 +10,11 @@
 #ifndef _AnaglyphRenderer
 #define _AnaglyphRenderer
 
-#include "BasicRenderer.h"
+#include "BasicPlaymode.h"
 #include "ofxCameraAnaglyph.h"
 
 
-class AnaglyphRenderer : public BasicRenderer{
+class AnaglyphRenderer : public BasicPlaymode{
     
 public:
     

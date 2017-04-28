@@ -11,14 +11,31 @@
 
 
 //------------------------------------------------------------------
-AbstractGameControl::AbstractGameControl(GameElements* gameElements_, string name_, string type_) {
+AbstractGameControl::AbstractGameControl(GameElements* gameElements_, string name_, bool isRules_, bool isRenderer_) {
     gameElements = gameElements_;
     name = name_;
-    type = type_;
     durationMode = 15000;
-    //durationMode = -1;
+    _isRules = isRules_;
+    _isRenderer = isRenderer_;
 }
 
+void AbstractGameControl::update(){
+    if (durationMode != -1) {
+        if (startTime + durationMode < ofGetElapsedTimeMillis()) {
+            ofNotifyEvent(durationExtendedEvent, *this);
+        }
+    }
+    applyRules();
+}
+
+void AbstractGameControl::draw(){
+    if (durationMode != -1) {
+        if (startTime + durationMode < ofGetElapsedTimeMillis()) {
+            ofNotifyEvent(durationExtendedEvent, *this);
+        }
+    }
+    render();
+}
 
 void AbstractGameControl::begin(){
     startTime = ofGetElapsedTimeMillis();

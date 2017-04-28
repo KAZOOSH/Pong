@@ -10,14 +10,13 @@
 
 #include "TennisRenderer.h"
 
-TennisRenderer::TennisRenderer(GameElements * gameElements, string name) :BasicRenderer(gameElements, name) {
+TennisRenderer::TennisRenderer(GameElements * gameElements, string name) :BasicPlaymode(gameElements, name,false,true) {
     court.load("images/court.jpg");
     tennis_ball.load("images/tennis_ball.png");
 }
 
 void TennisRenderer::begin()
 {
-    BasicRenderer::begin();
     PlayModeEvent e = PlayModeEvent(name,true,"tennis");
     ofNotifyEvent(gameElements->newPlayModeEvent, e);
 }

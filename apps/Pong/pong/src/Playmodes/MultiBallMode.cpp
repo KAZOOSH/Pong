@@ -9,24 +9,23 @@
 
 #include "MultiBallMode.h"
 
-MultiBallMode::MultiBallMode(GameElements* gameElements, string name):BasicRules(gameElements, name), BasicRenderer(gameElements, name){
+MultiBallMode::MultiBallMode(GameElements* gameElements, string name):BasicPlaymode(gameElements, name){
     
 }
 
 
 //------------------------------------------------------------------
 void MultiBallMode::begin() {
-    BasicRenderer::begin();
-    BasicRules::begin();
+    BasicPlaymode::begin();
     
     int nBalls = ofRandom(1, 2);
     for (int i=0; i<nBalls; ++i) {
-        float vStart = BasicRules::gameElements->minBallVelocity;
+        float vStart = BasicPlaymode::gameElements->minBallVelocity;
         if (ofRandom(-1, 1)<0) {
             vStart *= -1;
         }
         balls.push_back(new Ball(ofVec2f(
-                                         BasicRules::gameElements->getWidth()/2,ofRandom(50, BasicRules::gameElements->getHeigth()-50)),
+                                         BasicPlaymode::gameElements->getWidth()/2,ofRandom(50, BasicPlaymode::gameElements->getHeigth()-50)),
                                  ofVec2f(ofRandom(vStart*0.8, vStart*1.2),0)));
     }
     
@@ -38,16 +37,16 @@ void MultiBallMode::end(){
 }
 
 void MultiBallMode::applyRules() {
-    BasicRules::applyRules();
+    BasicPlaymode::applyRules();
     
-    float maxV = BasicRules::gameElements->maxBallVelocity - BasicRules::gameElements->minBallVelocity;
+    float maxV = BasicPlaymode::gameElements->maxBallVelocity - BasicPlaymode::gameElements->minBallVelocity;
     float velocityIncreaseAmt = maxV/20/ofGetFrameRate();
     
     for (auto&& ball : balls) {
         //increase speed on time
         ball->velocity.x > 0 ? ball->velocity.x += velocityIncreaseAmt : ball->velocity.x -= velocityIncreaseAmt;
-        if (ball->velocity.x > BasicRules::gameElements->maxBallVelocity) {
-            ball->velocity.x = BasicRules::gameElements->maxBallVelocity;
+        if (ball->velocity.x > BasicPlaymode::gameElements->maxBallVelocity) {
+            ball->velocity.x = BasicPlaymode::gameElements->maxBallVelocity;
         }
         
         //move ball
@@ -67,9 +66,9 @@ void MultiBallMode::render(){
     drawScore();
     drawMidLine();
     
-    BasicRules::gameElements->paddleRight.draw();
-    BasicRules::gameElements->paddleLeft.draw();
-    BasicRules::gameElements->ball.draw();
+    BasicPlaymode::gameElements->paddleRight.draw();
+    BasicPlaymode::gameElements->paddleLeft.draw();
+    BasicPlaymode::gameElements->ball.draw();
     
     for(auto&& ball : balls){
         ball->draw();

@@ -11,7 +11,9 @@
 
 
 //------------------------------------------------------------------
-TextRenderer::TextRenderer(GameElements* gameElements, string name):AbstractRenderer(gameElements, name) {
+TextRenderer::TextRenderer(GameElements* gameElements_){
+    
+    gameElements = gameElements_;
     //load fonts
     for(int i=0; i<3; ++i){
         fontList.push_back(new ofTrueTypeFont());
@@ -32,7 +34,6 @@ TextRenderer::TextRenderer(GameElements* gameElements, string name):AbstractRend
     ani_ease_bounce.animateTo( 1.0f );
     ani_ease_bounce.setDuration(1);
     
-    durationMode = -1;
 }
 
 /**

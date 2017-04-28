@@ -9,9 +9,9 @@
  */
 
 #pragma once
-#include "BasicRenderer.h"
+#include "BasicPlaymode.h"
 class TennisRenderer :
-	public BasicRenderer
+	public BasicPlaymode
 {
 public:
 	TennisRenderer(GameElements* gameElements, string name = "Tennis");

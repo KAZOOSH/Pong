@@ -10,7 +10,7 @@
 #ifndef _SpriteBallRenderer
 #define _SpriteBallRenderer
 
-#include "BasicRenderer.h"
+#include "BasicPlaymode.h"
 
 /**
  * loads an animated sprite texture as ball
@@ -23,7 +23,7 @@
  *
  *  enter the correct values for framesHorizontal, framesVertical
  */
-class SpriteBallRenderer : public BasicRenderer{
+class SpriteBallRenderer : public BasicPlaymode{
     
 public:
     

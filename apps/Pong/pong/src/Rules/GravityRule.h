@@ -9,9 +9,9 @@
  */
 
 #pragma once
-#include "BasicRules.h"
+#include "BasicPlaymode.h"
 class GravityRule :
-	public BasicRules
+	public BasicPlaymode
 {
 public:
 	GravityRule(GameElements* gameElements, string name = "Gravity");

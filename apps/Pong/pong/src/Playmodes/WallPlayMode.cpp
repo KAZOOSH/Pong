@@ -92,7 +92,7 @@ bool Wall::wallHittest(Ball* ball){
 
 //WALL PLAYMODE
 
-WallPlayMode::WallPlayMode(GameElements* gameElements, string name):BasicRenderer(gameElements, name), BasicRules(gameElements, name){
+WallPlayMode::WallPlayMode(GameElements* gameElements, string name):BasicPlaymode(gameElements, name){
     
     walls.push_back(Wall(ofRectangle(gameElements->getWidth()*0.25, gameElements->getHeigth()*0.5, 10, 10)));
     walls.push_back(Wall(ofRectangle(gameElements->getWidth()*0.5, gameElements->getHeigth()*0.5, 10, 10)));
@@ -101,13 +101,12 @@ WallPlayMode::WallPlayMode(GameElements* gameElements, string name):BasicRendere
 
 //------------------------------------------------------------------
 void WallPlayMode::begin() {
-    BasicRenderer::begin();
-    BasicRules::begin();
+    BasicPlaymode::begin();
     updateWalls();
 }
 
 void WallPlayMode::updateWalls(){
-    GameElements* gameElements = BasicRules::gameElements;
+    GameElements* gameElements = BasicPlaymode::gameElements;
     
     int ySide = ofRandom(ofRandom(gameElements->getHeigth()));
     int wSide = 50;
@@ -129,11 +128,11 @@ void WallPlayMode::updateWalls(){
 
 //------------------------------------------------------------------
 void WallPlayMode::applyRules() {
-    BasicRules::applyRules();
+    BasicPlaymode::applyRules();
     
     for(auto wall:walls){
-        if(wall.wallHittest(&BasicRules::gameElements->ball)){
-            BasicRules::gameElements->notifyGameEvent(CONTACT_WALL);
+        if(wall.wallHittest(&BasicPlaymode::gameElements->ball)){
+            BasicPlaymode::gameElements->notifyGameEvent(CONTACT_WALL);
         }
         
     }
@@ -142,7 +141,7 @@ void WallPlayMode::applyRules() {
 
 //------------------------------------------------------------------
 void WallPlayMode::render() {
-    BasicRenderer::render();
+    BasicPlaymode::render();
     
     for(auto wall:walls){
         ofDrawRectangle(wall.dimensions);

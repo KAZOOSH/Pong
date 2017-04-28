@@ -10,10 +10,10 @@
 #ifndef _DoubleSpeedRule
 #define _DoubleSpeedRule
 
-#include "BasicRules.h"
+#include "BasicPlaymode.h"
 
 
-class DoubleSpeedRule : public BasicRules{
+class DoubleSpeedRule : public BasicPlaymode{
     
 public:
     

@@ -1,0 +1,24 @@
+<playmodes>
+	<!--> rules <!-->
+	<playmode>Double Speed</playmode>
+	<playmode>Small Paddle</playmode>
+	<playmode>Big Paddle</playmode>
+	<playmode>Tiny Ball</playmode>
+	<playmode>Huge Ball</playmode>
+	<playmode>Gravity</playmode>
+	<playmode>Swerve</playmode>
+	<!--> renderers <!-->
+	<playmode>Anaglyph</playmode>
+	<playmode>Round Ball</playmode>
+	<playmode>PSY</playmode>
+	<playmode>Tennis</playmode>
+	<playmode>Trails</playmode>
+	<playmode>Movie</playmode>
+	<playmode>Invisible Ball</playmode>
+	<playmode>Goat Mode</playmode>
+	<playmode>Dalmatian</playmode>
+	<!--> playmodes <!-->
+	<playmode>Walls</playmode>
+	<playmode>Portals</playmode>
+	<playmode>Multiball</playmode>
+</playmodes>

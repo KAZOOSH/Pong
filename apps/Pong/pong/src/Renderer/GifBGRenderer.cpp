@@ -10,7 +10,7 @@
 #include "GifBGRenderer.h"
 
 
-GifBGRenderer::GifBGRenderer(GameElements* gameElements, string name):BasicRenderer(gameElements, name) {
+GifBGRenderer::GifBGRenderer(GameElements* gameElements, string name):BasicPlaymode(gameElements, name,false,true) {
     ofDirectory dir;
     dir.listDir("images/bg/");
     
@@ -28,7 +28,7 @@ GifBGRenderer::GifBGRenderer(GameElements* gameElements, string name):BasicRende
 }
 
 void GifBGRenderer::begin(){
-    BasicRenderer::begin();
+    BasicPlaymode::begin();
     
     currentScene = ofRandom(decoder.size());
 }
