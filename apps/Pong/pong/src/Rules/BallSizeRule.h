@@ -10,9 +10,9 @@
 #ifndef _BallSizeRule
 #define _BallSizeRule
 
-#include "BasicRules.h"
+#include "BasicPlaymode.h"
 
-class BallSizeRule : public BasicRules{
+class BallSizeRule : public BasicPlaymode{
     
 public:
     

@@ -11,7 +11,7 @@
 
 
 //------------------------------------------------------------------
-PsyRenderer::PsyRenderer(GameElements* gameElements, string name):BasicRenderer(gameElements, name) {
+PsyRenderer::PsyRenderer(GameElements* gameElements, string name):BasicPlaymode(gameElements, name,false,true) {
     shader.load("shaders/psy");
 }
 

@@ -12,19 +12,19 @@
 
 
 
-GravityRule::GravityRule(GameElements * gameElements, string name):BasicRules(gameElements,name)
+GravityRule::GravityRule(GameElements * gameElements, string name):BasicPlaymode(gameElements,name,true,false)
 {
     //runTime = -1;
 }
 
 void GravityRule::begin()
 {
-    BasicRules::begin();
+    BasicPlaymode::begin();
 }
 
 void GravityRule::end()
 {
-    BasicRules::end();
+    BasicPlaymode::end();
 }
 
 void GravityRule::applyRules()

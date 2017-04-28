@@ -10,10 +10,10 @@
 #ifndef _InvisibleRenderer
 #define _InvisibleRenderer
 
-#include "BasicRenderer.h"
+#include "BasicPlaymode.h"
 
 
-class InvisibleRenderer : public BasicRenderer{
+class InvisibleRenderer : public BasicPlaymode{
     
 public:
     

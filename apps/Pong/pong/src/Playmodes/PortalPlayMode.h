@@ -11,8 +11,7 @@
 #ifndef _PortalPlayMode
 #define _PortalPlayMode
 
-#include "BasicRenderer.h"
-#include "BasicRules.h"
+#include "BasicPlaymode.h"
 
 #include "ofxGifDecoder.h"
 #include "ofxGifFile.h"
@@ -24,7 +23,7 @@ public:
 	bool portalHittest(Ball* ball);
 };
 
-class PortalPlayMode : public BasicRenderer, public BasicRules {
+class PortalPlayMode : public BasicPlaymode {
 
 public:
 

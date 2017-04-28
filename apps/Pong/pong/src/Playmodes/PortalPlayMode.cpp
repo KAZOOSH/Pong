@@ -52,7 +52,7 @@ bool Portal::portalHittest(Ball* ball) {
 
 //Portal PLAYMODE
 
-PortalPlayMode::PortalPlayMode(GameElements* gameElements, string name) :BasicRenderer(gameElements, name), BasicRules(gameElements, name) {
+PortalPlayMode::PortalPlayMode(GameElements* gameElements, string name) :BasicPlaymode(gameElements, name) {
     
     portals.push_back(Portal(ofRectangle(gameElements->getWidth()*0.25, gameElements->getHeigth()*0.5, 10, 10)));
     portals.push_back(Portal(ofRectangle(gameElements->getWidth()*0.5, gameElements->getHeigth()*0.5, 10, 10)));
@@ -64,13 +64,12 @@ PortalPlayMode::PortalPlayMode(GameElements* gameElements, string name) :BasicRe
 
 //------------------------------------------------------------------
 void PortalPlayMode::begin() {
-    BasicRenderer::begin();
-    BasicRules::begin();
+    BasicPlaymode::begin();
     updatePortals();
 }
 
 void PortalPlayMode::updatePortals() {
-    GameElements* gameElements = BasicRules::gameElements;
+    GameElements* gameElements = BasicPlaymode::gameElements;
     
     int wFirst = 200;
     int hFirst = 200;
@@ -90,20 +89,20 @@ void PortalPlayMode::updatePortals() {
 
 //------------------------------------------------------------------
 void PortalPlayMode::applyRules() {
-    BasicRules::applyRules();
+    BasicPlaymode::applyRules();
     
     int new_x;
     int new_y;
     
     int ct_portal = 0;
     
-    Ball* ball = &BasicRules::gameElements->ball;
+    Ball* ball = &BasicPlaymode::gameElements->ball;
     
     new_x = ball->position.x;
     new_y = ball->position.y;
     for (auto portal : portals) {
         if (portal.portalHittest(ball)) {
-            BasicRules::gameElements->notifyGameEvent(CONTACT_WALL);
+            BasicPlaymode::gameElements->notifyGameEvent(CONTACT_WALL);
             if (ct_portal == 0) {
                 if (ball->velocity.x > 0) {
                     new_x = portals[1].dimensions.x + portals[1].dimensions.width*1.01 + ball->radius;
@@ -135,10 +134,10 @@ void PortalPlayMode::applyRules() {
 
 //------------------------------------------------------------------
 void PortalPlayMode::render() {
-    BasicRenderer::render();
+    BasicPlaymode::render();
     
     
-    BasicRenderer::gameElements->ledControl.setColors(ofColor(192,0,255));
+    BasicPlaymode::gameElements->ledControl.setColors(ofColor(192,0,255));
     
     for (auto portal : portals) {
         int maxFrames = portalImg.getNumFrames()-2;

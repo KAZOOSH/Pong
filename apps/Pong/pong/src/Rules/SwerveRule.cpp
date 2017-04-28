@@ -11,7 +11,7 @@
 #include "SwerveRule.h"
 
 
-SwerveRule::SwerveRule(GameElements * gameElements, string name) :BasicRules(gameElements, name)
+SwerveRule::SwerveRule(GameElements * gameElements, string name) :BasicPlaymode(gameElements, name,true,false)
 {
     //runTime = -1;
 }
@@ -19,12 +19,12 @@ SwerveRule::SwerveRule(GameElements * gameElements, string name) :BasicRules(gam
 
 void SwerveRule::begin()
 {
-    BasicRules::begin();
+    BasicPlaymode::begin();
 }
 
 void SwerveRule::end()
 {
-    BasicRules::end();
+    BasicPlaymode::end();
 }
 
 void SwerveRule::applyRules()

@@ -14,32 +14,11 @@
 #include "GameElements.h"
 #include "TextRenderer.h"
 
-#include "AbstractRules.h"
-#include "BasicRules.h"
-#include "MultiBallMode.h"
-#include "DoubleSpeedRule.h"
-#include "PaddleSizeRule.h"
-#include "BallSizeRule.h"
-#include "GravityRule.h"
-#include "SwerveRule.h"
-#include "HeliumRule.h"
-//-> include other rules here
+#include "AbstractGameControl.h"
+#include "BasicPlaymode.h"
 
-#include "AbstractRenderer.h"
-#include "BasicRenderer.h"
-#include "AnaglyphRenderer.h"
-#include "RoundBallRenderer.h"
-#include "PsyRenderer.h"
-#include "TennisRenderer.h"
-#include "TrailRenderer.h"
-#include "GifBGRenderer.h"
-#include "InvisibleRenderer.h"
-#include "SpriteBallRenderer.h"
-//-> include other renderers here
+#include "PlaymodeFactory.h"
 
-#include "WallPlayMode.h"
-#include "PortalPlayMode.h"
-//-> include other playmodes here
 
 /**
  * controls and switches the playmodes
@@ -49,29 +28,38 @@ class PlayModeController {
 public:
     void setup(GameElements* gameElements, TextRenderer* textRenderer);
     
-    AbstractRenderer* getCurrentRenderer();
-    AbstractRules* getCurrentRules();
+    AbstractGameControl* getCurrentRenderer();
+    AbstractGameControl* getCurrentRules();
     
     void resetStartModes();
     void shufflePlaymode();
     
     //listener
-    void onEndMode(string& type);
+    void onEndMode(AbstractGameControl& c);
     
     //for testing
-    void setRenderer(int index);
-    void setRenderer(string name);
-    void setRules(int index);
-    void setRules(string name);
+    void setPlaymode(string name);
+    
+protected:
+    void addBasicPlaymodes();
+    void initPlaymodesFromXml(string path = "playmodes.xml");
+    void addPlaymode(string name);
+    
+    void setRenderer(AbstractGameControl* r);
+    void setRules(AbstractGameControl* r);
+    void setPlaymode(AbstractGameControl* r);
     
 private:
-    vector<AbstractRules*> rules; //!< rule set
-    int currentRules;
+    map<string,AbstractGameControl*> playmodes;
+    vector<AbstractGameControl*> v_playmodes;
+    vector<string> shufflePlaymodeSet;
     
-    vector<AbstractRenderer*> renderer; //!< renderer collection
-    int currentRenderer;
+    AbstractGameControl* currentRules;
+    AbstractGameControl* currentRenderer;
     
-    bool isNextSelectRules; //!<switch between rules and renderer every time
+    BasicPlaymode* basicPlaymode;
+    
+    GameElements* gameElements;
 };
 
 #endif

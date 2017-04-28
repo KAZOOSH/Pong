@@ -9,9 +9,9 @@
  */
 
 #pragma once
-#include "BasicRules.h"
+#include "BasicPlaymode.h"
 class SwerveRule :
-	public BasicRules
+	public BasicPlaymode
 {
 public:
 	SwerveRule(GameElements* gameElements, string name = "Swerve");

@@ -9,9 +9,9 @@
  */
 
 #pragma once
-#include "BasicRules.h"
+#include "BasicPlaymode.h"
 class HeliumRule :
-public BasicRules
+public BasicPlaymode
 {
 public:
     HeliumRule(GameElements* gameElements, string name = "Helium");

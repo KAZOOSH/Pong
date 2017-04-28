@@ -10,20 +10,20 @@
 #include "PaddleSizeRule.h"
 
 
-PaddleSizeRule::PaddleSizeRule(GameElements* gameElements, string name, float sizeMultiplicator_):BasicRules(gameElements, name){
+PaddleSizeRule::PaddleSizeRule(GameElements* gameElements, string name, float sizeMultiplicator_):BasicPlaymode(gameElements, name,true,false){
     sizeMultiplicator = sizeMultiplicator_;
 }
 
 
 //------------------------------------------------------------------
 void PaddleSizeRule::begin() {
-    AbstractRules::begin();
+    AbstractGameControl::begin();
     gameElements->paddleLeft.height *= sizeMultiplicator;
     gameElements->paddleRight.height *= sizeMultiplicator;
 }
 
 void PaddleSizeRule::end(){
-    AbstractRules::end();
+    AbstractGameControl::end();
     gameElements->paddleLeft.height /= sizeMultiplicator;
     gameElements->paddleRight.height /= sizeMultiplicator;
 }

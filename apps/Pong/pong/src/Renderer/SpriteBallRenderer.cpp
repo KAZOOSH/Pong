@@ -10,7 +10,7 @@
 #include "SpriteBallRenderer.h"
 
 
-SpriteBallRenderer::SpriteBallRenderer(GameElements* gameElements, string name,string path,int framesHorizontal_, int framesVertical_):BasicRenderer(gameElements, name) {
+SpriteBallRenderer::SpriteBallRenderer(GameElements* gameElements, string name,string path,int framesHorizontal_, int framesVertical_):BasicPlaymode(gameElements, name,false,true) {
     
     sprite.load(path);
     framesHorizontal = framesHorizontal_;
@@ -21,7 +21,7 @@ SpriteBallRenderer::SpriteBallRenderer(GameElements* gameElements, string name,s
 }
 
 void SpriteBallRenderer::begin(){
-    BasicRenderer::begin();
+    BasicPlaymode::begin();
     
 }
 

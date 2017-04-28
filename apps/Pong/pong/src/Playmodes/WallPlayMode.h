@@ -10,8 +10,7 @@
 #ifndef _WallPlayMode
 #define _WallPlayMode
 
-#include "BasicRenderer.h"
-#include "BasicRules.h"
+#include "BasicPlaymode.h"
 
 class Wall{
 public:
@@ -20,7 +19,7 @@ public:
     bool wallHittest(Ball* ball);
 };
 
-class WallPlayMode : public BasicRenderer, public BasicRules{
+class WallPlayMode : public BasicPlaymode{
     
 public:
     

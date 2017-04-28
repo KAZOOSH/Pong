@@ -10,9 +10,9 @@
 #ifndef _PaddleSizeRule
 #define _PaddleSizeRule
 
-#include "BasicRules.h"
+#include "BasicPlaymode.h"
 
-class PaddleSizeRule : public BasicRules{
+class PaddleSizeRule : public BasicPlaymode{
     
 public:
     

@@ -10,10 +10,9 @@
 #ifndef _MultiBallMode
 #define _MultiBallMode
 
-#include "BasicRules.h"
-#include "BasicRenderer.h"
+#include "BasicPlaymode.h"
 
-class MultiBallMode : public BasicRules, public BasicRenderer{
+class MultiBallMode : public BasicPlaymode{
     
 public:
     

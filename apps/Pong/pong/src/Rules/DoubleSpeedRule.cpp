@@ -9,14 +9,14 @@
 
 #include "DoubleSpeedRule.h"
 
-DoubleSpeedRule::DoubleSpeedRule(GameElements* gameElements, string name):BasicRules(gameElements, name){
+DoubleSpeedRule::DoubleSpeedRule(GameElements* gameElements, string name):BasicPlaymode(gameElements, name,true,false){
     speedMultiplicator = 2.0f;
 }
 
 
 //------------------------------------------------------------------
 void DoubleSpeedRule::begin() {
-    BasicRules::begin();
+    BasicPlaymode::begin();
     gameElements->ball.velocity *= speedMultiplicator;
     
     

@@ -333,7 +333,7 @@ void ofApp::keyPressed(int key){
         playModeController.shufflePlaymode();
     }
     if(key == '1') {
-        playModeController.setRenderer("PSY");
+        //playModeController.setRenderer("PSY");
         // playModeController.setRules("Topspin");
     }
     

@@ -11,7 +11,7 @@
 
 
 //------------------------------------------------------------------
-InvisibleRenderer::InvisibleRenderer(GameElements* gameElements, string name,int visiblePeriod_, int invisiblePeriod_):BasicRenderer(gameElements, name) {
+InvisibleRenderer::InvisibleRenderer(GameElements* gameElements, string name,int visiblePeriod_, int invisiblePeriod_):BasicPlaymode(gameElements, name,false,true) {
     visiblePeriod = visiblePeriod_;
     invisiblePeriod = invisiblePeriod_;
     isBallVisible = false;

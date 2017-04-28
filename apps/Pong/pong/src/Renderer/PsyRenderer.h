@@ -10,10 +10,10 @@
 #ifndef _LsdRenderer
 #define _LsdRenderer
 
-#include "BasicRenderer.h"
+#include "BasicPlaymode.h"
 
 
-class PsyRenderer : public BasicRenderer{
+class PsyRenderer : public BasicPlaymode{
     
 public:
     

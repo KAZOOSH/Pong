@@ -10,10 +10,10 @@
 #ifndef _TrailRenderer
 #define _TrailRenderer
 
-#include "BasicRenderer.h"
+#include "BasicPlaymode.h"
 
 
-class TrailRenderer : public BasicRenderer{
+class TrailRenderer : public BasicPlaymode{
     
 public:
     

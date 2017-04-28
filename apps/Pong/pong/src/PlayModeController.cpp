@@ -10,71 +10,39 @@
 #include "PlayModeController.h"
 
 
-void PlayModeController::setup(GameElements* gameElements,TextRenderer* textRenderer){
-    isNextSelectRules = true;
+void PlayModeController::setup(GameElements* gameElements_,TextRenderer* textRenderer){
+    
+    ofSeedRandom();
+    
+    gameElements = gameElements_;
     
     //init rules
-    currentRules = 0;
-    rules.push_back(new BasicRules(gameElements,"",-1));
-    rules.push_back(new DoubleSpeedRule(gameElements));
-    rules.push_back(new PaddleSizeRule(gameElements, "Small Paddle", 0.5));
-    rules.push_back(new PaddleSizeRule(gameElements, "Big Paddle", 2.0));
-    rules.push_back(new BallSizeRule(gameElements, "Tiny Ball", 0.3));
-    rules.push_back(new BallSizeRule(gameElements, "Huge Ball", 3.0));
-    rules.push_back(new GravityRule(gameElements));
-    rules.push_back(new SwerveRule(gameElements));
-    rules.push_back(new HeliumRule(gameElements));
-    //->add other rules to vector here
+    basicPlaymode =  new BasicPlaymode(gameElements,"",-1);
     
-    //init renderer
-    currentRenderer = 0;
-    renderer.push_back(new BasicRenderer(gameElements,"",-1));
-    /* renderer.push_back(new AnaglyphRenderer(gameElements));
-     renderer.push_back(new RoundBallRenderer(gameElements));
-     renderer.push_back(new PsyRenderer(gameElements));
-     renderer.push_back(new TennisRenderer(gameElements));
-     renderer.push_back(new TrailRenderer(gameElements));
-     renderer.push_back(new GifBGRenderer(gameElements));
-     renderer.push_back(new InvisibleRenderer(gameElements));
-     renderer.push_back(new SpriteBallRenderer(gameElements));
-     renderer.push_back(new SpriteBallRenderer(gameElements,"Dalmatian","images/dalmatian.png",4,2));*/
-    //-> add other renderers to vector here
+    initPlaymodesFromXml();
     
-    //add playmodes -> add the playmode to renderer and rules
-    WallPlayMode* wallPlayMode = new WallPlayMode(gameElements);
-    //rules.push_back(wallPlayMode);
-    //renderer.push_back(wallPlayMode);
-    
-    
-    /* PortalPlayMode* portalPlayMode = new PortalPlayMode(gameElements);
-     rules.push_back(portalPlayMode);
-     renderer.push_back(portalPlayMode);*/
-    
-    MultiBallMode* multiBallMode = new MultiBallMode(gameElements);
-    rules.push_back(multiBallMode);
-    renderer.push_back(multiBallMode);
-    
-    for (int i=0; i<rules.size(); ++i) {
-        ofAddListener(rules[i]->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);
-        ofAddListener(rules[i]->durationExtendedEvent, this, &PlayModeController::onEndMode);
+    for (auto& p:v_playmodes) {
+        ofAddListener(p->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);
+        ofAddListener(p->durationExtendedEvent, this, &PlayModeController::onEndMode);
     }
-    for (int i=0; i<renderer.size(); ++i) {
-        ofAddListener(renderer[i]->newTextEvent, textRenderer, &TextRenderer::onNewTextElement);
-        ofAddListener(renderer[i]->durationExtendedEvent, this, &PlayModeController::onEndMode);
+    
+    for (auto& p:v_playmodes) {
+        shufflePlaymodeSet.push_back(p->getName());
     }
+    
+    resetStartModes();
 }
 
-AbstractRenderer* PlayModeController::getCurrentRenderer(){
-    return renderer[currentRenderer];
+AbstractGameControl* PlayModeController::getCurrentRenderer(){
+    return currentRenderer;
 }
 
-AbstractRules* PlayModeController::getCurrentRules(){
-    return rules[currentRules];
+AbstractGameControl* PlayModeController::getCurrentRules(){
+    return currentRules;
 }
 
 void PlayModeController::resetStartModes(){
-    setRenderer(0);
-    setRules(0);
+    setPlaymode(basicPlaymode);
 }
 
 /**
@@ -82,87 +50,92 @@ void PlayModeController::resetStartModes(){
  * if Renderer and rules belong together the will selected together
  */
 void PlayModeController::shufflePlaymode(){
-    if(isNextSelectRules){
-        //eliminate game mode
-        
-        
-        for (int i=0; i<renderer.size(); ++i) {
-            if(renderer[i]->getName() == rules[currentRules]->getName()){
-                setRenderer(0);
-            }
-        }
-        
-        setRules(ofRandom(1,rules.size()));
-        cout << rules[currentRules]->getName() << endl;
-        //find corresponding renderer
-        for (int i=0; i<renderer.size(); ++i) {
-            if(renderer[i]->getName() == rules[currentRules]->getName()){
-                setRenderer(i);
-            }
-        }
-    }
-    else{
-        //eliminate game mode
-        for (int i=0; i<rules.size(); ++i) {
-            if(rules[i]->getName() == renderer[currentRenderer]->getName()){
-                setRules(0);
-            }
-        }
-        
-        setRenderer(ofRandom(1,renderer.size()));
-        cout << renderer[currentRenderer]->getName() << endl;
-        
-        //find corresponding renderer
-        for (int i=0; i<rules.size(); ++i) {
-            if(rules[i]->getName() == renderer[currentRenderer]->getName()){
-                setRules(i);
-            }
-        }
-    }
     
-    isNextSelectRules = !isNextSelectRules;
+    string newModeName = shufflePlaymodeSet[ofRandom(shufflePlaymodeSet.size())];
+    
+    setPlaymode(newModeName);
+    
+    int i = ofFind(shufflePlaymodeSet, newModeName);
+    shufflePlaymodeSet.erase(shufflePlaymodeSet.begin() + i);
+    if (shufflePlaymodeSet.size() == 0) {
+        for (auto& p:playmodes) {
+            shufflePlaymodeSet.push_back(p.first);
+        }
+    }
 }
 
 /**
  * when special Mode is finished return back to basic mode
  */
-void PlayModeController::onEndMode(string& type){
-    if (type == "Renderer") {
-        setRenderer(0);
-    }else if(type == "Rules"){
-        setRules(0);
+void PlayModeController::onEndMode(AbstractGameControl& c){
+    if (c.isRenderer() && c.isRules()) {
+        setPlaymode(basicPlaymode);
+    }
+    else if (c.isRenderer()) {
+        setRenderer(basicPlaymode);
+    }
+    else if(c.isRules()){
+        setRules(basicPlaymode);
+        
+    }
+    
+}
+
+void PlayModeController::setPlaymode(string name){
+    AbstractGameControl* nMode = playmodes[name];
+    if (nMode->isRules() && nMode->isRenderer()) {
+        setPlaymode(nMode);
+    }
+    else if (nMode->isRules()) {
+        //setRules(basicRules);
+        setRules(nMode);
+    }
+    else if (nMode->isRenderer()) {
+        //setRenderer(basicRenderer);
+        setRenderer(nMode);
     }
 }
 
-
-void PlayModeController::setRenderer(int index){
-    if(index < renderer.size()){
-        renderer[currentRenderer]->end();
-        currentRenderer = index;
-        renderer[currentRenderer]->begin();
-    }
-}
-
-void PlayModeController::setRenderer(string name){
-    for(int i=0;i<renderer.size();++i){
-        if(renderer[i]->getName() == name){
-            setRenderer(i);
+void PlayModeController::initPlaymodesFromXml(string path){
+    ofXml xml;
+    xml.load(path);
+    xml.setTo("playmodes");
+    if(xml.exists("playmode"))
+    {
+        // This gets the first stroke (notice the [0], it's just like an array)
+        xml.setTo("playmode[0]");
+        do {
+            addPlaymode(xml.getValue<string>(""));
         }
+        while( xml.setToSibling() ); // go to the next STROKE
     }
 }
 
-void PlayModeController::setRules(int index){
-    if(index < rules.size()){
-        rules[currentRules]->end();
-        currentRules = index;
-        rules[currentRules]->begin();
+void PlayModeController::addPlaymode(string name){
+    AbstractGameControl* g =  PlaymodeFactory::make_playMode(name, gameElements);
+    if (g != nullptr) {
+        v_playmodes.push_back(g);
+        playmodes.insert(pair<string, AbstractGameControl*>(name,v_playmodes.back()));
     }
 }
 
-void PlayModeController::setRules(string name){
-    for(int i=0;i<rules.size();++i){
-        if(rules[i]->getName() == name){
-            setRules(i);
-        }
-    }
+void PlayModeController::setRenderer(AbstractGameControl* r){
+    if(currentRenderer != nullptr) currentRenderer->end();
+    currentRenderer = r;
+    currentRenderer->begin();
 }
+
+void PlayModeController::setRules(AbstractGameControl* r){
+    if (currentRules != nullptr) currentRules->end();
+    currentRules = r;
+    currentRules->begin();
+}
+
+void PlayModeController::setPlaymode(AbstractGameControl* r){
+    if (currentRules != nullptr) currentRules->end();
+    currentRules = r;
+    if(currentRenderer != nullptr) currentRenderer->end();
+    currentRenderer = r;
+    currentRules->begin();
+}
+

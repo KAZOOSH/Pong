@@ -10,7 +10,7 @@
 #include "TrailRenderer.h"
 
 
-TrailRenderer::TrailRenderer(GameElements* gameElements, string name):BasicRenderer(gameElements, name) {
+TrailRenderer::TrailRenderer(GameElements* gameElements, string name):BasicPlaymode(gameElements, name,false,true) {
 #ifdef TARGET_OPENGLES
     fbo.allocate(gameElements->getWidth(), gameElements->getHeigth());
 #else
@@ -20,7 +20,7 @@ TrailRenderer::TrailRenderer(GameElements* gameElements, string name):BasicRende
 }
 
 void TrailRenderer::begin(){
-    BasicRenderer::begin();
+    BasicPlaymode::begin();
     fbo.begin();
     ofClear(255,255,255, 0);
     fbo.end();

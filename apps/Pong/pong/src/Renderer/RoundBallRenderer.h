@@ -10,10 +10,10 @@
 #ifndef _RoundBallRenderer
 #define _RoundBallRenderer
 
-#include "BasicRenderer.h"
+#include "BasicPlaymode.h"
 
 
-class RoundBallRenderer : public BasicRenderer{
+class RoundBallRenderer : public BasicPlaymode{
     
 public:
     

@@ -11,7 +11,7 @@
 
 
 //------------------------------------------------------------------
-RoundBallRenderer::RoundBallRenderer(GameElements* gameElements, string name):BasicRenderer(gameElements, name) {
+RoundBallRenderer::RoundBallRenderer(GameElements* gameElements, string name):BasicPlaymode(gameElements, name,false,true) {
 }
 
 
