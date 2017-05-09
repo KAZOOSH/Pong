@@ -14,7 +14,9 @@
 PsyRenderer::PsyRenderer(GameElements* gameElements, string name):BasicPlaymode(gameElements, name,false,true) {
     
 #ifdef TARGET_OPENGLES
-    shader.load("shaders/gles/psy");
+    bg.load("images/psy-bg.png");
+    ball.load("images/psy-ball.png");
+    ballSmall.load("images/psy-ball-small.png");
 #else
     shader.load("shaders/gl2/psy");
 #endif
@@ -23,8 +25,22 @@ PsyRenderer::PsyRenderer(GameElements* gameElements, string name):BasicPlaymode(
 
 //------------------------------------------------------------------
 void PsyRenderer::render() {
-    //img.getTextureReference().bind();
     
+#ifdef TARGET_OPENGLES
+    int wStart = ((int)ofGetElapsedTimef())%8;
+    for (int x =0; x<4; x++) {
+        for (int y =0; y<3; y++) {
+            bg.draw(x*512,y*512);
+        }
+    }
+    
+    float t = ofGetElapsedTimef();
+    float x = gameElements->ball.position.x;
+    float y = gameElements->ball.position.y;
+    float r = gameElements->ball.radius;
+    ball.draw(x-r,y-r,r*2,r*2 );
+    ballSmall.draw(x + r*cos(t), y + r*sin(t),r,r);
+#else
     int color = (ofGetElapsedTimeMillis()/200)%2 == 0 ? 30:255;
     gameElements->ledControl.setColors(ofColor(color));
     
@@ -43,7 +59,7 @@ void PsyRenderer::render() {
     ofPopMatrix();
     
     shader.end();
-    
+#endif   
     ofSetColor(255);
     drawScore();
     

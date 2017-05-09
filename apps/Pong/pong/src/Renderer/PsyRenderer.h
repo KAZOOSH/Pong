@@ -21,7 +21,11 @@ public:
     virtual void render();
     
 private:
+#ifdef TARGET_OPENGLES
+    ofImage bg, ballSmall,ball;
+#else
     ofShader shader;
+#endif
 };
 
 #endif
