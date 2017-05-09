@@ -12,7 +12,12 @@
 
 //------------------------------------------------------------------
 PsyRenderer::PsyRenderer(GameElements* gameElements, string name):BasicPlaymode(gameElements, name,false,true) {
-    shader.load("shaders/psy");
+    
+#ifdef TARGET_OPENGLES
+    shader.load("shaders/gles/psy");
+#else
+    shader.load("shaders/gl2/psy");
+#endif
 }
 
 
