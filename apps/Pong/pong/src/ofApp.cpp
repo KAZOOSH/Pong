@@ -63,7 +63,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    ofSoundUpdate();
+    //ofSoundUpdate();
     
     
     //init message
