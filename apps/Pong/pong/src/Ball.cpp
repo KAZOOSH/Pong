@@ -44,11 +44,11 @@ void Ball::update() {
 
 //------------------------------------------------------------------
 void Ball::draw() {
+    ofSetColor(brightness);
     if(isBallSpawning){
         drawSpawn();
     }
     else {
-        ofSetColor(200);
         ofDrawRectangle(position.x - radius, position.y - radius, radius*2, radius*2);
     }
 }

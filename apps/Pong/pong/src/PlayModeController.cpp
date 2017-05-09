@@ -17,7 +17,7 @@ void PlayModeController::setup(GameElements* gameElements_,TextRenderer* textRen
     gameElements = gameElements_;
     
     //init rules
-    basicPlaymode =  new BasicPlaymode(gameElements,"",-1);
+    basicPlaymode =  new BasicPlaymode(gameElements,"",true,true,-1);
     
     initPlaymodesFromXml();
     
@@ -93,11 +93,11 @@ void PlayModeController::setPlaymode(string name){
             setPlaymode(nMode);
         }
         else if (nMode->isRules()) {
-            //setRules(basicRules);
+            if (currentRenderer->isRules()) setRenderer(basicPlaymode);
             setRules(nMode);
         }
         else if (nMode->isRenderer()) {
-            //setRenderer(basicRenderer);
+            if (currentRules->isRenderer()) setRules(basicPlaymode);
             setRenderer(nMode);
         }
     }

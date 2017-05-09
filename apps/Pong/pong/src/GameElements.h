@@ -83,6 +83,7 @@ public:
     Ball ball; //!< balls
     
     ofParameter<float> minBallVelocity, maxBallVelocity;
+    ofParameter<int> brightness;
     
     LedControl ledControl;
     

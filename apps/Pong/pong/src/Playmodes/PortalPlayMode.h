@@ -1,46 +1,43 @@
 /*
-*  PortalPlayMode.h
-*  PONG
-*
-*  KAZOOSH!  - open platform for interactive installations - 2016 
-*  http://kazoosh.com 
-*
-*  created by Max Haferlach - 2016
-*/
+ *  PortalPlayMode.h
+ *  PONG
+ *
+ *  KAZOOSH!  - open platform for interactive installations - 2016 
+ *  http://kazoosh.com 
+ *
+ *  created by Max Haferlach - 2016
+ */
 
 #ifndef _PortalPlayMode
 #define _PortalPlayMode
 
 #include "BasicPlaymode.h"
 
-#include "ofxGifDecoder.h"
-#include "ofxGifFile.h"
 
-class Portal {
+class Portal{
 public:
-	Portal(ofRectangle dimensions);
-	ofRectangle dimensions;
-	bool portalHittest(Ball* ball);
+    Portal(ofRectangle dimensions);
+    ofRectangle dimensions;
+    bool portalHittest(Ball* ball);
 };
 
 class PortalPlayMode : public BasicPlaymode {
-
+    
 public:
-
-	PortalPlayMode(GameElements* gameElements, string name = "Portals");
-
-	virtual void begin();
-	virtual void applyRules();
-	virtual void render();
-
+    
+    PortalPlayMode(GameElements* gameElements, string name = "Portals");
+    
+    virtual void begin();
+    virtual void applyRules();
+    virtual void render();
+    
 private:
-	void updatePortals();
-	vector<Portal> portals;
+    void updatePortals();
+    vector<Portal> portals;
     
-    
-    ofxGifDecoder decoder;
-    ofxGifFile portalImg;
-
+    ofImage sprite;
+    int framesHorizontal,framesVertical;
+    int frameWidth, frameHeight;
 };
 
 #endif

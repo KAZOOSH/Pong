@@ -17,6 +17,7 @@ Use the project generator to create a project for your IDE (```[project folder]/
 | load settings  |  a |
 | toggle ModerationMode  | m  |
 | toggle Warper  | w  |
+| ball brightness velocity -+  | c,v  |
 | min ball velocity -+  | i,o  |
 | max ball velocity -+  | k,l  |
 | paddle: pixel per LED -+ | LEFT,RIGHT  |

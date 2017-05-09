@@ -18,6 +18,9 @@ GameElements::GameElements(){
     
     minBallVelocity.set("minBallVelocity", 10);
     maxBallVelocity.set("maxBallVelocity", 20);
+    brightness.set("brightness",200,10,255);
+    
+    ball.brightness.makeReferenceTo(brightness);
     
     paddleLeft.setup(0, widthGame, heightGame);
     paddleRight.setup(widthGame-1, widthGame, heightGame);

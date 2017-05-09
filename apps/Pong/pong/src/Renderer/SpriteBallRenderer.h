@@ -31,7 +31,7 @@ public:
     virtual void begin();
     virtual void render();
     
-private:
+protected:
     
     ofImage sprite;
     int framesHorizontal,framesVertical;

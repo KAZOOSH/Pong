@@ -348,6 +348,8 @@ void ofApp::drawDebugInformation(){
     ofTranslate(0, ty);
     ofDrawBitmapString("Ball", 0, 0);
     ofTranslate(0, ty);
+    ofDrawBitmapString("Ball brightness: " + ofToString(abs(elements.ball.brightness)), 0, 0);
+    ofTranslate(0, ty);
     ofDrawBitmapString("Velocity: " + ofToString(abs(elements.ball.velocity.x)), 0, 0);
     ofTranslate(0, ty);
     ofDrawBitmapString("MinVelocity: " + ofToString(abs(elements.minBallVelocity),1) + " -+ (i,o)", 0, 0);
@@ -439,7 +441,12 @@ void ofApp::keyPressed(int key){
     if(key == 'l') {
         elements.maxBallVelocity++;
     }
-    
+    if(key == 'c') {
+        elements.brightness--;
+    }
+    if(key == 'v') {
+        elements.brightness++;
+    }
     if(key == 'm') {
         soundPlayer.isModerationMode = !soundPlayer.isModerationMode;
     }
@@ -449,6 +456,7 @@ void ofApp::initSettings(){
     settings.add(soundPlayer.isModerationMode);
     settings.add(elements.minBallVelocity);
     settings.add(elements.maxBallVelocity);
+    settings.add(elements.brightness);
     settings.add(elements.ledControl.pixelPerLed);
     settings.add(elements.paddleLeft.height);
     settings.add(elements.paddleRight.height);

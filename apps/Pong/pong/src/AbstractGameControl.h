@@ -16,7 +16,7 @@
 
 class AbstractGameControl {
 public:
-    AbstractGameControl(GameElements* gameElements, string name, bool isRules, bool isRenderer);
+    AbstractGameControl(GameElements* gameElements, string name, bool isRules, bool isRenderer, int duration = 7500);
     virtual void begin();
     virtual void end();
     string getName();

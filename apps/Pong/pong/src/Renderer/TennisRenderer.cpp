@@ -17,8 +17,9 @@ TennisRenderer::TennisRenderer(GameElements * gameElements, string name) :BasicP
 
 void TennisRenderer::begin()
 {
-    PlayModeEvent e = PlayModeEvent(name,true,"tennis");
-    ofNotifyEvent(gameElements->newPlayModeEvent, e);
+    BasicPlaymode::begin();
+    //PlayModeEvent e = PlayModeEvent(name,true,"tennis");
+    //ofNotifyEvent(gameElements->newPlayModeEvent, e);
 }
 
 void TennisRenderer::render() {

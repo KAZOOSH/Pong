@@ -45,6 +45,7 @@ public:
     bool isBallSpawning;
     long startBallSpawn;
     int spawnTime;
+    ofParameter<int> brightness;
     
     ofxAnimatableFloat ani_spawn;
     

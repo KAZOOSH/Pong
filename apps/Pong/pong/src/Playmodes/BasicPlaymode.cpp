@@ -11,9 +11,8 @@
 
 
 //------------------------------------------------------------------
-BasicPlaymode::BasicPlaymode(GameElements* gameElements, string name, bool isRules, bool isRenderer,int durationMode_):AbstractGameControl(gameElements, name, isRules, isRenderer) {
+BasicPlaymode::BasicPlaymode(GameElements* gameElements, string name, bool isRules, bool isRenderer,int durationMode_):AbstractGameControl(gameElements, name, isRules, isRenderer,durationMode_) {
     font.load("font.ttf",70);
-    durationMode = durationMode_;
 }
 
 void BasicPlaymode::begin(){
@@ -66,36 +65,36 @@ void BasicPlaymode::drawMidLine(){
 
 void BasicPlaymode::applyRules() {
     
-
-        //update ball speeds
-        float maxV = gameElements->maxBallVelocity - gameElements->minBallVelocity;
-        float velocityIncreaseAmt = maxV/20/ofGetFrameRate();
-        
-        //increase speed on time
-        gameElements->ball.velocity.x > 0 ? gameElements->ball.velocity.x += velocityIncreaseAmt : gameElements->ball.velocity.x -= velocityIncreaseAmt;
-        if (gameElements->ball.velocity.x > gameElements->maxBallVelocity) {
-            gameElements->ball.velocity.x = gameElements->maxBallVelocity;
-        }
-        
-        //add spin
-        Ball* ball = &BasicPlaymode::gameElements->ball;
-        float factor = 0;
-        //move ball
-        if (ball->getinitialSpin() != 0) {
-            factor = sin(PI * ((double)ball->getSpin() / (double)ball->getinitialSpin()));
-        }
-        
-        ball->velocity.y += ofMap(ball->getSpin() * factor, -100, 100, -3, 3, true);
-        ball->setSpin(ball->getSpin()*0.97);
-        ball->update();
-        
-        //move ball
-        gameElements->ball.update();
-        
-        //check paddle and/or wall hit
-        if (!paddleHittest(ball)) {
-            wallHittest(ball);
-        }
+    
+    //update ball speeds
+    float maxV = gameElements->maxBallVelocity - gameElements->minBallVelocity;
+    float velocityIncreaseAmt = maxV/20/ofGetFrameRate();
+    
+    //increase speed on time
+    gameElements->ball.velocity.x > 0 ? gameElements->ball.velocity.x += velocityIncreaseAmt : gameElements->ball.velocity.x -= velocityIncreaseAmt;
+    if (gameElements->ball.velocity.x > gameElements->maxBallVelocity) {
+        gameElements->ball.velocity.x = gameElements->maxBallVelocity;
+    }
+    
+    //add spin
+    Ball* ball = &BasicPlaymode::gameElements->ball;
+    float factor = 0;
+    //move ball
+    if (ball->getinitialSpin() != 0) {
+        factor = sin(PI * ((double)ball->getSpin() / (double)ball->getinitialSpin()));
+    }
+    
+    ball->velocity.y += ofMap(ball->getSpin() * factor, -100, 100, -3, 3, true);
+    ball->setSpin(ball->getSpin()*0.97);
+    ball->update();
+    
+    //move ball
+    gameElements->ball.update();
+    
+    //check paddle and/or wall hit
+    if (!paddleHittest(ball)) {
+        wallHittest(ball);
+    }
     
 }
 
