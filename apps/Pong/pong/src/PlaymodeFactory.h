@@ -27,6 +27,7 @@
 #include "TennisRenderer.h"
 #include "TrailRenderer.h"
 #include "GifBGRenderer.h"
+#include "SpriteBGRenderer.h"
 #include "InvisibleRenderer.h"
 #include "SpriteBallRenderer.h"
 //-> include other renderers here

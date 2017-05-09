@@ -51,6 +51,9 @@ AbstractGameControl* PlaymodeFactory::make_playMode(string playModeName, GameEle
         c = new TrailRenderer(gameElements);
     }
     else if (playModeName == "Movie") {
+        c = new SpriteBGRenderer(gameElements);
+    }
+    else if (playModeName == "MovieGif") {
         c = new GifBGRenderer(gameElements);
     }
     else if (playModeName == "Invisible Ball") {

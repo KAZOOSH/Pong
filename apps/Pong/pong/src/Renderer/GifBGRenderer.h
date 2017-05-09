@@ -19,9 +19,10 @@ class GifBGRenderer : public BasicPlaymode{
     
 public:
     
-    GifBGRenderer(GameElements* gameElements, string name = "Movie");
+    GifBGRenderer(GameElements* gameElements, string name = "MovieGif");
     virtual void begin();
     virtual void render();
+    
     
 private:
     
