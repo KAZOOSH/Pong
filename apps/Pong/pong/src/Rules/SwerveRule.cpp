@@ -33,7 +33,7 @@ void SwerveRule::applyRules()
     
     //move ball
     Ball* ball = &gameElements->ball;
-    ball->position.y += cos(ofGetElapsedTimef() * 5) * 4;
+    ball->position.y += cos(ofGetElapsedTimef() * 5) * 8;
     ball->update();
     
     //check paddle and/or wall hit

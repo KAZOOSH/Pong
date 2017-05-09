@@ -58,7 +58,7 @@ void ofApp::setup(){
     ofAddListener(elements.newGameEvent, &soundPlayer, &SoundPlayer::onGameEvent);
     ofAddListener(elements.newPlayModeEvent, &soundPlayer, &SoundPlayer::onPlaymodeChanged);
     
-    
+    initMessageSwitch = 0;
 }
 
 //--------------------------------------------------------------
@@ -74,7 +74,7 @@ void ofApp::update(){
     }
     //prepare for start
     else if(gamestate == PLAYERS_PREPARING
-            && ofGetElapsedTimeMillis() - lastGamestateChange > 2000){
+            ){
         prepareForStart();
     }
     else if (gamestate == WAIT_FOR_START
@@ -197,19 +197,74 @@ void ofApp::endGame(int winner){
 }
 
 void ofApp::showInitMessage(){
-    TextElement t("Paddles up!",
-                  MEDIUM,
-                  true,
-                  2000);
-    ofNotifyEvent(gameOverEvent, t);
     
-    changeGameState(PLAYERS_PREPARING);
+    int t = ofGetElapsedTimeMillis() - lastGamestateChange;
+    
+    bool enter = false;
+    if (t > 2000 && initMessageSwitch == 1) {
+        enter = true;
+    }
+    if (t > 230 && initMessageSwitch !=1) {
+        enter = true;
+    }
+    
+    if (enter) {
+        string message = "";
+        int lengthAni = 500;
+        bool hasAnimation = false;
+        
+        switch (initMessageSwitch) {
+            case 0:
+                message = "Paddles up!";
+                lengthAni = 2000;
+                hasAnimation = true;
+                break;
+            case 1:
+                message +=".              .\n";
+                message +=".              .\n";
+                message +=".              .\n";
+                message +="^             ^\n";
+                break;
+            case 2:
+                message +=".              .\n";
+                message +=".              .\n";
+                message +="^             ^\n";
+                message +=".              .\n";
+                break;
+            case 3:
+                message +=".              .\n";
+                message +="^             ^\n";
+                message +=".              .\n";
+                message +=".              .\n";
+                break;
+            case 4:
+                message +="^             ^\n";
+                message +=".              .\n";
+                message +=".              .\n";
+                message +=".              .\n";
+                break;
+            default:
+                break;
+        }
+        
+        initMessageSwitch = (initMessageSwitch+1)%5;
+        
+        TextElement t(message,
+                      MEDIUM,
+                      hasAnimation,
+                      lengthAni);
+        ofNotifyEvent(gameOverEvent, t);
+        
+        changeGameState(PLAYERS_PREPARING);
+    }
+    
 }
 
 /**
  * checks if paddles are ready to start game
  */
 void ofApp::prepareForStart(){
+    
     if(elements.paddleLeft.getPosition() < elements.paddleLeft.height*1.5  &&
        elements.paddleRight.getPosition() < elements.paddleRight.height*1.5){
         
@@ -220,6 +275,9 @@ void ofApp::prepareForStart(){
         ofNotifyEvent(gameOverEvent, t);
         
         changeGameState(WAIT_FOR_START);
+    }
+    else{
+        showInitMessage();
     }
 }
 

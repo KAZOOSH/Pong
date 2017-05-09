@@ -81,4 +81,6 @@ private:
     
     
     ofParameterGroup settings;
+    
+    int initMessageSwitch;
 };

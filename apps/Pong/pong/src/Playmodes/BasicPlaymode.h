@@ -25,6 +25,9 @@ public:
     
     
 protected:
+    
+    
+    
     void beginRender();
     void beginRules();
     

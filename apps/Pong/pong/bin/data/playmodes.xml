@@ -6,6 +6,7 @@
 	<playmode>Tiny Ball</playmode>
 	<playmode>Huge Ball</playmode>
 	<playmode>Gravity</playmode>
+	<playmode>Helium</playmode>
 	<playmode>Swerve</playmode>
 	<!--> renderers <!-->
 	<playmode>Anaglyph</playmode>

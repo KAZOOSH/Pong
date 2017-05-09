@@ -49,7 +49,8 @@ void TextRenderer::render() {
         }
         //max fade-in time 2 seconds
         int fadeInTime = text.lengthAnimation;
-        if( text.lengthAnimation >= 2000) fadeInTime = 2000;
+        if (text.lengthAnimation >= 2000) fadeInTime = 2000;
+        if (!text.hasAnimation) fadeInTime = 1;
         
         //get animation position
         float playPosition = ofMap(now, text.startTime, text.startTime + fadeInTime, 0, 1);
