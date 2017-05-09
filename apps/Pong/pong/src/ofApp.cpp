@@ -243,11 +243,23 @@ void ofApp::showInitMessage(){
                 message +=".              .\n";
                 message +=".              .\n";
                 break;
+            case 5:
+                message +="^             ^\n";
+                message +=".              .\n";
+                message +=".              .\n";
+                message +=".              .\n";
+                break;
+            case 6:
+                message +="^             ^\n";
+                message +=".              .\n";
+                message +=".              .\n";
+                message +=".              .\n";
+                break;
             default:
                 break;
         }
         
-        initMessageSwitch = (initMessageSwitch+1)%5;
+        initMessageSwitch = (initMessageSwitch+1)%7;
         
         TextElement t(message,
                       MEDIUM,

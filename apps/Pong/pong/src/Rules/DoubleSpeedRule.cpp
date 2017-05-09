@@ -19,6 +19,5 @@ void DoubleSpeedRule::begin() {
     BasicPlaymode::begin();
     gameElements->ball.velocity *= speedMultiplicator;
     
-    
 }
 

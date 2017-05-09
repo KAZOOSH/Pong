@@ -17,7 +17,7 @@ class InvisibleRenderer : public BasicPlaymode{
     
 public:
     
-    InvisibleRenderer(GameElements* gameElements, string name = "Invisible Ball",int visiblePeriod = 250, int invisiblePeriod = 310);
+    InvisibleRenderer(GameElements* gameElements, string name = "Invisible Ball",int visiblePeriod = 250, int invisiblePeriod = 100);
     virtual void render();
     
 private:

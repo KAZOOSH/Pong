@@ -14,7 +14,7 @@
 AbstractGameControl::AbstractGameControl(GameElements* gameElements_, string name_, bool isRules_, bool isRenderer_) {
     gameElements = gameElements_;
     name = name_;
-    durationMode = 10000;
+    durationMode = 7500;
     _isRules = isRules_;
     _isRenderer = isRenderer_;
 }
