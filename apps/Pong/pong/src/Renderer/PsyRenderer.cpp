@@ -2,8 +2,8 @@
  *  LsdRenderer.cpp
  *  PONG
  *
- *  KAZOOSH!  - open platform for interactive installations - http://kazoosh.com 
- *    
+ *  KAZOOSH!  - open platform for interactive installations - http://kazoosh.com
+ *
  *  created by Brian Eschrich - 2016
  */
 
@@ -27,19 +27,22 @@ PsyRenderer::PsyRenderer(GameElements* gameElements, string name):BasicPlaymode(
 void PsyRenderer::render() {
     
 #ifdef TARGET_OPENGLES
-    int wStart = ((int)ofGetElapsedTimef())%8;
+    float wStart = ofGetElapsedTimef()*2;
+    int mod = (int)wStart;
+    wStart -= (float)mod;
+    wStart *= 8;
     for (int x =0; x<4; x++) {
         for (int y =0; y<3; y++) {
-            bg.draw(x*512,y*512);
+            bg.draw(x*512 + wStart,y*512);
         }
     }
     
-    float t = ofGetElapsedTimef();
+    float t = ofGetElapsedTimef()*2;
     float x = gameElements->ball.position.x;
     float y = gameElements->ball.position.y;
     float r = gameElements->ball.radius;
     ball.draw(x-r,y-r,r*2,r*2 );
-    ballSmall.draw(x + r*cos(t), y + r*sin(t),r,r);
+    ballSmall.draw(x -r/2 + r/2*cos(t), y -r/2 + r/2*sin(t),r,r);
 #else
     int color = (ofGetElapsedTimeMillis()/200)%2 == 0 ? 30:255;
     gameElements->ledControl.setColors(ofColor(color));
@@ -59,7 +62,7 @@ void PsyRenderer::render() {
     ofPopMatrix();
     
     shader.end();
-#endif   
+#endif
     ofSetColor(255);
     drawScore();
     

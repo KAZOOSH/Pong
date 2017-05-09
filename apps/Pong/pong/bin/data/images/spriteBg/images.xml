@@ -1,4 +1,4 @@
 <images>
-	<image name="spock.png" nFrames="120" framesPerLine="11"></image>
-	<image name="shopping.png" nFrames="90" framesPerLine="10"></image>
+	<image name="spock.png" nFrames="72" framesPerLine="8"></image>
+	<image name="shopping.png" nFrames="80" framesPerLine="8"></image>
 </images>

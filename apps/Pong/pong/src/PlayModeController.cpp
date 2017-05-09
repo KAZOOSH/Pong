@@ -29,6 +29,7 @@ void PlayModeController::setup(GameElements* gameElements_,TextRenderer* textRen
     for (auto& p:v_playmodes) {
         shufflePlaymodeSet.push_back(p->getName());
     }
+    random_shuffle(shufflePlaymodeSet.begin(), shufflePlaymodeSet.end());
     
     resetStartModes();
 }

@@ -18,6 +18,7 @@ Ball::Ball(ofVec2f position_, ofVec2f velocity_){
 }
 
 void Ball::setup(ofVec2f position_, ofVec2f velocity_){
+    brightness = 255;
     position = position_;
     velocity = velocity_;
     radius = 25;

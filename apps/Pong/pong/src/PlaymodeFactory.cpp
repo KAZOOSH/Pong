@@ -25,6 +25,9 @@ AbstractGameControl* PlaymodeFactory::make_playMode(string playModeName, GameEle
     else if (playModeName == "Tiny Ball") {
         c = new BallSizeRule(gameElements, "Tiny Ball", 0.3);
     }
+    else if (playModeName == "Huge Ball") {
+        c = new BallSizeRule(gameElements, "Huge Ball", 1.7);
+    }
     else if (playModeName == "Gravity") {
         c = new GravityRule(gameElements);
     }
