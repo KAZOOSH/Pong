@@ -1,7 +1,7 @@
 # Pong
 A simple yet advanced version of the classic pong. Controlled with real paddles. Created by [KAZOOSH!](http://kazoosh.com).
 
-[pong]: http://kazoosh.com/img/projekte/2016_pong/pong-26.jpg "Pong"
+![pong](http://kazoosh.com/img/projekte/2016_pong/pong-26.jpg "pong")
 
 Features:
 - use real paddle controllers (todo tutorial for building them), mouse or any self made serial controller
