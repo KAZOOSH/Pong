@@ -5,4 +5,7 @@
 	<brightness>200</brightness>
 	<pixelPerLED>11</pixelPerLED>
 	<height>130</height>
+	<isSerialControl>1</isSerialControl>
+	<portLeftPaddle>/dev/cu.usbmodemFD121</portLeftPaddle>
+	<portRightPaddle>/dev/cu.usbmodemFA1341</portRightPaddle>
 </group>
