@@ -15,7 +15,7 @@ sudo apt-get upgrade
 
 ### Prepare system for Pong
 
-Go to *settings->pi-settings* und set video memory to ```512mb``
+Go to *settings->pi-settings* und set video memory to ```512mb```
 
 Set *cli* as startup option to save memory.
 
