@@ -49,7 +49,7 @@ mv -n of_v0.9.3_linuxarmv6l_release/addons/* Pong/addons
 rm -R of_v0.9.3_linuxarmv6l_release
 ```
 
-Prepare openFrameworks (see [instructions pi](http://openframeworks.cc/setup/raspberrypi/).
+Prepare openFrameworks (see [instructions pi](http://openframeworks.cc/setup/raspberrypi/)).
 
 Install dependencies
 
@@ -72,30 +72,52 @@ make
 make run
 ```
 
-## Setup Pong
+## Set USB controller as persistent device 
 
-We have to identify the two controllers first. When starting up Pong you will see there names like this
+We have to identify the two controllers first. With ```lsusb``` you get a list of the connected Serial Devices. Connect the Arduino for one controller and list the devices. You get a list like
 
 ```
-[notice ] ofApp::setup: Connected Devices: 
-[notice ] ofApp::setup: 	[the controller 1 port]
-(www.arduino.cc) Arduino Uno, USB VID:PID=2341:0001 SNR=64932343638351118261
-[notice ] ofApp::setup: 	[the controller 2 port]
-(www.arduino.cc) Arduino Uno, USB VID:PID=2341:0001 SNR=64932343638351118261
+~ # lsusb
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 011: ID 0403:6001 Arduino UNO R5
+[...]
 ```
 
-With this information you have to edit the *settings.xml*.
+Enter ```/dev/tty``` and tab to get the device names. The Arduino should be named like ```ttyAM...```. Then we get the details of the device by entering
+
+```
+udevadm info -a -n /dev/ttyUSB1 | grep '{serial}' | head -n1
+udevadm info -a -n /dev/ttyUSB1 | grep '{idVendor}' | head -n1
+udevadm info -a -n /dev/ttyUSB1 | grep '{idProduct}' | head -n1
+```
+Copy all this informations. Go to ```/etc/udev/rules.d``` Create a file named ```99-usb-serial.rules```: 
+
+```
+cd /etc/udev/rules.d
+sudo nano 99-usb-serial.rules
+```
+
+Enter the following line (of course, use your values):
+
+```
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="A6008isP", SYMLINK+="controllerLeft"
+```
+
+Do this for all the controllers. With this information you have to edit the *settings.xml*.
 
 ```
 sudo nano /home/pi/openFrameworks/apps/Pong/pong/bin/data/settings.xml
 ```
 
 Reset the port values and activate serial control
+
 ```xml
 <isSerialControl>1</isSerialControl>
-<portLeftPaddle>[the controller 1 port]</portLeftPaddle>
-<portRightPaddle>[the controller 2 port]</portRightPaddle>
+<portLeftPaddle>controllerLeft</portLeftPaddle>
+<portRightPaddle> controllerRight</portRightPaddle>
 ```
+
+More information on this at ([persistent USB](http://hintshop.ludvig.co.nz/show/persistent-names-usb-serial-devices/)).
 
 ## Install fadeCandy
 
