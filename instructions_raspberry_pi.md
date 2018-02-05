@@ -61,7 +61,7 @@ sudo ./install_dependencies.sh
 make
 
 ```
-make Release -C /home/pi/openFrameworks/libs/openFrameworksCompiled/project -j 4
+make Release -C /home/pi/openFrameworks/libs/openFrameworksCompiled/project -j4
 ```
 
 compile Pong
